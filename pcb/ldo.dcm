@@ -1,0 +1,7 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP MCP1700
+D 3.3v LDO
+$ENDCMP
+#
+#End Doc Library

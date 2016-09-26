@@ -1,0 +1,11 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP TC4426A
+D Dual inverting MOSFET driver
+$ENDCMP
+#
+$CMP TC4427A
+D Dual non-inverting MOSFET driver
+$ENDCMP
+#
+#End Doc Library
