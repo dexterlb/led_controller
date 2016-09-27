@@ -338,7 +338,7 @@ U 1 1 57EA6212
 P 8150 3950
 F 0 "C9" H 8283 3996 50  0000 L CNN
 F 1 "1μ" H 8283 3905 50  0000 L CNN
-F 2 "Capacitors_ThroughHole:Capacitor10x25RM2.5" H 8150 3950 60  0001 C CNN
+F 2 "Capacitors_ThroughHole:Capacitor5x6RM2.5" H 8150 3950 60  0001 C CNN
 F 3 "" H 8150 3950 60  0000 C CNN
 	1    8150 3950
 	1    0    0    -1  
@@ -349,7 +349,7 @@ U 1 1 57EA6344
 P 9250 3950
 F 0 "C10" H 9383 3996 50  0000 L CNN
 F 1 "1μ" H 9383 3905 50  0000 L CNN
-F 2 "Capacitors_ThroughHole:Capacitor10x25RM2.5" H 9250 3950 60  0001 C CNN
+F 2 "Capacitors_ThroughHole:Capacitor5x6RM2.5" H 9250 3950 60  0001 C CNN
 F 3 "" H 9250 3950 60  0000 C CNN
 	1    9250 3950
 	1    0    0    -1  
@@ -415,7 +415,7 @@ U 1 1 57EA4CFB
 P 5450 3000
 F 0 "R17" H 5521 3038 40  0000 L CNN
 F 1 "1Ω" H 5521 2962 40  0000 L CNN
-F 2 "Resistors_ThroughHole:Resistor_Horizontal_RM10mm" V 5380 3000 30  0001 C CNN
+F 2 "Resistors_SMD:R_0805" V 5380 3000 30  0001 C CNN
 F 3 "" H 5450 3000 30  0000 C CNN
 	1    5450 3000
 	1    0    0    -1  
@@ -426,7 +426,7 @@ U 1 1 57EAE8CB
 P 5100 3000
 F 0 "R22" H 5171 3038 40  0000 L CNN
 F 1 "1Ω" H 5171 2962 40  0000 L CNN
-F 2 "Resistors_ThroughHole:Resistor_Horizontal_RM10mm" V 5030 3000 30  0001 C CNN
+F 2 "Resistors_SMD:R_0805" V 5030 3000 30  0001 C CNN
 F 3 "" H 5100 3000 30  0000 C CNN
 	1    5100 3000
 	1    0    0    -1  
@@ -437,7 +437,7 @@ U 1 1 57EAE91F
 P 4750 3000
 F 0 "R21" H 4821 3038 40  0000 L CNN
 F 1 "1Ω" H 4821 2962 40  0000 L CNN
-F 2 "Resistors_ThroughHole:Resistor_Horizontal_RM10mm" V 4680 3000 30  0001 C CNN
+F 2 "Resistors_SMD:R_0805" V 4680 3000 30  0001 C CNN
 F 3 "" H 4750 3000 30  0000 C CNN
 	1    4750 3000
 	1    0    0    -1  
