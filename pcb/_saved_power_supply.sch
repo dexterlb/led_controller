@@ -338,7 +338,7 @@ U 1 1 57EA6212
 P 8150 3950
 F 0 "C9" H 8283 3996 50  0000 L CNN
 F 1 "1μ" H 8283 3905 50  0000 L CNN
-F 2 "Capacitors_ThroughHole:Capacitor10x25RM2.5" H 8150 3950 60  0001 C CNN
+F 2 "Capacitors_ThroughHole:Capacitor5x6RM2.5" H 8150 3950 60  0001 C CNN
 F 3 "" H 8150 3950 60  0000 C CNN
 	1    8150 3950
 	1    0    0    -1  
@@ -349,7 +349,7 @@ U 1 1 57EA6344
 P 9250 3950
 F 0 "C10" H 9383 3996 50  0000 L CNN
 F 1 "1μ" H 9383 3905 50  0000 L CNN
-F 2 "Capacitors_ThroughHole:Capacitor10x25RM2.5" H 9250 3950 60  0001 C CNN
+F 2 "Capacitors_ThroughHole:Capacitor5x6RM2.5" H 9250 3950 60  0001 C CNN
 F 3 "" H 9250 3950 60  0000 C CNN
 	1    9250 3950
 	1    0    0    -1  
