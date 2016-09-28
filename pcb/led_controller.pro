@@ -1,4 +1,4 @@
-update=Mon 26 Sep 2016 10:13:47 PM EEST
+update=Thu 29 Sep 2016 12:04:51 AM EEST
 version=1
 last_client=kicad
 [pcbnew]
@@ -61,3 +61,4 @@ LibName29=valves
 LibName30=drivers_and_mosfets
 LibName31=crystal_s
 LibName32=ldo
+LibName33=esp8266

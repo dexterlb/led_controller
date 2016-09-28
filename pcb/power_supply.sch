@@ -31,6 +31,7 @@ LIBS:valves
 LIBS:drivers_and_mosfets
 LIBS:crystal_s
 LIBS:ldo
+LIBS:esp8266
 LIBS:led_controller-cache
 EELAYER 25 0
 EELAYER END
