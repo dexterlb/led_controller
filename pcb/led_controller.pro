@@ -1,4 +1,4 @@
-update=Thu 29 Sep 2016 12:04:51 AM EEST
+update=Fri 30 Sep 2016 02:32:28 PM EEST
 version=1
 last_client=kicad
 [pcbnew]
@@ -62,3 +62,13 @@ LibName30=drivers_and_mosfets
 LibName31=crystal_s
 LibName32=ldo
 LibName33=esp8266
+[schematic_editor]
+version=1
+PageLayoutDescrFile=empty_a4.kicad_wks
+PlotDirectoryName=
+SubpartIdSeparator=0
+SubpartFirstId=65
+NetFmtName=
+SpiceAjustPassiveValues=0
+LabSize=60
+ERC_TestSimilarLabels=1
