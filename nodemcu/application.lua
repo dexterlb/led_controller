@@ -4,8 +4,21 @@ main = function()
   connect_mqtt()
 end
 
+uart_names = {
+  ["block_0"] = "b0",
+  ["block_1"] = "b1",
+  ["switch_0"] = "s0",
+  ["switch_1"] = "s1",
+  ["switch_2"] = "s2",
+  ["switch_3"] = "s3",
+  ["switch_4"] = "s4",
+  ["switch_5"] = "s5",
+}
+
 subscriptions = {
-  ["/leddy"]=1
+  [MQTT_ROOT .. "/set/block_0"] = {1, function(client, data)
+      process_set("block_0", data)
+    end}
 }
 
 
@@ -26,9 +39,11 @@ mqtt_client:lwt(MQTT_ROOT .. "/connected", "0", 1, 1)
 
 -- on publish message receive event
 mqtt_client:on("message", function(client, topic, data)
-  print(topic .. ":" )
-  if data ~= nil then
-    print(data)
+  sub = subscriptions[topic]
+  if sub ~= nil then
+    sub[2](client, data)
+  else
+    print("received [" .. topic .. "]: " .. data)
   end
 end)
 
@@ -46,7 +61,13 @@ connect_mqtt = function()
   ok = mqtt_client:connect(MQTT_HOST, MQTT_PORT, is_tls,
     function(client)
       print("MQTT connected!")
-      client:subscribe(subscriptions, connected)
+
+      subscription_priorities = {}
+      for topic,sub in pairs(subscriptions) do
+        subscription_priorities[topic] = sub[1]
+      end
+
+      client:subscribe(subscription_priorities, connected)
     end,
     function(client, reason)
       print("failed to connect to MQTT: " .. reason)
