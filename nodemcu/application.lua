@@ -11,23 +11,18 @@ subscriptions = {
 
 connected = function(client)
   print("connected and subscribed")
-  client:publish("/leddy_test", "hello", 0, 0, function(client) print("sent") end)
+  client:publish(MQTT_ROOT .. "/connected", "2", 1, 1)
 end
 
 -- init mqtt client without logins, keepalive timer 120s
 if MQTT_AUTH then
-  mqtt_client = mqtt.Client(MQTT_CLIENT_ID, 120, MQTT_USERNAME, MQTT_PASSWORD)
+  mqtt_client = mqtt.Client(MQTT_CLIENT_ID, MQTT_KEEPALIVE, MQTT_USERNAME, MQTT_PASSWORD)
 else
-  mqtt_client = mqtt.Client(MQTT_CLIENT_ID, 120)
+  mqtt_client = mqtt.Client(MQTT_CLIENT_ID, MQTT_KEEPALIVE)
 end
 
--- init mqtt client with logins, keepalive timer 120sec
--- mqtt_client = mqtt.Client("leddy", 120, "user", "password")
-
--- setup Last Will and Testament (optional)
--- Broker will publish a message with qos = 0, retain = 0, data = "offline"
--- to topic "/lwt" if client don't send keepalive packet
-mqtt_client:lwt("/lwt", "offline", 0, 0)
+-- unset connected state when we die
+mqtt_client:lwt(MQTT_ROOT .. "/connected", "0", 1, 1)
 
 -- on publish message receive event
 mqtt_client:on("message", function(client, topic, data)
