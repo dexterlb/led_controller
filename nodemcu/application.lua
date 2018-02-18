@@ -1,26 +1,93 @@
 dofile("credentials.lua")
 
-main = function()
-  connect_mqtt()
+uart_callback = function(data)
+  print("you said: " .. data)
+  if string.sub(data, 1, 8) == "%restart" then
+    node.restart()
+  end
 end
 
-uart_names = {
-  ["block_0"] = "b0",
-  ["block_1"] = "b1",
-  ["switch_0"] = "s0",
-  ["switch_1"] = "s1",
-  ["switch_2"] = "s2",
-  ["switch_3"] = "s3",
-  ["switch_4"] = "s4",
-  ["switch_5"] = "s5",
-}
+main = function()
+  connect_mqtt()
+  print("NOW EXITING LUA SHELL. USE \"\\n%restart\\n\" TO RESTART.")
+  uart.on("data", "\n", uart_callback, 0)
+end
+
+process_set = function(name, data)
+  local value = nil
+  if data == "true" then
+    value = 1
+  elseif data == "false" then
+    value = 0
+  else
+    value = tonumber(data)
+  end
+
+  if value ~= nil then
+    if string.sub(name, 1, 1) == "s" and value ~= 0 then
+      value = 1
+    end
+
+    uart.write(0, "\n", "%set ", name, "=", tostring(value), "\n")
+  else
+    print("invalid value: " .. data)
+  end
+end
+
+process_get = function(name)
+  uart.write(0, "\n", "%get ", name, "\n")
+end
 
 subscriptions = {
   [MQTT_ROOT .. "/set/block_0"] = {1, function(client, data)
-      process_set("block_0", data)
-    end}
+      process_set("b0", data)
+    end},
+  [MQTT_ROOT .. "/set/block_1"] = {1, function(client, data)
+      process_set("b1", data)
+    end},
+  [MQTT_ROOT .. "/set/switch_0"] = {1, function(client, data)
+      process_set("s0", data)
+    end},
+  [MQTT_ROOT .. "/set/switch_1"] = {1, function(client, data)
+      process_set("s1", data)
+    end},
+  [MQTT_ROOT .. "/set/switch_2"] = {1, function(client, data)
+      process_set("s2", data)
+    end},
+  [MQTT_ROOT .. "/set/switch_3"] = {1, function(client, data)
+      process_set("s3", data)
+    end},
+  [MQTT_ROOT .. "/set/switch_4"] = {1, function(client, data)
+      process_set("s4", data)
+    end},
+  [MQTT_ROOT .. "/set/switch_5"] = {1, function(client, data)
+      process_set("s5", data)
+    end},
+  [MQTT_ROOT .. "/get/block_0"] = {1, function(client, data)
+      process_get("b0")
+    end},
+  [MQTT_ROOT .. "/get/block_1"] = {1, function(client, data)
+      process_get("b1")
+    end},
+  [MQTT_ROOT .. "/get/switch_0"] = {1, function(client, data)
+      process_get("s0")
+    end},
+  [MQTT_ROOT .. "/get/switch_1"] = {1, function(client, data)
+      process_get("s1")
+    end},
+  [MQTT_ROOT .. "/get/switch_2"] = {1, function(client, data)
+      process_get("s2")
+    end},
+  [MQTT_ROOT .. "/get/switch_3"] = {1, function(client, data)
+      process_get("s3")
+    end},
+  [MQTT_ROOT .. "/get/switch_4"] = {1, function(client, data)
+      process_get("s4")
+    end},
+  [MQTT_ROOT .. "/get/switch_5"] = {1, function(client, data)
+      process_get("s5")
+    end},
 }
-
 
 connected = function(client)
   print("connected and subscribed")
