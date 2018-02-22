@@ -3,6 +3,9 @@
 #include <avr/wdt.h>
 #include <util/delay.h>
 
+#include <stdbool.h>
+#include <stdlib.h>
+
 #include "hardware.h"
 #include "simple_uart.h"
 #include "bit_operations.h"
@@ -56,6 +59,23 @@ void set_brightness(uint8_t block, float brightness) {
     }
 }
 
+void set_power(uint8_t switch_id, bool value) {
+    uint8_t port;
+    uint8_t pin;
+
+    switch(switch_id) {
+        case 0: pin = SWITCH_0_PIN; port = SWITCH_0_PORT; break;
+        case 1: pin = SWITCH_1_PIN; port = SWITCH_1_PORT; break;
+        case 2: pin = SWITCH_2_PIN; port = SWITCH_2_PORT; break;
+        case 3: pin = SWITCH_3_PIN; port = SWITCH_3_PORT; break;
+        case 4: pin = SWITCH_4_PIN; port = SWITCH_4_PORT; break;
+        case 5: pin = SWITCH_5_PIN; port = SWITCH_5_PORT; break;
+        default: return;
+    }
+
+    setbitval(port, pin, value);
+}
+
 static inline void init() {
     _delay_ms(100);
 
@@ -83,10 +103,104 @@ static inline void soft_reset()
     for(;;);
 }
 
+char* trim_prefix(char* s, char* prefix) {
+    size_t i = 0;
+    for (; prefix[i] != '\0'; i++) {
+        if (s[i] != prefix[i]) {
+            return NULL;
+        }
+        if (s[i] == '\0') {
+            return NULL;
+        }
+    }
+
+    return &s[i];
+}
+
+float current_brightness[2] = {};
+bool current_power[6] = {};
+
+void update_brightness(uint8_t block, float brightness) {
+    current_brightness[block] = brightness;
+    set_brightness(block, brightness);
+}
+
+void update_power(uint8_t switch_id, bool power) {
+    current_power[switch_id] = power;
+    set_power(switch_id, power);
+}
+
+void report_brightness(uint8_t block) {
+    char buf[10];
+    uart_write_string("%%status b");
+    itoa(block, buf, 10);
+    uart_write_string(buf);
+    uart_write_string("=");
+    dtostrf(current_brightness[block], 0, 4, buf);
+    uart_write_string(buf);
+    uart_write_string("\n");
+}
+
+void report_power(uint8_t switch_id) {
+    char buf[10];
+    uart_write_string("%%status s");
+    itoa(switch_id, buf, 10);
+    uart_write_string(buf);
+    uart_write_string("=");
+    itoa((int)current_power[switch_id], buf, 10);
+    uart_write_string(buf);
+    uart_write_string("\n");
+}
+
+void process_command(char* command) {
+    char* arg;
+
+    uint8_t id;
+    float brightness;
+    uint8_t power;
+
+    if ((arg = trim_prefix(command, "set b")) != NULL) {
+        if (command[0] != '\0' && command[1] == '=' && command[2] != '\0') {
+            id = command[0] - '0';
+            brightness = atof(&command[2]);
+
+            if (id <= 1) {
+                update_brightness(id, brightness);
+                report_brightness(id);
+                return;
+            }
+        }
+    }
+    /*
+    if (sscanf(command, "get b%" SCNd8, &id) == 1 ) {
+        if (id <= 1) {
+            report_brightness(id);
+            return;
+        }
+    }
+    if (sscanf(command, "set s%" SCNd8 "=%" SCNd8, &id, &power) == 2 ) {
+        if (id <= 5) {
+            update_power(id, (power != 0));
+            report_power(id);
+            return;
+        }
+    }
+    if (sscanf(command, "get s%" SCNd8, &id) == 1 ) {
+        if (id <= 5) {
+            report_power(id);
+            return;
+        }
+    }
+    */
+}
+
 void process_line(char* line) {
     uart_write_string("you said: ");
     uart_write_string(line);
     uart_write_newline();
+    if (line[0] == '%') {
+        process_command(&line[1]);
+    }
 }
 
 // received char on uart
