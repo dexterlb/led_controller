@@ -52,28 +52,43 @@ void set_brightness(uint8_t block, uint32_t brightness) {
     }
 
     if (block == 0) {
-        OCR1A = compare_value;
+        if (compare_value == 0) {
+            clearbit(TCCR1A, COM1A1);
+            clearbit(PORTB, 3);
+        } else if (compare_value >= TIMER_TOP || brightness >= BRIGHTNESS_MAX) {
+            clearbit(TCCR1A, COM1A1);
+            setbit(PORTB, 3);
+        } else {
+            setbit(TCCR1A, COM1A1);
+            clearbit(PORTB, 3);
+            OCR1A = compare_value;
+        }
     }
     if (block == 1) {
-        OCR1B = compare_value;
+        if (compare_value == 0) {
+            clearbit(TCCR1A, COM1B1);
+            clearbit(PORTB, 4);
+        } else if (compare_value >= TIMER_TOP || brightness >= BRIGHTNESS_MAX) {
+            clearbit(TCCR1A, COM1B1);
+            setbit(PORTB, 4);
+        } else {
+            setbit(TCCR1A, COM1B1);
+            clearbit(PORTB, 4);
+            OCR1B = compare_value;
+        }
     }
 }
 
 void set_power(uint8_t switch_id, bool value) {
-    uint8_t port;
-    uint8_t pin;
-
     switch(switch_id) {
-        case 0: pin = SWITCH_0_PIN; port = SWITCH_0_PORT; break;
-        case 1: pin = SWITCH_1_PIN; port = SWITCH_1_PORT; break;
-        case 2: pin = SWITCH_2_PIN; port = SWITCH_2_PORT; break;
-        case 3: pin = SWITCH_3_PIN; port = SWITCH_3_PORT; break;
-        case 4: pin = SWITCH_4_PIN; port = SWITCH_4_PORT; break;
-        case 5: pin = SWITCH_5_PIN; port = SWITCH_5_PORT; break;
+        case 0: setbitval(SWITCH_0_PORT, SWITCH_0_PIN, value); return;
+        case 1: setbitval(SWITCH_1_PORT, SWITCH_1_PIN, value); return;
+        case 2: setbitval(SWITCH_2_PORT, SWITCH_2_PIN, value); return;
+        case 3: setbitval(SWITCH_3_PORT, SWITCH_3_PIN, value); return;
+        case 4: setbitval(SWITCH_4_PORT, SWITCH_4_PIN, value); return;
+        case 5: setbitval(SWITCH_5_PORT, SWITCH_5_PIN, value); return;
         default: return;
     }
-
-    setbitval(port, pin, value);
 }
 
 static inline void init() {
@@ -132,13 +147,13 @@ void update_power(uint8_t switch_id, bool power) {
 
 void report(char item, uint8_t id) {
     char buf[10];
-    uart_write_string("%%status ");
+    uart_write_string("%status ");
     uart_write_byte(item);
-    itoa(id, buf, 10);
+    utoa(id, buf, 10);
     uart_write_string(buf);
-    uart_write_string("=");
+    uart_write_byte('=');
     if (item == 'b') {
-        itoa(current_brightness[id], buf, 10);
+        utoa(current_brightness[id], buf, 10);
         uart_write_string(buf);
     } else {
         if (current_power[id]) {
