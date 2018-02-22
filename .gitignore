@@ -81,3 +81,4 @@ _saved_*
 .sconsign.dblite
 build/
 
+credentials.lua
