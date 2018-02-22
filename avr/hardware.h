@@ -1,12 +1,14 @@
 #pragma once
 
+#define PWM_FREQ 1000
+
 #define BAUDRATE 57600
 #define UART_CRLF
 
 // port direction settings:
 // 1 - out, 0 - in   v bits v
 //                   76543210
-#define DDRB_STATE 0b00001000
+#define DDRB_STATE 0b00011000
 #define DDRC_STATE 0b00000000
 #define DDRD_STATE 0b00000010
 
