@@ -117,42 +117,73 @@ char* trim_prefix(char* s, char* prefix) {
     return &s[i];
 }
 
-// float current_brightness[2] = {};
-// bool current_power[6] = {};
+uint16_t current_brightness[2] = {};
+bool current_power[6] = {};
 
-// void update_brightness(uint8_t block, float brightness) {
-//     current_brightness[block] = brightness;
-//     set_brightness(block, brightness);
-// }
+void update_brightness(uint8_t block, uint16_t brightness) {
+    current_brightness[block] = brightness;
+    set_brightness(block, brightness);
+}
 
-// void update_power(uint8_t switch_id, bool power) {
-//     current_power[switch_id] = power;
-//     set_power(switch_id, power);
-// }
+void update_power(uint8_t switch_id, bool power) {
+    current_power[switch_id] = power;
+    set_power(switch_id, power);
+}
 
-// void report_brightness(uint8_t block) {
-//     char buf[10];
-//     uart_write_string("%%status b");
-//     itoa(block, buf, 10);
-//     uart_write_string(buf);
-//     uart_write_string("=");
-//     dtostrf(current_brightness[block], 0, 4, buf);
-//     uart_write_string(buf);
-//     uart_write_string("\n");
-// }
+void report(char item, uint8_t id) {
+    char buf[10];
+    uart_write_string("%%status ");
+    uart_write_byte(item);
+    itoa(id, buf, 10);
+    uart_write_string(buf);
+    uart_write_string("=");
+    if (item == 'b') {
+        itoa(current_brightness[id], buf, 10);
+        uart_write_string(buf);
+    } else {
+        if (current_power[id]) {
+            uart_write_byte('1');
+        } else {
+            uart_write_byte('0');
+        }
+    }
+    uart_write_newline();
+}
 
-// void report_power(uint8_t switch_id) {
-//     char buf[10];
-//     uart_write_string("%%status s");
-//     itoa(switch_id, buf, 10);
-//     uart_write_string(buf);
-//     uart_write_string("=");
-//     itoa((int)current_power[switch_id], buf, 10);
-//     uart_write_string(buf);
-//     uart_write_string("\n");
-// }
+void process_set(char* arg) {
+    uart_write_string("set: ");
+    uart_write_string(arg);
+    uart_write_newline();
+
+    if (arg[0] == '\0' || arg[1] == '\0' || arg[2] != '=' || arg[3] == '\0') {
+        return;
+    }
+
+    uint8_t id = arg[1] - '0';
+
+    uint16_t value = atoi(&arg[3]);
+
+    switch(arg[0]) {
+        case 'b':
+            update_brightness(id, value);
+            break;
+        case 's':
+            update_power(id, value);
+            break;
+        default:
+            uart_write_string("unknown key\n");
+            return;
+    }
+
+    report(arg[0], id);
+}
 
 void process_command(char* command) {
+    char* arg;
+
+    if ((arg = trim_prefix(command, "set ")) != NULL) {
+        process_set(arg);
+    }
 }
 
 void process_line(char* line) {
