@@ -60,6 +60,8 @@ wifi_disconnect_event = function(T)
   else
     wifi.sta.disconnect()
     print("Aborting connection to AP!")
+    print("Will restart.")
+    node.restart()
     disconnect_ct = nil
   end
 end

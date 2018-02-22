@@ -1,10 +1,48 @@
 dofile("credentials.lua")
 
+long_names = {
+  ["b0"] = "block_0",
+  ["b1"] = "block_1",
+  ["s0"] = "switch_0",
+  ["s1"] = "switch_1",
+  ["s2"] = "switch_2",
+  ["s3"] = "switch_3",
+  ["s4"] = "switch_4",
+  ["s5"] = "switch_5",
+}
+
+current_mqtt_client = nil
+
 uart_callback = function(data)
   print("you said: " .. data)
   if string.sub(data, 1, 8) == "%restart" then
     node.restart()
+    return
   end
+
+  local key, raw_value = string.match(data, '%%status ([bs][0-9])=([0-9.]+)')
+  if key ~= nil then
+    local long_name = long_names[key]
+    if long_name == nil then
+      print("unable to find key " .. key)
+      return
+    end
+
+    local value = nil
+    if string.sub(key, 1, 1) == "s" then
+      value = (tonumber(raw_value) == 1)
+    else
+      value = tonumber(raw_value)
+    end
+
+    if value ~= nil and current_mqtt_client ~= nil then
+      succ = current_mqtt_client:publish(MQTT_ROOT .. "/status/" .. long_name, tostring(value), 1, 1)
+      print("publish [" .. MQTT_ROOT .. "/status/" .. long_name .. "] " .. tostring(value) .. ": " .. tostring(succ))
+    end
+    return
+  end
+
+  print("unknown key.")
 end
 
 main = function()
@@ -92,6 +130,7 @@ subscriptions = {
 connected = function(client)
   print("connected and subscribed")
   client:publish(MQTT_ROOT .. "/connected", "2", 1, 1)
+  current_mqtt_client = client
 end
 
 -- init mqtt client without logins, keepalive timer 120s
@@ -115,6 +154,7 @@ mqtt_client:on("message", function(client, topic, data)
 end)
 
 mqtt_offline_callback = function(client)
+  current_mqtt_client = nil
   print("MQTT went offline. Will connect again in 3 seconds")
   tmr.create():alarm(3000, tmr.ALARM_SINGLE, connect_mqtt)
 end
