@@ -1,39 +1,6 @@
-EESchema Schematic File Version 2
-LIBS:power
-LIBS:device
-LIBS:transistors
-LIBS:conn
-LIBS:linear
-LIBS:regul
-LIBS:74xx
-LIBS:cmos4000
-LIBS:adc-dac
-LIBS:memory
-LIBS:xilinx
-LIBS:microcontrollers
-LIBS:dsp
-LIBS:microchip
-LIBS:analog_switches
-LIBS:motorola
-LIBS:texas
-LIBS:intel
-LIBS:audio
-LIBS:interface
-LIBS:digital-audio
-LIBS:philips
-LIBS:display
-LIBS:cypress
-LIBS:siliconi
-LIBS:opto
-LIBS:atmel
-LIBS:contrib
-LIBS:valves
-LIBS:drivers_and_mosfets
-LIBS:crystal_s
-LIBS:ldo
-LIBS:esp8266
+EESchema Schematic File Version 4
 LIBS:led_controller-cache
-EELAYER 25 0
+EELAYER 26 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
@@ -48,7 +15,7 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L MC34063 U6
+L led_controller-rescue:MC34063-RESCUE-led_controller U6
 U 1 1 57EA48FC
 P 4100 4100
 F 0 "U6" H 4400 4500 60  0000 C CNN
@@ -59,7 +26,7 @@ F 3 "" H 4100 4100 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L CONN_01X01 P15
+L conn:CONN_01X01 P15
 U 1 1 57EA49AC
 P 1700 2650
 F 0 "P15" H 1700 2550 50  0000 C CNN
@@ -70,7 +37,7 @@ F 3 "" H 1700 2650 60  0000 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L CONN_01X01 P16
+L conn:CONN_01X01 P16
 U 1 1 57EA4A80
 P 1700 2950
 F 0 "P16" H 1700 2850 50  0000 C CNN
@@ -81,7 +48,7 @@ F 3 "" H 1700 2950 60  0000 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L GND #PWR39
+L power:GND #PWR39
 U 1 1 57EA4AB8
 P 1950 3000
 F 0 "#PWR39" H 1950 2750 60  0001 C CNN
@@ -92,7 +59,7 @@ F 3 "" H 1950 3000 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L VDD #PWR38
+L power:VDD #PWR38
 U 1 1 57EA4AD7
 P 2200 2550
 F 0 "#PWR38" H 2200 2400 60  0001 C CNN
@@ -103,7 +70,7 @@ F 3 "" H 2200 2550 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PWR_FLAG #FLG1
+L power:PWR_FLAG #FLG1
 U 1 1 57EA4B0E
 P 1950 2550
 F 0 "#FLG1" H 1950 2645 30  0001 C CNN
@@ -114,7 +81,7 @@ F 3 "" H 1950 2550 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L CP1 C5
+L led_controller-rescue:CP1-RESCUE-led_controller C5
 U 1 1 57EA4B43
 P 2500 2950
 F 0 "C5" H 2633 2996 50  0000 L CNN
@@ -125,7 +92,7 @@ F 3 "" H 2500 2950 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR41
+L power:GND #PWR41
 U 1 1 57EA4BAE
 P 2500 3250
 F 0 "#PWR41" H 2500 3000 60  0001 C CNN
@@ -136,9 +103,11 @@ F 3 "" H 2500 3250 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C C6
+L led_controller-rescue:C-RESCUE-led_controller C6
 U 1 1 57EA4C14
 P 3050 2950
+AR Path="/57EA4C14" Ref="C6"  Part="1" 
+AR Path="/57EA4823/57EA4C14" Ref="C6"  Part="1" 
 F 0 "C6" H 3165 2988 40  0000 L CNN
 F 1 "100n" H 3165 2912 40  0000 L CNN
 F 2 "Capacitors_ThroughHole:Capacitor6MMDiscRM5" H 3088 2800 30  0001 C CNN
@@ -147,7 +116,7 @@ F 3 "" H 3050 2950 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR40
+L power:GND #PWR40
 U 1 1 57EA4C84
 P 3050 3200
 F 0 "#PWR40" H 3050 2950 60  0001 C CNN
@@ -158,7 +127,7 @@ F 3 "" H 3050 3200 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L R R18
+L led_controller-rescue:R-RESCUE-led_controller R18
 U 1 1 57EA4E2B
 P 5100 3600
 F 0 "R18" H 5171 3638 40  0000 L CNN
@@ -169,9 +138,11 @@ F 3 "" H 5100 3600 30  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C C11
+L led_controller-rescue:C-RESCUE-led_controller C11
 U 1 1 57EA5192
 P 3150 4550
+AR Path="/57EA5192" Ref="C11"  Part="1" 
+AR Path="/57EA4823/57EA5192" Ref="C11"  Part="1" 
 F 0 "C11" H 3265 4588 40  0000 L CNN
 F 1 "470p" H 3265 4512 40  0000 L CNN
 F 2 "Capacitors_ThroughHole:Capacitor6MMDiscRM5" H 3188 4400 30  0001 C CNN
@@ -180,7 +151,7 @@ F 3 "" H 3150 4550 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR49
+L power:GND #PWR49
 U 1 1 57EA520D
 P 3150 4850
 F 0 "#PWR49" H 3150 4600 60  0001 C CNN
@@ -191,7 +162,7 @@ F 3 "" H 3150 4850 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR50
+L power:GND #PWR50
 U 1 1 57EA52B2
 P 4100 4850
 F 0 "#PWR50" H 4100 4600 60  0001 C CNN
@@ -202,7 +173,7 @@ F 3 "" H 4100 4850 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L INDUCTOR L1
+L led_controller-rescue:INDUCTOR-RESCUE-led_controller L1
 U 1 1 57EA52FD
 P 6250 3700
 F 0 "L1" V 6443 3700 40  0000 C CNN
@@ -213,7 +184,7 @@ F 3 "" H 6250 3700 60  0000 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L R R19
+L led_controller-rescue:R-RESCUE-led_controller R19
 U 1 1 57EA53CD
 P 6650 4000
 F 0 "R19" H 6721 4038 40  0000 L CNN
@@ -224,7 +195,7 @@ F 3 "" H 6650 4000 30  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L R R20
+L led_controller-rescue:R-RESCUE-led_controller R20
 U 1 1 57EA5435
 P 6650 4600
 F 0 "R20" H 6721 4638 40  0000 L CNN
@@ -235,7 +206,7 @@ F 3 "" H 6650 4600 30  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L ZENER D3
+L led_controller-rescue:ZENER-RESCUE-led_controller D3
 U 1 1 57EA5616
 P 5900 4600
 F 0 "D3" V 5938 4521 50  0000 R CNN
@@ -246,7 +217,7 @@ F 3 "" H 5900 4600 60  0000 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L GND #PWR51
+L power:GND #PWR51
 U 1 1 57EA572C
 P 5900 4900
 F 0 "#PWR51" H 5900 4650 60  0001 C CNN
@@ -257,7 +228,7 @@ F 3 "" H 5900 4900 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR52
+L power:GND #PWR52
 U 1 1 57EA578F
 P 6650 4900
 F 0 "#PWR52" H 6650 4650 60  0001 C CNN
@@ -268,7 +239,7 @@ F 3 "" H 6650 4900 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L CP1 C7
+L led_controller-rescue:CP1-RESCUE-led_controller C7
 U 1 1 57EA5BC4
 P 7150 3950
 F 0 "C7" H 7283 3996 50  0000 L CNN
@@ -279,7 +250,7 @@ F 3 "" H 7150 3950 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR44
+L power:GND #PWR44
 U 1 1 57EA5BCA
 P 7150 4250
 F 0 "#PWR44" H 7150 4000 60  0001 C CNN
@@ -290,9 +261,11 @@ F 3 "" H 7150 4250 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C C8
+L led_controller-rescue:C-RESCUE-led_controller C8
 U 1 1 57EA5BD1
 P 7700 3950
+AR Path="/57EA5BD1" Ref="C8"  Part="1" 
+AR Path="/57EA4823/57EA5BD1" Ref="C8"  Part="1" 
 F 0 "C8" H 7815 3988 40  0000 L CNN
 F 1 "100n" H 7815 3912 40  0000 L CNN
 F 2 "Capacitors_SMD:C_0805" H 7738 3800 30  0001 C CNN
@@ -301,7 +274,7 @@ F 3 "" H 7700 3950 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR45
+L power:GND #PWR45
 U 1 1 57EA5BD7
 P 7700 4250
 F 0 "#PWR45" H 7700 4000 60  0001 C CNN
@@ -312,7 +285,7 @@ F 3 "" H 7700 4250 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L +5V #PWR42
+L power:+5V #PWR42
 U 1 1 57EA5CFB
 P 7700 3600
 F 0 "#PWR42" H 7700 3450 60  0001 C CNN
@@ -323,7 +296,7 @@ F 3 "" H 7700 3600 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L MCP1700 U5
+L ldo:MCP1700 U5
 U 1 1 57EA613C
 P 8700 3750
 F 0 "U5" H 8700 4104 40  0000 C CNN
@@ -334,7 +307,7 @@ F 3 "" H 8700 3750 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L CP1 C9
+L led_controller-rescue:CP1-RESCUE-led_controller C9
 U 1 1 57EA6212
 P 8150 3950
 F 0 "C9" H 8283 3996 50  0000 L CNN
@@ -345,7 +318,7 @@ F 3 "" H 8150 3950 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L CP1 C10
+L led_controller-rescue:CP1-RESCUE-led_controller C10
 U 1 1 57EA6344
 P 9250 3950
 F 0 "C10" H 9383 3996 50  0000 L CNN
@@ -356,7 +329,7 @@ F 3 "" H 9250 3950 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR46
+L power:GND #PWR46
 U 1 1 57EA649E
 P 8150 4250
 F 0 "#PWR46" H 8150 4000 60  0001 C CNN
@@ -367,7 +340,7 @@ F 3 "" H 8150 4250 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR48
+L power:GND #PWR48
 U 1 1 57EA64DC
 P 9250 4250
 F 0 "#PWR48" H 9250 4000 60  0001 C CNN
@@ -378,7 +351,7 @@ F 3 "" H 9250 4250 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR47
+L power:GND #PWR47
 U 1 1 57EA65AB
 P 8700 4250
 F 0 "#PWR47" H 8700 4000 60  0001 C CNN
@@ -389,7 +362,7 @@ F 3 "" H 8700 4250 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L +3V3 #PWR43
+L power:+3V3 #PWR43
 U 1 1 57EA6756
 P 9250 3600
 F 0 "#PWR43" H 9250 3450 60  0001 C CNN
@@ -400,7 +373,7 @@ F 3 "" H 9250 3600 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PWR_FLAG #FLG2
+L power:PWR_FLAG #FLG2
 U 1 1 57EAC700
 P 6650 3600
 F 0 "#FLG2" H 6650 3695 30  0001 C CNN
@@ -411,7 +384,7 @@ F 3 "" H 6650 3600 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L R R17
+L led_controller-rescue:R-RESCUE-led_controller R17
 U 1 1 57EA4CFB
 P 5450 3000
 F 0 "R17" H 5521 3038 40  0000 L CNN
@@ -422,7 +395,7 @@ F 3 "" H 5450 3000 30  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L R R22
+L led_controller-rescue:R-RESCUE-led_controller R22
 U 1 1 57EAE8CB
 P 5100 3000
 F 0 "R22" H 5171 3038 40  0000 L CNN
@@ -433,7 +406,7 @@ F 3 "" H 5100 3000 30  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L R R21
+L led_controller-rescue:R-RESCUE-led_controller R21
 U 1 1 57EAE91F
 P 4750 3000
 F 0 "R21" H 4821 3038 40  0000 L CNN
@@ -466,7 +439,7 @@ Wire Wire Line
 	5100 2650 5100 2750
 Connection ~ 3050 2650
 Wire Wire Line
-	5100 3250 5100 3350
+	5100 3250 5100 3300
 Wire Wire Line
 	5100 3850 5100 3900
 Wire Wire Line
@@ -474,9 +447,9 @@ Wire Wire Line
 Wire Wire Line
 	5450 4000 4950 4000
 Wire Wire Line
-	5450 3250 5450 4000
+	5450 3250 5450 3300
 Wire Wire Line
-	3200 3300 5450 3300
+	3200 3300 4750 3300
 Connection ~ 5100 3300
 Wire Wire Line
 	3200 3300 3200 3950
@@ -494,21 +467,21 @@ Connection ~ 4100 2650
 Wire Wire Line
 	4100 4850 4100 4600
 Wire Wire Line
-	6650 4250 6650 4350
+	6650 4250 6650 4300
 Connection ~ 6650 4300
 Wire Wire Line
 	4950 4300 6650 4300
 Wire Wire Line
-	5900 3700 5900 4400
+	5900 3700 5900 4150
 Wire Wire Line
 	5900 3700 5950 3700
 Wire Wire Line
 	4950 4150 5900 4150
 Connection ~ 5900 4150
 Wire Wire Line
-	6550 3700 8300 3700
+	6550 3700 6650 3700
 Wire Wire Line
-	6650 3600 6650 3750
+	6650 3600 6650 3700
 Wire Wire Line
 	5900 4900 5900 4800
 Wire Wire Line
@@ -521,7 +494,7 @@ Wire Wire Line
 	7150 3700 7150 3750
 Connection ~ 6650 3700
 Wire Wire Line
-	7700 3600 7700 3750
+	7700 3600 7700 3700
 Connection ~ 7150 3700
 Connection ~ 7700 3700
 Wire Wire Line
@@ -534,7 +507,7 @@ Wire Wire Line
 	8150 3750 8150 3700
 Connection ~ 8150 3700
 Wire Wire Line
-	9250 3600 9250 3750
+	9250 3600 9250 3700
 Wire Wire Line
 	9250 3700 9100 3700
 Connection ~ 9250 3700
@@ -549,9 +522,9 @@ Wire Wire Line
 	4750 2650 4750 2750
 Connection ~ 4750 2650
 Wire Wire Line
-	1900 2650 5450 2650
+	1900 2650 1950 2650
 $Comp
-L CONN_01X01 P18
+L conn:CONN_01X01 P18
 U 1 1 57EF93DD
 P 3650 6100
 F 0 "P18" H 3650 6200 50  0000 C CNN
@@ -562,7 +535,7 @@ F 3 "" H 3650 6100 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L CONN_01X01 P21
+L conn:CONN_01X01 P21
 U 1 1 57EF9857
 P 3650 6350
 F 0 "P21" H 3650 6450 50  0000 C CNN
@@ -573,7 +546,7 @@ F 3 "" H 3650 6350 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L CONN_01X01 P23
+L conn:CONN_01X01 P23
 U 1 1 57EF98DB
 P 3650 6600
 F 0 "P23" H 3650 6700 50  0000 C CNN
@@ -584,7 +557,7 @@ F 3 "" H 3650 6600 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L CONN_01X01 P25
+L conn:CONN_01X01 P25
 U 1 1 57EF9937
 P 3650 6850
 F 0 "P25" H 3650 6950 50  0000 C CNN
@@ -595,7 +568,7 @@ F 3 "" H 3650 6850 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L CONN_01X01 P27
+L conn:CONN_01X01 P27
 U 1 1 57EF9994
 P 3650 7100
 F 0 "P27" H 3650 7200 50  0000 C CNN
@@ -606,7 +579,7 @@ F 3 "" H 3650 7100 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L CONN_01X01 P29
+L conn:CONN_01X01 P29
 U 1 1 57EF99F2
 P 3650 7350
 F 0 "P29" H 3650 7450 50  0000 C CNN
@@ -617,7 +590,7 @@ F 3 "" H 3650 7350 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L CONN_01X01 P17
+L conn:CONN_01X01 P17
 U 1 1 57EF9A9E
 P 2700 6100
 F 0 "P17" H 2700 6000 50  0000 C CNN
@@ -628,9 +601,9 @@ F 3 "" H 2700 6100 60  0000 C CNN
 	-1   0    0    1   
 $EndComp
 Wire Wire Line
-	2900 6100 3450 6100
+	2900 6100 3300 6100
 Wire Wire Line
-	3300 6100 3300 7350
+	3300 6100 3300 6350
 Wire Wire Line
 	3300 7350 3450 7350
 Wire Wire Line
@@ -649,7 +622,7 @@ Connection ~ 3300 6100
 Text Label 3000 6100 0    60   ~ 0
 GND2
 $Comp
-L CONN_01X01 P20
+L conn:CONN_01X01 P20
 U 1 1 57EFA036
 P 5750 6100
 F 0 "P20" H 5750 6200 50  0000 C CNN
@@ -660,7 +633,7 @@ F 3 "" H 5750 6100 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L CONN_01X01 P22
+L conn:CONN_01X01 P22
 U 1 1 57EFA159
 P 5750 6350
 F 0 "P22" H 5750 6450 50  0000 C CNN
@@ -671,7 +644,7 @@ F 3 "" H 5750 6350 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L CONN_01X01 P24
+L conn:CONN_01X01 P24
 U 1 1 57EFA1CB
 P 5750 6600
 F 0 "P24" H 5750 6700 50  0000 C CNN
@@ -682,7 +655,7 @@ F 3 "" H 5750 6600 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L CONN_01X01 P26
+L conn:CONN_01X01 P26
 U 1 1 57EFA238
 P 5750 6850
 F 0 "P26" H 5750 6950 50  0000 C CNN
@@ -693,7 +666,7 @@ F 3 "" H 5750 6850 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L CONN_01X01 P28
+L conn:CONN_01X01 P28
 U 1 1 57EFA2AC
 P 5750 7100
 F 0 "P28" H 5750 7200 50  0000 C CNN
@@ -704,7 +677,7 @@ F 3 "" H 5750 7100 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L CONN_01X01 P30
+L conn:CONN_01X01 P30
 U 1 1 57EFA31F
 P 5750 7350
 F 0 "P30" H 5750 7450 50  0000 C CNN
@@ -715,7 +688,7 @@ F 3 "" H 5750 7350 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L CONN_01X01 P19
+L conn:CONN_01X01 P19
 U 1 1 57EFA395
 P 5100 6100
 F 0 "P19" H 5100 6000 50  0000 C CNN
@@ -726,11 +699,11 @@ F 3 "" H 5100 6100 60  0000 C CNN
 	-1   0    0    1   
 $EndComp
 Wire Wire Line
-	5300 6100 5550 6100
+	5300 6100 5400 6100
 Wire Wire Line
 	5550 7350 5400 7350
 Wire Wire Line
-	5400 7350 5400 6100
+	5400 7350 5400 7100
 Connection ~ 5400 6100
 Wire Wire Line
 	5550 7100 5400 7100
@@ -744,4 +717,64 @@ Connection ~ 5400 6600
 Wire Wire Line
 	5550 6350 5400 6350
 Connection ~ 5400 6350
+Wire Wire Line
+	1950 2650 2200 2650
+Wire Wire Line
+	2200 2650 2500 2650
+Wire Wire Line
+	2500 2650 3050 2650
+Wire Wire Line
+	3050 2650 4100 2650
+Wire Wire Line
+	5100 3300 5100 3350
+Wire Wire Line
+	5100 3300 5450 3300
+Wire Wire Line
+	4100 2650 4750 2650
+Wire Wire Line
+	6650 4300 6650 4350
+Wire Wire Line
+	5900 4150 5900 4400
+Wire Wire Line
+	6650 3700 7150 3700
+Wire Wire Line
+	6650 3700 6650 3750
+Wire Wire Line
+	7150 3700 7700 3700
+Wire Wire Line
+	7700 3700 7700 3750
+Wire Wire Line
+	7700 3700 8150 3700
+Wire Wire Line
+	8150 3700 8300 3700
+Wire Wire Line
+	9250 3700 9250 3750
+Wire Wire Line
+	4750 3300 5100 3300
+Wire Wire Line
+	5450 3300 5450 4000
+Wire Wire Line
+	5100 2650 5450 2650
+Wire Wire Line
+	4750 2650 5100 2650
+Wire Wire Line
+	3300 7100 3300 7350
+Wire Wire Line
+	3300 6850 3300 7100
+Wire Wire Line
+	3300 6600 3300 6850
+Wire Wire Line
+	3300 6350 3300 6600
+Wire Wire Line
+	3300 6100 3450 6100
+Wire Wire Line
+	5400 6100 5550 6100
+Wire Wire Line
+	5400 7100 5400 6850
+Wire Wire Line
+	5400 6850 5400 6600
+Wire Wire Line
+	5400 6600 5400 6350
+Wire Wire Line
+	5400 6350 5400 6100
 $EndSCHEMATC
