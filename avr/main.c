@@ -10,8 +10,8 @@
 #include "simple_uart.h"
 #include "bit_operations.h"
 
-const uint16_t TIMER_TOP = F_CPU / PWM_FREQ;
-const float EPSILON = 0.00000001;
+#define TIMER_TOP (F_CPU / PWM_FREQ)
+#define BRIGHTNESS_MAX 0xffff
 
 static inline void timer1_init() {
     // COMXX:   set at 0, clear on compare
@@ -40,15 +40,15 @@ static inline void timer1_init() {
     ICR1 = TIMER_TOP;
 }
 
-void set_brightness(uint8_t block, float brightness) {
+void set_brightness(uint8_t block, uint32_t brightness) {
     uint16_t compare_value;
 
-    if (brightness < 0 + EPSILON) {
+    if (brightness == 0) {
         compare_value = 0;
-    } else if (brightness > 1 - EPSILON) {
+    } else if (brightness >= BRIGHTNESS_MAX) {
         compare_value = TIMER_TOP;
     } else {
-        compare_value = (uint16_t)(((float)TIMER_TOP) * brightness);
+        compare_value = (uint16_t)(((uint32_t)brightness * (uint32_t)TIMER_TOP) / BRIGHTNESS_MAX);
     }
 
     if (block == 0) {
@@ -86,8 +86,8 @@ static inline void init() {
     PORTD = PORTD_STATE;
 
     timer1_init();
-    set_brightness(0, 0.5);
-    set_brightness(1, 0.7);
+    set_brightness(0, 20000);
+    set_brightness(1, 2000);
 
     uart_init();
     uart_enable_interrupt();
@@ -117,81 +117,42 @@ char* trim_prefix(char* s, char* prefix) {
     return &s[i];
 }
 
-float current_brightness[2] = {};
-bool current_power[6] = {};
+// float current_brightness[2] = {};
+// bool current_power[6] = {};
 
-void update_brightness(uint8_t block, float brightness) {
-    current_brightness[block] = brightness;
-    set_brightness(block, brightness);
-}
+// void update_brightness(uint8_t block, float brightness) {
+//     current_brightness[block] = brightness;
+//     set_brightness(block, brightness);
+// }
 
-void update_power(uint8_t switch_id, bool power) {
-    current_power[switch_id] = power;
-    set_power(switch_id, power);
-}
+// void update_power(uint8_t switch_id, bool power) {
+//     current_power[switch_id] = power;
+//     set_power(switch_id, power);
+// }
 
-void report_brightness(uint8_t block) {
-    char buf[10];
-    uart_write_string("%%status b");
-    itoa(block, buf, 10);
-    uart_write_string(buf);
-    uart_write_string("=");
-    dtostrf(current_brightness[block], 0, 4, buf);
-    uart_write_string(buf);
-    uart_write_string("\n");
-}
+// void report_brightness(uint8_t block) {
+//     char buf[10];
+//     uart_write_string("%%status b");
+//     itoa(block, buf, 10);
+//     uart_write_string(buf);
+//     uart_write_string("=");
+//     dtostrf(current_brightness[block], 0, 4, buf);
+//     uart_write_string(buf);
+//     uart_write_string("\n");
+// }
 
-void report_power(uint8_t switch_id) {
-    char buf[10];
-    uart_write_string("%%status s");
-    itoa(switch_id, buf, 10);
-    uart_write_string(buf);
-    uart_write_string("=");
-    itoa((int)current_power[switch_id], buf, 10);
-    uart_write_string(buf);
-    uart_write_string("\n");
-}
+// void report_power(uint8_t switch_id) {
+//     char buf[10];
+//     uart_write_string("%%status s");
+//     itoa(switch_id, buf, 10);
+//     uart_write_string(buf);
+//     uart_write_string("=");
+//     itoa((int)current_power[switch_id], buf, 10);
+//     uart_write_string(buf);
+//     uart_write_string("\n");
+// }
 
 void process_command(char* command) {
-    char* arg;
-
-    uint8_t id;
-    float brightness;
-    uint8_t power;
-
-    if ((arg = trim_prefix(command, "set b")) != NULL) {
-        if (command[0] != '\0' && command[1] == '=' && command[2] != '\0') {
-            id = command[0] - '0';
-            brightness = atof(&command[2]);
-
-            if (id <= 1) {
-                update_brightness(id, brightness);
-                report_brightness(id);
-                return;
-            }
-        }
-    }
-    /*
-    if (sscanf(command, "get b%" SCNd8, &id) == 1 ) {
-        if (id <= 1) {
-            report_brightness(id);
-            return;
-        }
-    }
-    if (sscanf(command, "set s%" SCNd8 "=%" SCNd8, &id, &power) == 2 ) {
-        if (id <= 5) {
-            update_power(id, (power != 0));
-            report_power(id);
-            return;
-        }
-    }
-    if (sscanf(command, "get s%" SCNd8, &id) == 1 ) {
-        if (id <= 5) {
-            report_power(id);
-            return;
-        }
-    }
-    */
 }
 
 void process_line(char* line) {
