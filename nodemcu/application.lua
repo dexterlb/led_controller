@@ -22,7 +22,7 @@ uart_callback = function(data)
     return
   end
 
-  local key, raw_value = string.match(data, '%%status ([bs][0-9])=([0-9])')
+  local key, raw_value = string.match(data, '%%status ([bs][0-9])=([0-9]+)')
   if key ~= nil then
     local long_name = long_names[key]
     if long_name == nil then
@@ -32,7 +32,7 @@ uart_callback = function(data)
 
     local value = nil
     if string.sub(key, 1, 1) == "s" then
-      value = (tonumber(raw_value) == 1)
+      value = (tonumber(raw_value) >= 0.5)
     else
       value = tonumber(raw_value) / max_brightness
       if value > 1 then
@@ -43,8 +43,14 @@ uart_callback = function(data)
     end
 
     if value ~= nil and current_mqtt_client ~= nil then
-      succ = current_mqtt_client:publish(MQTT_ROOT .. "/status/" .. long_name, tostring(value), 1, 1)
-      print("publish [" .. MQTT_ROOT .. "/status/" .. long_name .. "] " .. tostring(value) .. ": " .. tostring(succ))
+      topic = MQTT_ROOT .. "/status/" .. long_name
+      if value == true or value == false or value == 0 or value == 1 then
+        value_string = tostring(value)
+      else
+        value_string = string.format("%.5f", value)
+      end
+      succ = current_mqtt_client:publish(topic, value_string, 1, 1)
+      print("publish [" .. topic .. "] " .. value_string .. ": " .. tostring(succ))
     end
     return
   end
