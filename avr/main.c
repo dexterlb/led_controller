@@ -51,7 +51,7 @@ void set_brightness(uint8_t block, uint32_t brightness) {
         compare_value = (uint16_t)(((uint32_t)brightness * (uint32_t)TIMER_TOP) / BRIGHTNESS_MAX);
     }
 
-    if (block == 0) {
+    if (block == PWM_A_BLOCK) {
         if (compare_value == 0) {
             clearbit(TCCR1A, COM1A1);
             clearbit(PORTB, 3);
@@ -64,7 +64,7 @@ void set_brightness(uint8_t block, uint32_t brightness) {
             OCR1A = compare_value;
         }
     }
-    if (block == 1) {
+    if (block == PWM_B_BLOCK) {
         if (compare_value == 0) {
             clearbit(TCCR1A, COM1B1);
             clearbit(PORTB, 4);
