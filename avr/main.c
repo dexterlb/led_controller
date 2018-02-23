@@ -101,8 +101,8 @@ static inline void init() {
     PORTD = PORTD_STATE;
 
     timer1_init();
-    set_brightness(0, 20000);
-    set_brightness(1, 2000);
+    set_brightness(0, 0);
+    set_brightness(1, 0);
 
     uart_init();
     uart_enable_interrupt();
