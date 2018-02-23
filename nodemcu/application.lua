@@ -11,6 +11,8 @@ long_names = {
   ["s5"] = "switch_5",
 }
 
+max_brightness = 0xffff
+
 current_mqtt_client = nil
 
 uart_callback = function(data)
@@ -20,7 +22,7 @@ uart_callback = function(data)
     return
   end
 
-  local key, raw_value = string.match(data, '%%status ([bs][0-9])=([0-9.]+)')
+  local key, raw_value = string.match(data, '%%status ([bs][0-9])=([0-9])')
   if key ~= nil then
     local long_name = long_names[key]
     if long_name == nil then
@@ -32,7 +34,12 @@ uart_callback = function(data)
     if string.sub(key, 1, 1) == "s" then
       value = (tonumber(raw_value) == 1)
     else
-      value = tonumber(raw_value)
+      value = tonumber(raw_value) / max_brightness
+      if value > 1 then
+        value = 1
+      elseif value < 0 then
+        value = 0
+      end
     end
 
     if value ~= nil and current_mqtt_client ~= nil then
@@ -64,6 +71,15 @@ process_set = function(name, data)
   if value ~= nil then
     if string.sub(name, 1, 1) == "s" and value ~= 0 then
       value = 1
+    end
+    if string.sub(name, 1, 1) == "b" then
+      if value < 0 then
+        value = 0
+      elseif value > 1 then
+        value = max_brightness
+      else
+        value = math.floor(value * max_brightness + 0.5)
+      end
     end
 
     uart.write(0, "\n", "%set ", name, "=", tostring(value), "\n")
