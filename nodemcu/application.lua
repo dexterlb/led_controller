@@ -98,6 +98,16 @@ process_get = function(name)
   uart.write(0, "\n", "%get ", name, "\n")
 end
 
+set_led = function(led_id, state)
+  if state then
+    state_value = 1
+  else
+    state_value = 0
+  end
+
+  uart.write(0, "\n", "%set l", tostring(led_id), "=", tostring(state_value), "\n")
+end
+
 subscriptions = {
   [MQTT_ROOT .. "/set/block_0"] = {1, function(client, data)
       process_set("b0", data)
@@ -153,6 +163,7 @@ connected = function(client)
   print("connected and subscribed")
   client:publish(MQTT_ROOT .. "/connected", "2", 1, 1)
   current_mqtt_client = client
+  set_led(0, true)
 end
 
 -- init mqtt client without logins, keepalive timer 120s
@@ -177,6 +188,7 @@ end)
 
 mqtt_offline_callback = function(client)
   current_mqtt_client = nil
+  set_led(0, false)
   print("MQTT went offline. Will connect again in 3 seconds")
   tmr.create():alarm(3000, tmr.ALARM_SINGLE, connect_mqtt)
 end

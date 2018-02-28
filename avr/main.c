@@ -59,8 +59,8 @@ void set_brightness(uint8_t block, uint32_t brightness) {
             clearbit(TCCR1A, COM1A1);
             setbit(PORTB, 3);
         } else {
-            setbit(TCCR1A, COM1A1);
             clearbit(PORTB, 3);
+            setbit(TCCR1A, COM1A1);
             OCR1A = compare_value;
         }
     }
@@ -81,12 +81,20 @@ void set_brightness(uint8_t block, uint32_t brightness) {
 
 void set_power(uint8_t switch_id, bool value) {
     switch(switch_id) {
-        case 0: setbitval(SWITCH_0_PORT, SWITCH_0_PIN, value); return;
-        case 1: setbitval(SWITCH_1_PORT, SWITCH_1_PIN, value); return;
-        case 2: setbitval(SWITCH_2_PORT, SWITCH_2_PIN, value); return;
-        case 3: setbitval(SWITCH_3_PORT, SWITCH_3_PIN, value); return;
-        case 4: setbitval(SWITCH_4_PORT, SWITCH_4_PIN, value); return;
-        case 5: setbitval(SWITCH_5_PORT, SWITCH_5_PIN, value); return;
+        case 0: setbitval(SWITCH_0_PORT, SWITCH_0_BIT, value); return;
+        case 1: setbitval(SWITCH_1_PORT, SWITCH_1_BIT, value); return;
+        case 2: setbitval(SWITCH_2_PORT, SWITCH_2_BIT, value); return;
+        case 3: setbitval(SWITCH_3_PORT, SWITCH_3_BIT, value); return;
+        case 4: setbitval(SWITCH_4_PORT, SWITCH_4_BIT, value); return;
+        case 5: setbitval(SWITCH_5_PORT, SWITCH_5_BIT, value); return;
+        default: return;
+    }
+}
+
+void set_led(uint8_t led_id, bool value) {
+    switch(led_id) {
+        case 0: setbitval(LED_0_PORT, LED_0_BIT, value); return;
+        case 1: setbitval(LED_1_PORT, LED_1_BIT, value); return;
         default: return;
     }
 }
@@ -100,9 +108,10 @@ static inline void init() {
     PORTB = PORTB_STATE;
     PORTD = PORTD_STATE;
 
-    timer1_init();
     set_brightness(0, 0);
     set_brightness(1, 0);
+
+    timer1_init();
 
     uart_init();
     uart_enable_interrupt();
@@ -166,10 +175,6 @@ void report(char item, uint8_t id) {
 }
 
 void process_set(char* arg) {
-    uart_write_string("set: ");
-    uart_write_string(arg);
-    uart_write_newline();
-
     if (arg[0] == '\0' || arg[1] == '\0' || arg[2] != '=' || arg[3] == '\0') {
         return;
     }
@@ -184,6 +189,9 @@ void process_set(char* arg) {
             break;
         case 's':
             update_power(id, value);
+            break;
+        case 'l':
+            set_led(id, value);
             break;
         default:
             uart_write_string("unknown key\n");
@@ -202,9 +210,6 @@ void process_command(char* command) {
 }
 
 void process_line(char* line) {
-    uart_write_string("you said: ");
-    uart_write_string(line);
-    uart_write_newline();
     if (line[0] == '%') {
         process_command(&line[1]);
     }
@@ -235,8 +240,6 @@ ISR(USART_RX_vect) {
 int main()
 {
     init();
-
-    uart_write_string("hello!\n");
 
     for (;;) {
     }

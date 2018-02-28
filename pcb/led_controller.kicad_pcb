@@ -1,9 +1,6 @@
-(kicad_pcb (version 20160815) (host pcbnew "(2016-09-27 revision 92216b7)-makepkg")
+(kicad_pcb (version 20171130) (host pcbnew "(5.0-dev-4128-g997d4dee4)")
 
   (general
-    (links 175)
-    (no_connects 18)
-    (area 104.4575 24.5695 186.0135 140.335001)
     (thickness 1.6)
     (drawings 0)
     (tracks 353)
@@ -37,7 +34,7 @@
   )
 
   (setup
-    (last_trace_width 1.4)
+    (last_trace_width 0.8)
     (user_trace_width 0.4)
     (user_trace_width 0.5)
     (user_trace_width 0.6)
@@ -70,10 +67,13 @@
     (pad_drill 3)
     (pad_to_mask_clearance 0.2)
     (aux_axis_origin 0 0)
-    (visible_elements FFFCF77F)
+    (visible_elements FFFDF77F)
     (pcbplotparams
       (layerselection 0x00030_ffffffff)
       (usegerberextensions false)
+      (usegerberattributes false)
+      (usegerberadvancedattributes false)
+      (creategerberjobfile false)
       (excludeedgelayer true)
       (linewidth 0.100000)
       (plotframeref false)
@@ -165,8 +165,6 @@
     (via_drill 0.8)
     (uvia_dia 0.3)
     (uvia_drill 0.1)
-    (diff_pair_gap 0.25)
-    (diff_pair_width 0.2)
     (add_net +3V3)
     (add_net +5V)
     (add_net /MISO)
@@ -2524,10 +2522,10 @@
     (path /57E9BA7B)
     (autoplace_cost180 10)
     (fp_text reference X1 (at 0 -3.81) (layer F.SilkS)
-      (effects (font (thickness 0.3048)))
+      (effects (font (size 1.524 1.524) (thickness 0.3048)))
     )
     (fp_text value 20MHz (at 0 3.81) (layer F.SilkS)
-      (effects (font (thickness 0.3048)))
+      (effects (font (size 1.524 1.524) (thickness 0.3048)))
     )
     (fp_line (start -3.175 2.54) (end 3.175 2.54) (layer F.SilkS) (width 0.3175))
     (fp_line (start -3.175 -2.54) (end 3.175 -2.54) (layer F.SilkS) (width 0.3175))
@@ -3648,35 +3646,43 @@
       )
     )
     (polygon
-      (pts        (xy 113.3475 96.2025) (xy 113.3475 100.965) (xy 120.9675 100.965) (xy 120.9675 96.2025)
+      (pts
+        (xy 113.3475 96.2025) (xy 113.3475 100.965) (xy 120.9675 100.965) (xy 120.9675 96.2025)
       )
     )
     (polygon
-      (pts        (xy 123.5075 96.2025) (xy 123.5075 100.965) (xy 131.1275 100.965) (xy 131.1275 96.2025)
+      (pts
+        (xy 123.5075 96.2025) (xy 123.5075 100.965) (xy 131.1275 100.965) (xy 131.1275 96.2025)
       )
     )
     (polygon
-      (pts        (xy 133.6675 96.2025) (xy 133.6675 100.965) (xy 141.2875 100.965) (xy 141.2875 96.2025)
+      (pts
+        (xy 133.6675 96.2025) (xy 133.6675 100.965) (xy 141.2875 100.965) (xy 141.2875 96.2025)
       )
     )
     (polygon
-      (pts        (xy 143.8275 96.2025) (xy 143.8275 100.6475) (xy 150.8125 100.6475) (xy 150.8125 96.2025)
+      (pts
+        (xy 143.8275 96.2025) (xy 143.8275 100.6475) (xy 150.8125 100.6475) (xy 150.8125 96.2025)
       )
     )
     (polygon
-      (pts        (xy 113.3475 90.4875) (xy 113.3475 94.9325) (xy 150.8125 94.9325) (xy 150.8125 90.4875)
+      (pts
+        (xy 113.3475 90.4875) (xy 113.3475 94.9325) (xy 150.8125 94.9325) (xy 150.8125 90.4875)
       )
     )
     (polygon
-      (pts        (xy 137.4775 104.14) (xy 144.145 104.14) (xy 144.145 118.4275) (xy 137.4775 118.4275)
+      (pts
+        (xy 137.4775 104.14) (xy 144.145 104.14) (xy 144.145 118.4275) (xy 137.4775 118.4275)
       )
     )
     (polygon
-      (pts        (xy 133.0325 105.41) (xy 133.0325 118.4275) (xy 128.27 118.4275) (xy 128.27 105.41)
+      (pts
+        (xy 133.0325 105.41) (xy 133.0325 118.4275) (xy 128.27 118.4275) (xy 128.27 105.41)
       )
     )
     (polygon
-      (pts        (xy 154.305 87.3125) (xy 160.3375 81.28) (xy 167.9575 81.28) (xy 167.9575 96.8375) (xy 172.72 96.8375)
+      (pts
+        (xy 154.305 87.3125) (xy 160.3375 81.28) (xy 167.9575 81.28) (xy 167.9575 96.8375) (xy 172.72 96.8375)
         (xy 172.72 113.03) (xy 169.8625 116.205) (xy 167.005 116.205) (xy 167.005 122.2375) (xy 156.21 122.2375)
         (xy 156.21 109.855) (xy 154.305 109.855)
       )
