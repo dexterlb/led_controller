@@ -1,0 +1,239 @@
+import itertools
+from glob import glob
+
+# This SConstruct helps build ARM
+# projects easier with the GCC tools.
+#
+# It supports C, C++ and Assembly source files
+#
+# It contains the following targets:
+# scons             : builds everything
+# scons elf         : builds only the elf file
+# scons hex         : builds the hex file
+# scons disasm      : builds .s (disassembly)
+# scons size        : shows size information
+
+# -------- configuration options ---------
+
+# project name (use a single word, e.g. "myprj")
+pname = 'bleh'
+
+# target architecture (e.g. cortex-m3)
+cpu = 'cortex-m0'
+
+# optimisation level
+# can be 's' (size opt), '1', '2', '3' or '0' (not advised)
+# when debugging, it might be useful to set it to 1 or 0
+optlevel = '0'
+
+# save debug info to .elf file
+debug_info = True
+
+# source files
+# .c, .cpp or .S (NOT .s !!! for asm)
+# example: ['main.c', 'foo.c', 'lowlevel.S']
+sources = '''
+src/main.c
+src/queue.c
+src/uart.c
+src/clock.c
+src/error.c
+src/pwm.c
+'''.split()
+
+sys_sources = '''
+'''.split()
+
+sys_sources += glob('hal/*.c') # include all HAL libraries
+sys_sources += glob('sys/*.c') # include all system libraries
+
+startup_code = 'sys/startup_stm32f030x6.s'
+
+sys_objects = '''
+'''.split()
+
+include_dirs = '''
+.
+./hal
+./sys
+./cmsis
+./src
+'''.split()
+
+library_dirs = '''
+./cmsis
+'''.split()
+
+libraries = '''
+'''.split()
+
+defines = '''
+STM32F030x6
+HAL_TIM_MODULE_ENABLED
+'''.split()
+
+common_flags = '''
+-c
+-Wall
+-Werror
+-Wextra
+-Wno-unused-parameter
+-Wno-missing-field-initializers
+-fmessage-length=0
+-fno-exceptions
+-fno-builtin
+-ffunction-sections
+-fdata-sections
+-funsigned-char
+-MMD
+-fno-delete-null-pointer-checks
+-fomit-frame-pointer
+-MMD -MP
+-mthumb
+'''.split()
+
+c_flags = '''
+-std=gnu11
+'''.split()
+
+cpp_flags = '''
+-std=gnu++11 -fno-rtti -Wvla
+'''.split()
+
+asm_flags = '''
+-x assembler-with-cpp
+'''.split()
+
+linker_flags = '''
+-Wl,--gc-sections
+-mthumb
+--specs=nano.specs
+'''.split()
+
+linker_libraries = '''
+stdc++
+supc++
+m
+c
+gcc
+nosys
+'''.split()
+
+linker_script = 'STM32F030F4_FLASH.ld'
+
+# build directory - all output files will go here
+build_dir = 'build'
+
+
+# ------------ Config done ---------------
+
+import os, re, SCons.Tool
+
+def toBuildDir(name):
+    'prepends the build dir to a path'
+    return os.path.join(build_dir, name)
+
+common_flags += ['-O' + optlevel, '-mcpu=' + cpu]
+if debug_info:
+    common_flags += ['-g', '-gdwarf-2']
+
+linker_flags += ['-T' + linker_script, '-mcpu=' + cpu, startup_code]
+
+# output format for hex
+hexformat = 'ihex'
+
+# transform target to full path
+target = toBuildDir(pname)
+
+# determine target files
+targetelf = target + '.elf'
+targethex = target + '.hex'
+targetbin = target + '.bin'
+targetdisasm = target + '.s'
+
+# produce map file
+linker_flags += ['-Wl,-Map=' + target + '.map']
+
+# transform all sources to full path
+sources = map(lambda x: toBuildDir(x), sources + sys_sources + sys_objects)
+
+# set output to build dir
+VariantDir(build_dir, '.', duplicate = 0)
+
+# create environment
+dummy = Environment()
+if re.search('^win', dummy['PLATFORM']):
+    print('Detected windows. Using MinGW')
+    env = Environment(ENV = os.environ, tools = ['mingw'])
+    Tool('mingw')(env)
+else:
+    env = Environment(ENV = os.environ)
+del dummy
+
+env['CCCOMSTR'] = "[compile c] $SOURCE"
+env['CXXCOMSTR'] = "[compile c++] $SOURCE"
+env['ASCOMSTR'] = "[compile asm] $SOURCE"
+env['ASPPCOMSTR'] = "[compile asm] $SOURCE"
+env['LINKCOMSTR'] = "[link] $SOURCE"
+
+env['PROGSUFFIX']   = '.elf'
+
+# executable names
+env['AS'] = 'arm-none-eabi-as'
+env['CC'] = 'arm-none-eabi-gcc'
+env['LINK'] = 'arm-none-eabi-gcc'
+env['CXX'] = 'arm-none-eabi-g++'
+env['OBJCOPY'] = 'arm-none-eabi-objcopy'
+env['OBJDUMP'] = 'arm-none-eabi-objdump'
+env['SIZE'] = 'arm-none-eabi-size'
+
+# set flags into the environment
+env.Append(CCFLAGS = common_flags)
+env.Append(CFLAGS = c_flags)
+env.Append(CXXFLAGS = cpp_flags)
+env.Append(ASFLAGS = asm_flags + common_flags)
+env.Append(LINKFLAGS = linker_flags)
+
+# build .elf
+env.Program(
+        target = targetelf,
+        source = sources,
+        LIBS = libraries + linker_libraries,
+        CPPPATH = include_dirs,
+        CPPDEFINES = defines,
+        LIBPATH = library_dirs + include_dirs
+)
+
+# build .hex
+env.Command(targethex, targetelf,
+    Action(env['OBJCOPY'] + ' -O ' + hexformat + ' $SOURCE $TARGET', "[generate] $TARGET")
+)
+
+# build .bin
+env.Command(targetbin, targetelf,
+    Action(env['OBJCOPY'] + ' -O binary' + ' $SOURCE $TARGET', "[generate] $TARGET")
+)
+
+# create disassembly (.s)
+env.Command(targetdisasm, targetelf,
+    Action(env['OBJDUMP'] + ' -S $SOURCE > $TARGET', "[disassemble] $TARGET")
+)
+
+# display size
+env.Command('size', targetelf,
+    Action(env['SIZE'] + ' $SOURCE', "\n\n >>>>>>>>> ")
+)
+
+# create target commands
+env.Alias('elf', targetelf)
+env.Alias('disasm', targetdisasm)
+env.Alias('hex', targethex)
+
+# default target (scons without parameters)
+Default(targetelf
+    , targethex
+    , targetdisasm
+    , targetbin
+    , 'size')
+
+# all done :)
