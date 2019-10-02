@@ -43,20 +43,16 @@ Text Label 9950 9500 0    50   ~ 0
 TIM3_CH2
 Text Label 9950 9200 0    50   ~ 0
 TIM14_CH1
-Text Label 9950 9000 0    50   ~ 0
-TIM15_CH1
-Text Label 9950 9100 0    50   ~ 0
-TIM15_CH2
 Text Label 8300 9900 0    50   ~ 0
 TIM3_CH4
 Wire Wire Line
 	9750 9600 9950 9600
 Wire Wire Line
 	9750 9700 9950 9700
-Text Label 9950 9600 0    50   ~ 0
-TX_SCL
-Text Label 9950 9700 0    50   ~ 0
-RX_SDA
+Text Label 9950 9000 0    50   ~ 0
+TX
+Text Label 9950 9100 0    50   ~ 0
+RX
 Wire Wire Line
 	9950 9500 9750 9500
 Wire Wire Line
@@ -72,7 +68,7 @@ Wire Wire Line
 Wire Wire Line
 	4250 4500 4150 4500
 Text Label 3700 4500 0    50   ~ 0
-TIM15_CH1
+TIM1_CH2
 $Comp
 L Device:R R7
 U 1 1 5D82A9AD
@@ -446,7 +442,7 @@ Wire Wire Line
 Wire Wire Line
 	8700 6250 8600 6250
 Text Label 5900 6250 0    50   ~ 0
-TIM15_CH2
+TIM1_CH3
 Text Label 8150 4500 0    50   ~ 0
 TIM14_CH1
 Text Label 3700 6250 0    50   ~ 0
@@ -686,7 +682,7 @@ $EndComp
 Wire Wire Line
 	14000 2150 13550 2150
 $Comp
-L Relay_SolidState:MOC3023M U6
+L led_controller_pcb-rescue:MOC3023M-Relay_SolidState U6
 U 1 1 5D957503
 P 13250 2050
 F 0 "U6" H 13250 2375 50  0000 C CNN
@@ -827,7 +823,7 @@ Connection ~ 14150 3850
 Wire Wire Line
 	14150 4400 14400 4400
 $Comp
-L Relay_SolidState:MOC3023M U7
+L led_controller_pcb-rescue:MOC3023M-Relay_SolidState U7
 U 1 1 5DA06959
 P 13250 4100
 F 0 "U7" H 13250 4425 50  0000 C CNN
@@ -1149,9 +1145,9 @@ Wire Wire Line
 Wire Wire Line
 	5500 9200 5650 9200
 Text Label 5650 9100 0    50   ~ 0
-RX_SDA
+RX
 Text Label 5650 9200 0    50   ~ 0
-TX_SCL
+TX
 Text Label 5650 9000 0    50   ~ 0
 SWDIO
 Text Label 5650 8900 0    50   ~ 0
@@ -2447,4 +2443,8 @@ F 3 "" H 1550 5700 50  0001 C CNN
 	1    1550 5700
 	1    0    0    -1  
 $EndComp
+Text Label 9950 9600 0    50   ~ 0
+TIM1_CH2
+Text Label 9950 9700 0    50   ~ 0
+TIM1_CH3
 $EndSCHEMATC
