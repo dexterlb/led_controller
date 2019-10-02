@@ -61,9 +61,14 @@ void init(void)
 int main(void) {
     init();
 
-    pwm_set(1, 333);
-    pwm_set(2, 600);
+    // pwm_set(1, 333);
+    pwm_set(2, PWM_PERIOD / 2);
     pwm_set(4, 20);
+
+    for (uint32_t v = 0; true; v = (v + 1) % PWM_PERIOD) {
+        pwm_set(1, v);
+        HAL_Delay(10);
+    }
 
     uart_begin_receive();
     while (1)

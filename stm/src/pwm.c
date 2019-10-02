@@ -58,28 +58,31 @@ void pwm_init() {
     sConfig.OCIdleState  = TIM_OCIDLESTATE_RESET;
 }
 
-void pwm_set(uint8_t chan, uint32_t value) {
-    char err;
-    switch(chan) {
-        case 1:
-            TimHandle.Instance = TIM3;
-            err = HAL_TIM_PWM_ConfigChannel(&TimHandle, &sConfig, TIM_CHANNEL_1);
-            break;
-        case 2:
-            TimHandle.Instance = TIM3;
-            err = HAL_TIM_PWM_ConfigChannel(&TimHandle, &sConfig, TIM_CHANNEL_2);
-            break;
-        case 4:
-            TimHandle.Instance = TIM3;
-            err = HAL_TIM_PWM_ConfigChannel(&TimHandle, &sConfig, TIM_CHANNEL_4);
-            break;
-        default:
-            err = 42;
-    }
-
-    if (err != HAL_OK) {
+static void pwm_start(TIM_TypeDef* instance, uint8_t channel_handle, uint32_t value) {
+    TimHandle.Instance = instance;
+    sConfig.Pulse = value;
+    if (HAL_TIM_PWM_ConfigChannel(&TimHandle, &sConfig, channel_handle) != HAL_OK) {
         error();
     }
+
+    if (HAL_TIM_PWM_Start(&TimHandle, channel_handle) != HAL_OK) {
+        error();
+    }
+}
+
+void pwm_set(uint8_t chan, uint32_t value) {
+    switch(chan) {
+        case 1:
+            pwm_start(TIM3, TIM_CHANNEL_1, value);
+            return;
+        case 2:
+            pwm_start(TIM3, TIM_CHANNEL_2, value);
+            return;
+        case 4:
+            pwm_start(TIM3, TIM_CHANNEL_4, value);
+            return;
+    }
+    error();
 }
 
 void HAL_TIM_PWM_MspInit(TIM_HandleTypeDef *htim)
