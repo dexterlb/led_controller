@@ -61,7 +61,7 @@ void pwm_msp_init_tim14(TIM_HandleTypeDef* htim) {
 TIM_HandleTypeDef  Tim1Handle;
 TIM_HandleTypeDef  Tim3Handle;
 TIM_HandleTypeDef  Tim14Handle;
-TIM_OC_InitTypeDef sConfig;
+TIM_OC_InitTypeDef pwmConfig;
 
 static void pwm_init_timer(TIM_HandleTypeDef* handle) {
     handle->Init.Prescaler         = PWM_PRESCALER;
@@ -82,12 +82,12 @@ void pwm_init() {
     Tim3Handle.Instance = TIM3;
     Tim14Handle.Instance = TIM14;
 
-    sConfig.OCMode       = TIM_OCMODE_PWM1;
-    sConfig.OCPolarity   = TIM_OCPOLARITY_HIGH;
-    sConfig.OCFastMode   = TIM_OCFAST_DISABLE;
-    sConfig.OCNPolarity  = TIM_OCNPOLARITY_HIGH;
-    sConfig.OCNIdleState = TIM_OCNIDLESTATE_RESET;
-    sConfig.OCIdleState  = TIM_OCIDLESTATE_SET;
+    pwmConfig.OCMode       = TIM_OCMODE_PWM1;
+    pwmConfig.OCPolarity   = TIM_OCPOLARITY_HIGH;
+    pwmConfig.OCFastMode   = TIM_OCFAST_DISABLE;
+    pwmConfig.OCNPolarity  = TIM_OCNPOLARITY_HIGH;
+    pwmConfig.OCNIdleState = TIM_OCNIDLESTATE_RESET;
+    pwmConfig.OCIdleState  = TIM_OCIDLESTATE_SET;
 
     pwm_init_timer(&Tim1Handle);
     pwm_init_timer(&Tim3Handle);
@@ -95,8 +95,8 @@ void pwm_init() {
 }
 
 static void pwm_start(TIM_HandleTypeDef* handle, uint8_t channel_handle, uint32_t value) {
-    sConfig.Pulse = value;
-    if (HAL_TIM_PWM_ConfigChannel(handle, &sConfig, channel_handle) != HAL_OK) {
+    pwmConfig.Pulse = value;
+    if (HAL_TIM_PWM_ConfigChannel(handle, &pwmConfig, channel_handle) != HAL_OK) {
         error();
     }
 

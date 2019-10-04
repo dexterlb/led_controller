@@ -60,14 +60,14 @@ void init(void)
 int main(void) {
     init();
 
-    for (uint32_t v = 0; true; v = (v + 1) % PWM_PERIOD) {
+    for (uint32_t v = 0; true; v = (v + 1000) % PWM_PERIOD) {
         pwm_set(31, v);
         pwm_set(32, v);
         pwm_set(34, v);
         pwm_set(12, v);
         pwm_set(13, v);
         pwm_set(141, v);
-        HAL_Delay(10);
+        HAL_Delay(1000);
     }
 
     uart_begin_receive();
