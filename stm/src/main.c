@@ -44,7 +44,6 @@ void init(void)
     init_clock();
 
     __HAL_RCC_GPIOA_CLK_ENABLE();
-
     gpio.Mode  = GPIO_MODE_OUTPUT_PP;
     gpio.Pull  = GPIO_PULLUP;
     gpio.Speed = GPIO_SPEED_FREQ_HIGH;
@@ -61,16 +60,12 @@ void init(void)
 int main(void) {
     init();
 
-    // pwm_set(1, 333);
-    pwm_set(32, PWM_PERIOD / 2);
-    pwm_set(34, 20);
-    
-    pwm_set(12, PWM_PERIOD / 2);
-    pwm_set(13, 20);
-
     for (uint32_t v = 0; true; v = (v + 1) % PWM_PERIOD) {
         pwm_set(31, v);
+        pwm_set(32, v);
+        pwm_set(34, v);
         pwm_set(12, v);
+        pwm_set(13, v);
         pwm_set(141, v);
         HAL_Delay(10);
     }

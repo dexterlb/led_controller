@@ -16,7 +16,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef *huart)
 
   /*##-2- Configure peripheral GPIO ##########################################*/
   /* UART TX GPIO pin configuration  */
-  GPIO_InitStruct.Pin       = GPIO_PIN_9;
+  GPIO_InitStruct.Pin       = GPIO_PIN_2;
   GPIO_InitStruct.Mode      = GPIO_MODE_AF_PP;
   GPIO_InitStruct.Pull      = GPIO_PULLUP;
   GPIO_InitStruct.Speed     = GPIO_SPEED_FREQ_HIGH;
@@ -25,7 +25,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef *huart)
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /* UART RX GPIO pin configuration  */
-  GPIO_InitStruct.Pin = GPIO_PIN_10;
+  GPIO_InitStruct.Pin = GPIO_PIN_3;
   GPIO_InitStruct.Alternate = GPIO_AF1_USART1;
 
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);

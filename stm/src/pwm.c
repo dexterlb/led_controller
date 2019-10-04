@@ -71,6 +71,7 @@ static void pwm_init_timer(TIM_HandleTypeDef* handle) {
     handle->Init.RepetitionCounter = 0;
     handle->Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
 
+    __HAL_TIM_MOE_ENABLE(handle);
     if (HAL_TIM_PWM_Init(handle) != HAL_OK) {
         error();
     }
