@@ -682,7 +682,7 @@ $EndComp
 Wire Wire Line
 	14000 2150 13550 2150
 $Comp
-L led_controller_pcb-rescue:MOC3023M-Relay_SolidState U6
+L led_controller_pcb-rescue:MOC3023M-Relay_SolidState-led_controller_pcb-rescue U6
 U 1 1 5D957503
 P 13250 2050
 F 0 "U6" H 13250 2375 50  0000 C CNN
@@ -823,7 +823,7 @@ Connection ~ 14150 3850
 Wire Wire Line
 	14150 4400 14400 4400
 $Comp
-L led_controller_pcb-rescue:MOC3023M-Relay_SolidState U7
+L led_controller_pcb-rescue:MOC3023M-Relay_SolidState-led_controller_pcb-rescue U7
 U 1 1 5DA06959
 P 13250 4100
 F 0 "U7" H 13250 4425 50  0000 C CNN
