@@ -124,35 +124,6 @@ local function send_defaults()
     end
 end
 
-local function make_contract()
-    local ss = {}
-    local add = function(s)
-        ss[#ss + 1] = s
-    end
-
-    add("{")
-    for short, long in pairs(long_names) do
-        add('"')
-        add(long)
-        add('":{')
-        add('"_t":"value","type":{"t":{"kind":"type-basic"')
-        if string.sub(short, 1, 1) == "s" then
-            add(',"sub":"bool"')
-        else
-            add(',"sub":"float","meta":{"min":0,"max":1}')
-        end
-        add('},"meta":{},"version":"0","encoding":"json"},')
-        add('"subcontract":{')
-        add('}')
-        add('}')
-        add(',')
-    end
-    ss[#ss] = "" -- remove the last comma
-    add("}")
-
-    return table.concat(ss, "")
-end
-
 local function connected(client)
     current_mqtt_client = client
     client:publish("_contract/" .. POTOO_ROOT, make_contract(), 1, 1)
