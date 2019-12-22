@@ -14,7 +14,10 @@ local function connect(subscriptions, connected, disconnected, lwt)
                 print("cannot publish because MQTT is offline")
                 return
             end
-            self.current_mqtt_client:publish(topic, msg, qos, retain)
+            if not self.current_mqtt_client:publish(topic, msg, qos, retain) then
+                local total, alloca = node.egc.meminfo()
+                print("could not publish message. RAM: ", alloca, "/", total, ", msg size: ", string.len(msg))
+            end
         end,
         is_online = function(self)
             return self.current_mqtt_client ~= nil

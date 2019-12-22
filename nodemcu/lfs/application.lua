@@ -4,14 +4,14 @@ max_brightness = 0xffff
 current_mqtt_client = nil
 
 long_names = {
-  ["b0"] = "block_0",
-  ["b1"] = "block_1",
-  ["s0"] = "switch_0",
-  ["s1"] = "switch_1",
-  ["s2"] = "switch_2",
-  ["s3"] = "switch_3",
-  ["s4"] = "switch_4",
-  ["s5"] = "switch_5",
+    ["b0"] = "block_0",
+    ["b1"] = "block_1",
+    ["s0"] = "switch_0",
+    ["s1"] = "switch_1",
+    ["s2"] = "switch_2",
+    ["s3"] = "switch_3",
+    ["s4"] = "switch_4",
+    ["s5"] = "switch_5",
 }
 
 local function process_data(key, raw_value)
@@ -44,7 +44,6 @@ local function process_data(key, raw_value)
 end
 
 local function uart_callback(data)
-    print("you said: " .. data)
     if string.sub(data, 1, 8) == "%restart" then
         node.restart()
         return
@@ -92,6 +91,17 @@ local function process_get(name)
     uart.write(0, "\n", "%get ", name, "\n")
 end
 
+local function set_led(led_id, state)
+    local state_value = nil
+    if state then
+        state_value = 1
+    else
+        state_value = 0
+    end
+
+    uart.write(0, "\n", "%set l", tostring(led_id), "=", tostring(state_value), "\n")
+end
+
 local function make_subscriptions()
     local subscriptions = {
         [POTOO_ROOT .. "/foo"] = {0, function(client, data)
@@ -112,7 +122,8 @@ local function make_subscriptions()
             0, function(client, data)
                 local arg = data:gmatch("[^ ]*$")()
                 process_set(short, arg)
-            end}
+            end
+        }
     end
 
     return subscriptions
@@ -124,15 +135,56 @@ local function send_defaults()
     end
 end
 
+local function make_contract()
+    local ss = {}
+    local add = function(...)
+        for _, s in ipairs(arg) do
+            ss[#ss + 1] = s
+        end
+    end
+
+    add("{")
+    for short, long in pairs(long_names) do
+        local tt = {}
+        tt[#tt + 1] = '{"t":{"kind":"type-basic",'
+        if string.sub(short, 1, 1) == "s" then
+            tt[#tt + 1] = '"sub":"bool"'
+        else
+            tt[#tt + 1] = '"sub":"float","meta":{"min":0,"max":1}'
+        end
+        tt[#tt + 1] = '},"meta":{},"version":"0","encoding":"json"}'
+
+        add('"')
+        add(long)
+        add('":{', '"_t":"value","type":')
+        add(unpack(tt))
+        add(",")
+        add('"subcontract":{')
+        add('"set":{"_t":"callable","argument":')
+        add(unpack(tt))
+        add(',"retval":{"t":{"kind":"type-basic","sub":"void"},')
+        add('"meta":{},"version":"0","encoding":"json"},"subcontract":{}}')
+        add('}')
+        add('}')
+        add(',')
+    end
+    ss[#ss] = "" -- remove the last comma
+    add("}")
+
+    return table.concat(ss, "")
+end
+
 local function connected(client)
     current_mqtt_client = client
     client:publish("_contract/" .. POTOO_ROOT, make_contract(), 1, 1)
     send_defaults()
+    set_led(0, true)
     print("started service")
 end
 
 local function disconnected(client)
     current_mqtt_client = nil
+    set_led(0, false)
     print("suspended service")
 end
 
@@ -140,7 +192,7 @@ local function main()
     local client = mqtt_persistent.connect(
         make_subscriptions(), connected, disconnected,
         {"_contract/" .. POTOO_ROOT, "null"}
-    )
+        )
 
     tmr.create():alarm(3000, tmr.ALARM_SINGLE, function()
         print("NOW EXITING LUA SHELL. USE \"\\n%restart\\n\" TO RESTART.")
