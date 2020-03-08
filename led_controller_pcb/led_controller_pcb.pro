@@ -1,4 +1,4 @@
-update=Sat 21 Sep 2019 21:29:57 EEST
+update=Fri 06 Mar 2020 18:20:16 EET
 version=1
 last_client=kicad
 [general]
@@ -248,3 +248,7 @@ uViaDrill=0.1
 dPairWidth=0.2
 dPairGap=0.25
 dPairViaGap=0.25
+[SchematicFrame]
+version=1
+[sheetnames]
+1=63049b7a-7ee9-419e-afde-1a355e657770:Sheet63049b7a-7ee9-419e-afde-1a355e657770
