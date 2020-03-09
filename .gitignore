@@ -71,10 +71,12 @@ Gemfile.lock
 *.blend[0-9]
 
 *.kicad_pcb-bak
+*.sch-bak
 *.bak
 *-cache.lib
 *.bck
 fp-lib-table
+fp-info-cache
 _saved_*
 
 # scons
