@@ -1,4 +1,4 @@
-update=Fri 06 Mar 2020 18:20:16 EET
+update=Sun 08 Mar 2020 19:12:13 EET
 version=1
 last_client=kicad
 [general]
@@ -12,6 +12,8 @@ NetIExt=net
 version=1
 LibDir=
 [eeschema/libraries]
+[SchematicFrame]
+version=1
 [pcbnew]
 version=1
 PageLayoutDescrFile=
@@ -34,13 +36,14 @@ MinMicroViaDiameter=0.2
 MinMicroViaDrill=0.09999999999999999
 MinHoleToHole=0.25
 CopperEdgeClearance=0.01
-TrackWidth1=0.25
+TrackWidth1=0.3
 TrackWidth2=0.3
-TrackWidth3=0.5
-TrackWidth4=0.6
-TrackWidth5=1
-TrackWidth6=1.2
-TrackWidth7=1.5
+TrackWidth3=0.4
+TrackWidth4=0.5
+TrackWidth5=0.6
+TrackWidth6=1
+TrackWidth7=1.2
+TrackWidth8=1.5
 ViaDiameter1=0.8
 ViaDrill1=0.4
 dPairWidth1=0.2
@@ -66,8 +69,10 @@ OthersTextSizeH=1
 OthersTextSizeThickness=0.15
 OthersTextItalic=0
 OthersTextUpright=1
+DimensionUnits=0
+DimensionPrecision=1
 SolderMaskClearance=0.051
-SolderMaskMinWidth=0.25
+SolderMaskMinWidth=0.3
 SolderPasteClearance=0
 SolderPasteRatio=-0
 [pcbnew/Layer.F.Cu]
@@ -240,7 +245,7 @@ Enabled=0
 [pcbnew/Netclasses/Default]
 Name=Default
 Clearance=0.2
-TrackWidth=0.25
+TrackWidth=0.3
 ViaDiameter=0.8
 ViaDrill=0.4
 uViaDiameter=0.3
@@ -248,7 +253,5 @@ uViaDrill=0.1
 dPairWidth=0.2
 dPairGap=0.25
 dPairViaGap=0.25
-[SchematicFrame]
-version=1
 [sheetnames]
-1=63049b7a-7ee9-419e-afde-1a355e657770:Sheet63049b7a-7ee9-419e-afde-1a355e657770
+1=c6643e7b-4a16-45e3-9971-f1da3586fa22:Sheetc6643e7b-4a16-45e3-9971-f1da3586fa22
