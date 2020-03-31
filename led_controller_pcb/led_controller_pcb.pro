@@ -1,4 +1,4 @@
-update=Sun 08 Mar 2020 19:12:13 EET
+update=Mon 30 Mar 2020 13:07:31 EEST
 version=1
 last_client=kicad
 [general]
@@ -14,6 +14,8 @@ LibDir=
 [eeschema/libraries]
 [SchematicFrame]
 version=1
+[sheetnames]
+1=c6643e7b-4a16-45e3-9971-f1da3586fa22:Sheetc6643e7b-4a16-45e3-9971-f1da3586fa22
 [pcbnew]
 version=1
 PageLayoutDescrFile=
@@ -27,14 +29,14 @@ CopperLayerCount=2
 BoardThickness=1.6
 AllowMicroVias=0
 AllowBlindVias=0
-RequireCourtyardDefinitions=0
-ProhibitOverlappingCourtyards=1
 MinTrackWidth=0.2
 MinViaDiameter=0.4
 MinViaDrill=0.3
 MinMicroViaDiameter=0.2
 MinMicroViaDrill=0.09999999999999999
 MinHoleToHole=0.25
+RequireCourtyardDefinitions=0
+ProhibitOverlappingCourtyards=1
 CopperEdgeClearance=0.01
 TrackWidth1=0.3
 TrackWidth2=0.3
@@ -74,7 +76,7 @@ DimensionPrecision=1
 SolderMaskClearance=0.051
 SolderMaskMinWidth=0.3
 SolderPasteClearance=0
-SolderPasteRatio=-0
+SolderPasteRatio=0
 [pcbnew/Layer.F.Cu]
 Name=F.Cu
 Type=0
@@ -253,5 +255,3 @@ uViaDrill=0.1
 dPairWidth=0.2
 dPairGap=0.25
 dPairViaGap=0.25
-[sheetnames]
-1=c6643e7b-4a16-45e3-9971-f1da3586fa22:Sheetc6643e7b-4a16-45e3-9971-f1da3586fa22
