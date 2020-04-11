@@ -1,4 +1,4 @@
-update=Sat Apr 11 12:41:13 2020
+update=Sat Apr 11 14:16:22 2020
 version=1
 last_client=kicad
 [general]
@@ -16,10 +16,10 @@ LibDir=
 version=1
 [SchematicFrame]
 version=1
-[ModEditFrame]
-version=1
 [sheetnames]
 1=00000000-0000-0000-0000-00005e8397fe:
+[ModEditFrame]
+version=1
 [pcbnew]
 version=1
 PageLayoutDescrFile=
