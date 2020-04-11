@@ -70,14 +70,30 @@ Gemfile.lock
 
 *.blend[0-9]
 
+
+# Temporary files
+*.000
+*.bak
+*.bck
 *.kicad_pcb-bak
 *.sch-bak
-*.bak
-*-cache.lib
-*.bck
-fp-lib-table
+*~
+_autosave-*
+*.tmp
+*-save.pro
+*-save.kicad_pcb
 fp-info-cache
-_saved_*
+
+# Netlist files (exported from Eeschema)
+*.net
+
+# Autorouter files (exported from Pcbnew)
+*.dsn
+*.ses
+
+# Exported BOM files
+*.xml
+*.csv
 
 # scons
 .sconsign.dblite
