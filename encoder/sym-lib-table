@@ -1,3 +1,4 @@
 (sym_lib_table
   (lib (name "encoder")(type "Legacy")(uri "${KIPRJMOD}/encoder.lib")(options "")(descr ""))
+  (lib (name "drivers_and_mosfets")(type "Legacy")(uri "${KIPRJMOD}/../led_controller_pcb/drivers_and_mosfets.lib")(options "")(descr ""))
 )

@@ -1,4 +1,4 @@
-update=Sat Apr 11 14:22:56 2020
+update=Thu 23 Apr 2020 00:28:39 EEST
 version=1
 last_client=kicad
 [general]
@@ -14,12 +14,10 @@ LibDir=
 [eeschema/libraries]
 [LibeditFrame]
 version=1
-[SchematicFrame]
-version=1
 [PcbFrame]
 version=1
-[sheetnames]
-1=00000000-0000-0000-0000-00005e920ae5:
+[SchematicFrame]
+version=1
 [pcbnew]
 version=1
 PageLayoutDescrFile=
@@ -258,3 +256,5 @@ uViaDrill=0.1
 dPairWidth=0.2
 dPairGap=0.25
 dPairViaGap=0.25
+[sheetnames]
+1=e292dbbe-ef12-430e-9365-a40621fd0723:

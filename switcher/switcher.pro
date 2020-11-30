@@ -1,4 +1,4 @@
-update=Sat Apr 11 14:17:39 2020
+update=Mon 11 May 2020 12:34:57 EEST
 version=1
 last_client=kicad
 [general]
@@ -16,8 +16,6 @@ LibDir=
 version=1
 [SchematicFrame]
 version=1
-[sheetnames]
-1=00000000-0000-0000-0000-00005e8397fe:
 [ModEditFrame]
 version=1
 [pcbnew]
@@ -259,3 +257,5 @@ uViaDrill=0.1
 dPairWidth=0.2
 dPairGap=0.25
 dPairViaGap=0.25
+[sheetnames]
+1=c2bbd6ad-ce72-41f2-aa79-b0293c8a4ee2:

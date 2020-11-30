@@ -1,5 +1,42 @@
-EESchema-LIBRARY Version 2.3
+EESchema-LIBRARY Version 2.4
 #encoding utf-8
+#
+# MOC3023M-Relay_SolidState-led_controller_pcb-rescue
+#
+DEF MOC3023M-Relay_SolidState-led_controller_pcb-rescue U 0 40 Y Y 1 F N
+F0 "U" -210 190 50 H V L CNN
+F1 "MOC3023M-Relay_SolidState-led_controller_pcb-rescue" 0 200 50 H V L CNN
+F2 "" -200 -200 50 H I L CIN
+F3 "" -25 0 50 H I L CNN
+$FPLIST
+ DIP*W7.62mm*
+ SMDIP*W9.53mm*
+ DIP*W10.16mm*
+$ENDFPLIST
+DRAW
+S -200 150 200 -150 0 1 10 f
+P 2 0 1 10 -125 -25 -75 -25 N
+P 2 0 1 10 75 25 145 25 N
+P 2 0 1 0 90 -100 90 -25 N
+P 2 0 1 0 90 -100 200 -100 N
+P 2 0 1 0 90 100 90 25 N
+P 2 0 1 0 90 100 200 100 N
+P 2 0 1 10 105 -25 35 -25 N
+P 3 0 1 0 -200 100 -100 100 -100 25 N
+P 3 0 1 0 -100 -25 -100 -100 -200 -100 N
+P 4 0 1 10 -100 -25 -125 25 -75 25 -100 -25 F
+P 4 0 1 10 60 -25 85 25 35 25 60 -25 F
+P 4 0 1 10 120 25 95 -25 145 -25 120 25 F
+P 5 0 1 0 -45 -20 5 -20 -10 -25 -10 -15 5 -20 N
+P 5 0 1 0 -45 20 5 20 -10 15 -10 25 5 20 N
+X ~ 1 -300 100 100 R 50 50 1 1 P
+X ~ 2 -300 -100 100 R 50 50 1 1 P
+X NC 3 -300 0 100 R 50 50 1 1 N N
+X ~ 4 300 -100 100 L 50 50 1 1 P
+X NC 5 300 0 100 L 50 50 1 1 N N
+X ~ 6 300 100 100 L 50 50 1 1 P
+ENDDRAW
+ENDDEF
 #
 # TC4426A
 #
