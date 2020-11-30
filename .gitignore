@@ -70,12 +70,13 @@ Gemfile.lock
 
 *.blend[0-9]
 
-
 # Temporary files
 *.000
 *.bak
 *.bck
 *.kicad_pcb-bak
+*.kicad_sch-bak
+*.kicad_prl
 *.sch-bak
 *~
 _autosave-*
@@ -91,12 +92,7 @@ fp-info-cache
 *.dsn
 *.ses
 
+
 # Exported BOM files
 *.xml
 *.csv
-
-# scons
-.sconsign.dblite
-build/
-
-credentials.lua
