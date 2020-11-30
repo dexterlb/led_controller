@@ -51,7 +51,7 @@ void init(void)
     gpio.Pin = GPIO_PIN_4;
     HAL_GPIO_Init(GPIOA, &gpio);
 
-    pwm_init();
+    // pwm_init();
 
     init_uart();
     UartReady = SET;
@@ -60,15 +60,18 @@ void init(void)
 int main(void) {
     init();
 
-    for (uint32_t v = 0; true; v = (v + 1000) % PWM_PERIOD) {
-        pwm_set(31, v);
-        pwm_set(32, v);
-        pwm_set(34, v);
-        pwm_set(12, v);
-        pwm_set(13, v);
-        pwm_set(141, v);
-        HAL_Delay(1000);
-    }
+    // for (uint32_t v = 0; true; v = (v + 1000) % PWM_PERIOD) {
+    //     pwm_set(31, v);
+    //     pwm_set(32, v);
+    //     pwm_set(34, v);
+    //     pwm_set(12, v);
+    //     pwm_set(13, v);
+    //     pwm_set(141, v);
+    //     HAL_Delay(500);
+    //     HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, 0);
+    //     HAL_Delay(500);
+    //     HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, 1);
+    // }
 
     uart_begin_receive();
     while (1)
