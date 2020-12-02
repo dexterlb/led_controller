@@ -3,6 +3,8 @@
 
 UART_HandleTypeDef uart1;
 
+extern void uart_handle_msg(uint8_t*);
+
 void HAL_UART_MspInit(UART_HandleTypeDef *huart)
 {
   GPIO_InitTypeDef  GPIO_InitStruct;
@@ -56,7 +58,67 @@ void USART1_IRQHandler(void) {
     HAL_UART_IRQHandler(&uart1);
 }
 
-void init_uart() {
+__IO ITStatus uart_ready = RESET;
+
+uint8_t uart_receive_buf;
+uint8_t rec[100];
+uint8_t rec_i = 0;
+uint8_t send[100];
+uint8_t send_i = 0;
+uint8_t local_send_buf[sizeof(send)];
+
+void HAL_UART_TxCpltCallback(UART_HandleTypeDef *UartHandle)
+{
+    uart_ready = SET;
+}
+
+void uart_begin_receive() {
+    if(HAL_UART_Receive_IT(&uart1, &uart_receive_buf, 1) != HAL_OK) {
+        Error_Handler();
+    }
+}
+
+void uart_queue(uint8_t* data) {
+    for (int i = 0; data[i] != '\0'; i++) {
+        send[send_i] = data[i];
+        send_i++;
+    }
+}
+
+void uart_transmit() {
+    int i;
+
+    if (send_i > 0) {
+        for (i = 0; i < send_i; i++) {
+            local_send_buf[i] = send[i];
+        }
+
+        send_i = 0;
+        while (uart_ready != SET) {  }
+        uart_ready = RESET;
+
+        if (HAL_UART_Transmit_IT(&uart1, local_send_buf, i) != HAL_OK) {
+            Error_Handler();
+        }
+    }
+}
+
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *UartHandle)
+{
+    if (uart_receive_buf == '\r' || uart_receive_buf == '\n' || uart_receive_buf == '\0') {
+        if (rec_i != 0) {
+            rec[rec_i] = '\0';
+            uart_handle_msg(rec);
+            rec_i = 0;
+        }
+    } else {
+        rec[rec_i] = uart_receive_buf;
+        rec_i++;
+    }
+    uart_begin_receive();
+}
+
+void uart_init() {
     uart1.Instance            = USART1;
     uart1.Init.BaudRate       = 115200;
     uart1.Init.WordLength     = UART_WORDLENGTH_8B;
@@ -68,4 +130,6 @@ void init_uart() {
     if (HAL_UART_Init(&uart1) != HAL_OK) {
         Error_Handler();
     }
+
+    uart_ready = SET;
 }
