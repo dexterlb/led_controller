@@ -1,62 +1,11 @@
 #include "main.h"
 #include "error.h"
 
+#include <stdbool.h>
+
 UART_HandleTypeDef uart1;
 
 extern void uart_handle_msg(uint8_t*);
-
-void HAL_UART_MspInit(UART_HandleTypeDef *huart)
-{
-  GPIO_InitTypeDef  GPIO_InitStruct;
-
-  /*##-1- Enable peripherals and GPIO Clocks #################################*/
-  /* Enable GPIO TX/RX clock */
-  __HAL_RCC_GPIOA_CLK_ENABLE();
-
-
-  __HAL_RCC_USART1_CLK_ENABLE();
-
-  /*##-2- Configure peripheral GPIO ##########################################*/
-  /* UART TX GPIO pin configuration  */
-  GPIO_InitStruct.Pin       = GPIO_PIN_2;
-  GPIO_InitStruct.Mode      = GPIO_MODE_AF_PP;
-  GPIO_InitStruct.Pull      = GPIO_PULLUP;
-  GPIO_InitStruct.Speed     = GPIO_SPEED_FREQ_HIGH;
-  GPIO_InitStruct.Alternate = GPIO_AF1_USART1;
-
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
-  /* UART RX GPIO pin configuration  */
-  GPIO_InitStruct.Pin = GPIO_PIN_3;
-  GPIO_InitStruct.Alternate = GPIO_AF1_USART1;
-
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
-  /*##-3- Configure the NVIC for UART ########################################*/
-  /* NVIC for USART */
-  HAL_NVIC_SetPriority(USART1_IRQn, 0, 1);
-  HAL_NVIC_EnableIRQ(USART1_IRQn);
-}
-
-void HAL_UART_MspDeInit(UART_HandleTypeDef *huart)
-{
-  /*##-1- Reset peripherals ##################################################*/
-  // HAL_RCC_USART1_FORCE_RESET();
-  // HAL_RCC_USART1_RELEASE_RESET();
-
-  /*##-2- Disable peripherals and GPIO Clocks #################################*/
-  /* Configure UART Tx as alternate function  */
-  HAL_GPIO_DeInit(GPIOA, GPIO_PIN_9);
-  /* Configure UART Rx as alternate function  */
-  HAL_GPIO_DeInit(GPIOA, GPIO_PIN_10);
-
-  /*##-3- Disable the NVIC for UART ##########################################*/
-  HAL_NVIC_DisableIRQ(USART1_IRQn);
-}
-
-void USART1_IRQHandler(void) {
-    HAL_UART_IRQHandler(&uart1);
-}
 
 __IO ITStatus uart_ready = RESET;
 
@@ -66,6 +15,61 @@ uint8_t rec_i = 0;
 uint8_t send[100];
 uint8_t send_i = 0;
 uint8_t local_send_buf[sizeof(send)];
+uint8_t local_recv_buf[sizeof(rec)];
+bool pending_received_msg = false;
+
+void HAL_UART_MspInit(UART_HandleTypeDef *huart)
+{
+    GPIO_InitTypeDef  GPIO_InitStruct;
+
+    /*##-1- Enable peripherals and GPIO Clocks #################################*/
+    /* Enable GPIO TX/RX clock */
+    __HAL_RCC_GPIOA_CLK_ENABLE();
+
+
+    __HAL_RCC_USART1_CLK_ENABLE();
+
+    /*##-2- Configure peripheral GPIO ##########################################*/
+    /* UART TX GPIO pin configuration  */
+    GPIO_InitStruct.Pin       = GPIO_PIN_2;
+    GPIO_InitStruct.Mode      = GPIO_MODE_AF_PP;
+    GPIO_InitStruct.Pull      = GPIO_PULLUP;
+    GPIO_InitStruct.Speed     = GPIO_SPEED_FREQ_HIGH;
+    GPIO_InitStruct.Alternate = GPIO_AF1_USART1;
+
+    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+    /* UART RX GPIO pin configuration  */
+    GPIO_InitStruct.Pin = GPIO_PIN_3;
+    GPIO_InitStruct.Alternate = GPIO_AF1_USART1;
+
+    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+    /*##-3- Configure the NVIC for UART ########################################*/
+    /* NVIC for USART */
+    HAL_NVIC_SetPriority(USART1_IRQn, 0, 1);
+    HAL_NVIC_EnableIRQ(USART1_IRQn);
+}
+
+void HAL_UART_MspDeInit(UART_HandleTypeDef *huart)
+{
+    /*##-1- Reset peripherals ##################################################*/
+    // HAL_RCC_USART1_FORCE_RESET();
+    // HAL_RCC_USART1_RELEASE_RESET();
+
+    /*##-2- Disable peripherals and GPIO Clocks #################################*/
+    /* Configure UART Tx as alternate function  */
+    HAL_GPIO_DeInit(GPIOA, GPIO_PIN_9);
+    /* Configure UART Rx as alternate function  */
+    HAL_GPIO_DeInit(GPIOA, GPIO_PIN_10);
+
+    /*##-3- Disable the NVIC for UART ##########################################*/
+    HAL_NVIC_DisableIRQ(USART1_IRQn);
+}
+
+void USART1_IRQHandler(void) {
+    HAL_UART_IRQHandler(&uart1);
+}
 
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef *UartHandle)
 {
@@ -103,12 +107,24 @@ void uart_transmit() {
     }
 }
 
+void uart_receive() {
+    if (pending_received_msg) {
+        uart_handle_msg(local_recv_buf);
+        pending_received_msg = false;
+    }
+}
+
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *UartHandle)
 {
     if (uart_receive_buf == '\r' || uart_receive_buf == '\n' || uart_receive_buf == '\0') {
         if (rec_i != 0) {
-            rec[rec_i] = '\0';
-            uart_handle_msg(rec);
+            if (!pending_received_msg) {
+                for (int i = 0; i < rec_i; i++) {
+                    local_recv_buf[i] = rec[i];
+                }
+                local_recv_buf[rec_i] = '\0';
+                pending_received_msg = true;
+            } // skip the message if we haven't processed the previous one ;(
             rec_i = 0;
         }
     } else {
