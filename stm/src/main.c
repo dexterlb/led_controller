@@ -17,6 +17,8 @@ __IO ITStatus UartReady = RESET;
 uint8_t uart_receive_buf;
 uint8_t rec[100];
 uint8_t rec_i = 0;
+uint8_t send[100];
+uint8_t send_i = 0;
 
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef *UartHandle)
 {
@@ -30,11 +32,34 @@ void uart_begin_receive() {
     }
 }
 
+void uart_queue(uint8_t* data) {
+    for (int i = 0; data[i] != '\0'; i++) {
+        send[send_i] = data[i];
+        send_i++;
+    }
+}
+
+uint8_t* str(char* arg) {
+    return (uint8_t*)arg;
+}
+
+void process_msg(uint8_t* msg) {
+    uart_queue(str("msg: "));
+    uart_queue(msg);
+    uart_queue(str("\r\n"));
+}
+
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *UartHandle)
 {
-    rec[rec_i] = uart_receive_buf;
+    if (uart_receive_buf == '\r' || uart_receive_buf == '\n' || uart_receive_buf == '\0') {
+        rec[rec_i] = '\0';
+        process_msg(rec);
+        rec_i = 0;
+    } else {
+        rec[rec_i] = uart_receive_buf;
+        rec_i++;
+    }
     uart_begin_receive();
-    rec_i++;
 }
 
 void init(void)
@@ -81,13 +106,14 @@ int main(void) {
         HAL_Delay(200);
         HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, 1);
 
-        while (UartReady != SET) {  }
 
-        if (rec_i > 0) {
+        if (send_i > 0) {
+            while (UartReady != SET) {  }
             UartReady = RESET;
-            if (HAL_UART_Transmit_IT(&uart1, rec, rec_i) != HAL_OK) {
+            if (HAL_UART_Transmit_IT(&uart1, send, send_i) != HAL_OK) {
                 Error_Handler();
             }
+            send_i = 0;
         }
     }
 }
