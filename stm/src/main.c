@@ -19,17 +19,21 @@ uint8_t rec[100];
 uint8_t rec_i = 0;
 uint8_t send[100];
 uint8_t send_i = 0;
+uint8_t local_send_buf[sizeof(send)];
 
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef *UartHandle)
 {
     UartReady = SET;
-    rec_i = 0;
 }
 
 void uart_begin_receive() {
     if(HAL_UART_Receive_IT(&uart1, &uart_receive_buf, 1) != HAL_OK) {
         Error_Handler();
     }
+}
+
+uint8_t* str(char* arg) {
+    return (uint8_t*)arg;
 }
 
 void uart_queue(uint8_t* data) {
@@ -39,8 +43,22 @@ void uart_queue(uint8_t* data) {
     }
 }
 
-uint8_t* str(char* arg) {
-    return (uint8_t*)arg;
+void uart_transmit() {
+    int i;
+
+    if (send_i > 0) {
+        for (i = 0; i < send_i; i++) {
+            local_send_buf[i] = send[i];
+        }
+
+        send_i = 0;
+        while (UartReady != SET) {  }
+        UartReady = RESET;
+
+        if (HAL_UART_Transmit_IT(&uart1, local_send_buf, i) != HAL_OK) {
+            Error_Handler();
+        }
+    }
 }
 
 void process_msg(uint8_t* msg) {
@@ -52,9 +70,11 @@ void process_msg(uint8_t* msg) {
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *UartHandle)
 {
     if (uart_receive_buf == '\r' || uart_receive_buf == '\n' || uart_receive_buf == '\0') {
-        rec[rec_i] = '\0';
-        process_msg(rec);
-        rec_i = 0;
+        if (rec_i != 0) {
+            rec[rec_i] = '\0';
+            process_msg(rec);
+            rec_i = 0;
+        }
     } else {
         rec[rec_i] = uart_receive_buf;
         rec_i++;
@@ -101,19 +121,10 @@ int main(void) {
     uart_begin_receive();
     while (1)
     {
-        HAL_Delay(800);
-        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, 0);
-        HAL_Delay(200);
-        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, 1);
-
-
-        if (send_i > 0) {
-            while (UartReady != SET) {  }
-            UartReady = RESET;
-            if (HAL_UART_Transmit_IT(&uart1, send, send_i) != HAL_OK) {
-                Error_Handler();
-            }
-            send_i = 0;
-        }
+        // HAL_Delay(800);
+        // HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, 0);
+        // HAL_Delay(200);
+        // HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, 1);
+        uart_transmit();
     }
 }
