@@ -5,8 +5,6 @@
 
 UART_HandleTypeDef uart1;
 
-extern void uart_handle_msg(uint8_t*);
-
 __IO ITStatus uart_ready = RESET;
 
 uint8_t uart_receive_buf;
@@ -86,6 +84,9 @@ void uart_queue(uint8_t* data) {
     for (int i = 0; data[i] != '\0'; i++) {
         send[send_i] = data[i];
         send_i++;
+        if (send_i >= sizeof(send)) {
+            Error_Handler();
+        }
     }
 }
 
@@ -107,9 +108,9 @@ void uart_transmit() {
     }
 }
 
-void uart_receive() {
+void uart_receive(void (*handler)(uint8_t*)) {
     if (pending_received_msg) {
-        uart_handle_msg(local_recv_buf);
+        handler(local_recv_buf);
         pending_received_msg = false;
     }
 }
@@ -129,7 +130,10 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *UartHandle)
         }
     } else {
         rec[rec_i] = uart_receive_buf;
-        rec_i++;
+        if (rec_i < sizeof(rec) - 1) {
+            // truncate messages which are too long
+            rec_i++;
+        }
     }
     uart_begin_receive();
 }

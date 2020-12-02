@@ -63,7 +63,7 @@ int main(void) {
         // HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, 0);
         // HAL_Delay(200);
         // HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, 1);
-        uart_receive();
+        uart_receive(uart_handle_msg);
         uart_transmit();
     }
 }
