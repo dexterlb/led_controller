@@ -7,6 +7,9 @@ UART_HandleTypeDef uart1;
 
 __IO ITStatus uart_ready = RESET;
 
+// TODO: these can be circular buffers to save memory
+// TODO: also, we can make it store multiple messages
+
 uint8_t uart_receive_buf;
 uint8_t rec[100];
 uint8_t rec_i = 0;
