@@ -6,19 +6,25 @@
 #include "clock.h"
 #include "error.h"
 #include "pwm.h"
+#include "utils.h"
 
 void Error_Handler(void);
 
 GPIO_InitTypeDef   gpio;
 
-uint8_t* str(char* arg) {
-    return (uint8_t*)arg;
-}
-
 void uart_handle_msg(uint8_t* msg) {
     uart_queue(str("msg: "));
     uart_queue(msg);
     uart_queue(str("\r\n"));
+
+    uint8_t* args[4];
+    split_string(args, msg, ' ', length(args) - 1);
+
+    for (size_t i = 0; args[i] != NULL; i++) {
+        uart_queue(str("arg: "));
+        uart_queue(args[i]);
+        uart_queue(str("\r\n"));
+    }
 }
 
 void init(void)
@@ -43,6 +49,7 @@ void init(void)
 int main(void) {
     init();
 
+    uart_queue(str("hello\r\n"));
     // for (uint32_t v = 0; true; v = (v + 1000) % PWM_PERIOD) {
     //     pwm_set(31, v);
     //     pwm_set(32, v);
