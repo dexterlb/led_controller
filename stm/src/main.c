@@ -23,6 +23,15 @@ typedef struct {
     chan_t channels[1];
 } state_t;
 
+void default_state(state_t* state) {
+    for (size_t i = 0; i < length(state->channels); i++) {
+        state->channels[i].gamma = 2.2;
+        state->channels[i].val = 0.5;
+        state->channels[i].ratio = 0.5;
+        state->channels[i].fade_speed = 2.0;
+    }
+}
+
 chan_t* resolve_chan(state_t* state, uint8_t* chan_name) {
     if (string_eq(chan_name, str("ch1"))) {
         return &state->channels[0];
@@ -62,6 +71,20 @@ void validate_float_field(float* field, chan_t* chan) {
     }
 }
 
+void print_field(uint8_t* section_name, uint8_t* field_name, uint8_t* field_content) {
+    uart_queue(str("val "));
+    uart_queue(section_name);
+    uart_queue(str(" "));
+    uart_queue(field_name);
+    uart_queue(str(" "));
+    uart_queue(field_content);
+    uart_queue(str("\r\n"));
+}
+
+void print_float_field(uint8_t* section_name, uint8_t* field_name, float field) {
+    print_field(section_name, field_name, str_float_fixed(field));
+}
+
 bool handle_set(state_t* state, uint8_t** args) {
     if (!args[0] || !args[1] || !args[2]) {
         return false;
@@ -76,14 +99,26 @@ bool handle_set(state_t* state, uint8_t** args) {
     if (field) {
         *field = parse_float_fixed(args[2]);
         validate_float_field(field, chan);
+        print_float_field(args[0], args[1], *field);
+        return true;
+    }
 
-        uart_queue(str("val "));
-        uart_queue(args[0]);
-        uart_queue(str(" "));
-        uart_queue(args[1]);
-        uart_queue(str(" "));
-        uart_queue(str_float_fixed(*field));
-        uart_queue(str("\r\n"));
+    return false;
+}
+
+bool handle_get(state_t* state, uint8_t** args) {
+    if (!args[0] || !args[1]) {
+        return false;
+    }
+
+    chan_t* chan = resolve_chan(state, args[0]);
+    if (!chan) {
+        return false;
+    }
+
+    float* field = resolve_float_field(chan, args[1]);
+    if (field) {
+        print_float_field(args[0], args[1], *field);
         return true;
     }
 
@@ -101,6 +136,10 @@ void handle_msg(state_t* state, uint8_t* msg) {
 
     if (string_eq(args[0], str("set"))) {
         if (handle_set(state, &args[1])) {
+            return;
+        }
+    } else if (string_eq(args[0], str("get"))) {
+        if (handle_get(state, &args[1])) {
             return;
         }
     }
@@ -138,6 +177,7 @@ int main(void) {
     init();
 
     state_t state;
+    default_state(&state);
 
     uart_queue(str("hello\r\n"));
     // for (uint32_t v = 0; true; v = (v + 1000) % PWM_PERIOD) {
