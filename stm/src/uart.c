@@ -111,11 +111,23 @@ void uart_transmit() {
     }
 }
 
-void uart_receive(void (*handler)(uint8_t*)) {
+void uart_receive_async(void (*handler)(uint8_t*)) {
     if (pending_received_msg) {
         handler(local_recv_buf);
         pending_received_msg = false;
     }
+}
+
+uint8_t* uart_receive_poll() {
+    if (pending_received_msg) {
+        return local_recv_buf;
+    } else {
+        return NULL;
+    }
+}
+
+void uart_receive_done() {
+    pending_received_msg = false;
 }
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *UartHandle)

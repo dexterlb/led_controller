@@ -12,19 +12,107 @@ void Error_Handler(void);
 
 GPIO_InitTypeDef   gpio;
 
-void uart_handle_msg(uint8_t* msg) {
-    uart_queue(str("msg: "));
-    uart_queue(msg);
-    uart_queue(str("\r\n"));
+typedef struct {
+    float gamma;
+    float val;
+    float ratio;
+    float fade_speed;
+} chan_t;
 
-    uint8_t* args[4];
+typedef struct {
+    chan_t channels[1];
+} state_t;
+
+chan_t* resolve_chan(state_t* state, uint8_t* chan_name) {
+    if (string_eq(chan_name, str("ch1"))) {
+        return &state->channels[0];
+    }
+
+    return NULL;
+}
+
+float* resolve_float_field(chan_t* chan, uint8_t* field_name) {
+    if (string_eq(field_name, str("gamma"))) {
+        return &chan->gamma;
+    }
+    if (string_eq(field_name, str("val"))) {
+        return &chan->val;
+    }
+    if (string_eq(field_name, str("ratio"))) {
+        return &chan->ratio;
+    }
+    if (string_eq(field_name, str("fade_speed"))) {
+        return &chan->fade_speed;
+    }
+    return NULL;
+}
+
+void validate_float_field(float* field, chan_t* chan) {
+    switch ((size_t)field - (size_t)chan) {
+        case offsetof(chan_t, gamma):
+            clamp(field, 1.0, 16.0);
+            break;
+        case offsetof(chan_t, val):
+        case offsetof(chan_t, ratio):
+            clamp(field, 0.0, 1.0);
+            break;
+        case offsetof(chan_t, fade_speed):
+            clamp(field, 0.0, 65536.0);
+            break;
+    }
+}
+
+bool handle_set(state_t* state, uint8_t** args) {
+    if (!args[0] || !args[1] || !args[2]) {
+        return false;
+    }
+
+    chan_t* chan = resolve_chan(state, args[0]);
+    if (!chan) {
+        return false;
+    }
+
+    float* field = resolve_float_field(chan, args[1]);
+    if (field) {
+        *field = parse_float_fixed(args[2]);
+        validate_float_field(field, chan);
+
+        uart_queue(str("val "));
+        uart_queue(args[0]);
+        uart_queue(str(" "));
+        uart_queue(args[1]);
+        uart_queue(str(" "));
+        uart_queue(str_float_fixed(*field));
+        uart_queue(str("\r\n"));
+        return true;
+    }
+
+    return false;
+}
+
+void handle_msg(state_t* state, uint8_t* msg) {
+    uint8_t* args[5];
     split_string(args, msg, ' ', length(args) - 1);
 
-    for (size_t i = 0; args[i] != NULL; i++) {
-        uart_queue(str("arg: "));
-        uart_queue(args[i]);
-        uart_queue(str("\r\n"));
+    if (!args[0]) {
+        Error_Handler();
+        return;
     }
+
+    if (string_eq(args[0], str("set"))) {
+        if (handle_set(state, &args[1])) {
+            return;
+        }
+    }
+
+    uart_queue(str("unable to parse: "));
+    for (int i = 0; args[i] != NULL; i++) {
+        uart_queue(args[i]);
+        if (args[i + 1] != NULL) {
+            uart_queue(str(" "));
+        }
+    }
+    uart_queue(str("\r\n"));
 }
 
 void init(void)
@@ -49,6 +137,8 @@ void init(void)
 int main(void) {
     init();
 
+    state_t state;
+
     uart_queue(str("hello\r\n"));
     // for (uint32_t v = 0; true; v = (v + 1000) % PWM_PERIOD) {
     //     pwm_set(31, v);
@@ -70,7 +160,12 @@ int main(void) {
         // HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, 0);
         // HAL_Delay(200);
         // HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, 1);
-        uart_receive(uart_handle_msg);
+        uint8_t* msg = uart_receive_poll();
+        if (msg) {
+            handle_msg(&state, msg);
+            uart_receive_done();
+        }
+
         uart_transmit();
     }
 }

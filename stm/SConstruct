@@ -24,7 +24,7 @@ cpu = 'cortex-m0'
 # optimisation level
 # can be 's' (size opt), '1', '2', '3' or '0' (not advised)
 # when debugging, it might be useful to set it to 1 or 0
-optlevel = '0'
+optlevel = 's'
 
 # save debug info to .elf file
 debug_info = True
@@ -94,11 +94,11 @@ common_flags = '''
 '''.split()
 
 c_flags = '''
--std=gnu11
+-std=gnu2x
 '''.split()
 
 cpp_flags = '''
--std=gnu++11 -fno-rtti -Wvla
+-std=gnu++20 -fno-rtti -Wvla
 '''.split()
 
 asm_flags = '''
