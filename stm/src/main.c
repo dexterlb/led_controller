@@ -13,10 +13,14 @@ void Error_Handler(void);
 GPIO_InitTypeDef   gpio;
 
 typedef struct {
+    // settable by user:
     float gamma;
     float val;
     float ratio;
     float fade_speed;
+
+    // internal:
+    float actual_val;
 } chan_t;
 
 typedef struct {
@@ -29,6 +33,7 @@ void default_state(state_t* state) {
         state->channels[i].val = 0.5;
         state->channels[i].ratio = 0.5;
         state->channels[i].fade_speed = 2.0;
+        state->channels[i].actual_val = 0.0;
     }
 }
 
@@ -173,11 +178,36 @@ void init(void)
     uart_init();
 }
 
-int main(void) {
-    init();
+void update_channel(chan_t* chan) {
 
-    state_t state;
+}
+
+void update(state_t* state) {
+    for (size_t i = 0; i < length(state->channels); i++) {
+        update_channel(&state->channels[i]);
+    }
+}
+
+void debug_info(state_t* state) {
+
+}
+
+state_t state;
+
+void systick() {
+    update(&state);
+
+    static uint16_t count;
+    if (count % 1000 == 0) {
+        debug_info(&state);
+        count = 0;
+    }
+    count++;
+}
+
+int main(void) {
     default_state(&state);
+    init();
 
     uart_queue(str("hello\r\n"));
     // for (uint32_t v = 0; true; v = (v + 1000) % PWM_PERIOD) {

@@ -3,3 +3,4 @@
 #include "stm32f0xx_hal.h"
 
 void error();
+void systick();
