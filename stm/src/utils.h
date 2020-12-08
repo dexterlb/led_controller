@@ -36,3 +36,5 @@ uint8_t* str_float(float f);
 uint8_t* str_float_fixed(float f);
 
 void clamp(float* v, float min, float max);
+void clamp_min(float* v, float min);
+void clamp_max(float* v, float max);

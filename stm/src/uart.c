@@ -12,9 +12,9 @@ __IO ITStatus uart_ready = RESET;
 
 uint8_t uart_receive_buf;
 uint8_t rec[100];
-uint8_t rec_i = 0;
-uint8_t send[100];
-uint8_t send_i = 0;
+size_t rec_i = 0;
+uint8_t send[400];
+size_t send_i = 0;
 uint8_t local_send_buf[sizeof(send)];
 uint8_t local_recv_buf[sizeof(rec)];
 bool pending_received_msg = false;
@@ -94,7 +94,7 @@ void uart_queue(uint8_t* data) {
 }
 
 void uart_transmit() {
-    int i;
+    size_t i;
 
     if (send_i > 0) {
         for (i = 0; i < send_i; i++) {
@@ -135,7 +135,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *UartHandle)
     if (uart_receive_buf == '\r' || uart_receive_buf == '\n' || uart_receive_buf == '\0') {
         if (rec_i != 0) {
             if (!pending_received_msg) {
-                for (int i = 0; i < rec_i; i++) {
+                for (size_t i = 0; i < rec_i; i++) {
                     local_recv_buf[i] = rec[i];
                 }
                 local_recv_buf[rec_i] = '\0';

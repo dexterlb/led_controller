@@ -106,10 +106,18 @@ bool string_eq(uint8_t* a, uint8_t* b) {
 }
 
 void clamp(float* v, float min, float max) {
-    if (*v > max) {
-        *v = max;
-    }
+    clamp_min(v, min);
+    clamp_max(v, max);
+}
+
+void clamp_min(float* v, float min) {
     if (*v < min){
         *v = min;
+    }
+}
+
+void clamp_max(float* v, float max) {
+    if (*v > max){
+        *v = max;
     }
 }

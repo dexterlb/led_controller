@@ -1,5 +1,6 @@
 #include <stdbool.h>
 #include <string.h>
+#include <math.h>
 
 #include "main.h"
 #include "uart.h"
@@ -20,7 +21,8 @@ typedef struct {
     float fade_speed;
 
     // internal:
-    float actual_val;
+    float actual_a;
+    float actual_b;
 } chan_t;
 
 typedef struct {
@@ -33,7 +35,8 @@ void default_state(state_t* state) {
         state->channels[i].val = 0.5;
         state->channels[i].ratio = 0.5;
         state->channels[i].fade_speed = 2.0;
-        state->channels[i].actual_val = 0.0;
+        state->channels[i].actual_a = 0.0;
+        state->channels[i].actual_b = 0.0;
     }
 }
 
@@ -178,8 +181,22 @@ void init(void)
     uart_init();
 }
 
-void update_channel(chan_t* chan) {
+void bump_val(float* val, float speed, float target) {
+    float delta = speed * 0.001;
+    if (target - *val >= 0) {
+        *val += delta;
+        clamp_max(val, target);
+    } else {
+        *val -= delta;
+        clamp_min(val, target);
+    }
+}
 
+void update_channel(chan_t* chan) {
+    float target_a = chan->val * chan->ratio;
+    float target_b = chan->val * (1.0 - chan->ratio);
+    bump_val(&chan->actual_a, chan->fade_speed, target_a);
+    bump_val(&chan->actual_b, chan->fade_speed, target_b);
 }
 
 void update(state_t* state) {
@@ -189,20 +206,56 @@ void update(state_t* state) {
 }
 
 void debug_info(state_t* state) {
-
+    uart_queue(str("\r\n"));
+    for (size_t i = 0; i < length(state->channels); i++) {
+        uart_queue(str("channel "));
+        uart_queue(str_int(i + 1));
+        uart_queue(str("\r\n"));
+        uart_queue(str("  gamma: "));
+        uart_queue(str_float_fixed(state->channels[i].gamma));
+        uart_queue(str("\r\n"));
+        uart_queue(str("  val: "));
+        uart_queue(str_float_fixed(state->channels[i].val));
+        uart_queue(str("\r\n"));
+        uart_queue(str("  ratio: "));
+        uart_queue(str_float_fixed(state->channels[i].ratio));
+        uart_queue(str("\r\n"));
+        uart_queue(str("  fade speed: "));
+        uart_queue(str_float_fixed(state->channels[i].fade_speed));
+        uart_queue(str("\r\n"));
+        uart_queue(str("\r\n"));
+        uart_queue(str("  actual A: "));
+        uart_queue(str_float_fixed(state->channels[i].actual_a));
+        uart_queue(str("\r\n"));
+        uart_queue(str("  actual B: "));
+        uart_queue(str_float_fixed(state->channels[i].actual_b));
+        uart_queue(str("\r\n"));
+        uart_queue(str("\r\n"));
+        uart_queue(str("  linear A: "));
+        uart_queue(str_float_fixed(powf(state->channels[i].actual_a, state->channels[i].gamma)));
+        uart_queue(str("\r\n"));
+        uart_queue(str("  linear B: "));
+        uart_queue(str_float_fixed(powf(state->channels[i].actual_b, state->channels[i].gamma)));
+        uart_queue(str("\r\n"));
+    }
 }
 
 state_t state;
 
 void systick() {
-    update(&state);
-
-    static uint16_t count;
-    if (count % 1000 == 0) {
-        debug_info(&state);
-        count = 0;
+    static uint16_t update_counter;
+    if (update_counter % update_interval_ms == 0) {
+        update(&state);
+        update_counter = 0;
     }
-    count++;
+    update_counter++;
+
+    // static uint16_t debug_counter;
+    // if (debug_counter % 1000 == 0) {
+    //     debug_info(&state);
+    //     debug_counter = 0;
+    // }
+    // debug_counter++;
 }
 
 int main(void) {
