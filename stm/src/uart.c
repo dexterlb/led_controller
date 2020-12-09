@@ -88,7 +88,7 @@ void uart_queue(uint8_t* data) {
         send[send_i] = data[i];
         send_i++;
         if (send_i >= sizeof(send)) {
-            Error_Handler();
+            break;
         }
     }
 }

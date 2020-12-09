@@ -40,6 +40,7 @@ src/uart.c
 src/clock.c
 src/error.c
 src/pwm.c
+src/vendor/fixedptc/fixedptc.c
 '''.split()
 
 sys_sources = '''

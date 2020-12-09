@@ -4,6 +4,8 @@
 #include <sys/types.h>
 #include <stdbool.h>
 
+#include "vendor/fixedptc/fixedptc.h"
+
 #define length(array) (sizeof(array)/sizeof(*(array)))
 
 // split the string 's' by the given 'token', storing the resulting pointers.
@@ -20,21 +22,17 @@ static inline uint8_t* str(char* arg) {
 // checks if two strings are equal
 bool string_eq(uint8_t* a, uint8_t* b);
 
-// parse a rational number from a numerator and denominator
-float parse_float(uint8_t* num, uint8_t* denom);
-
-// parse a float represented as an integer, multiplied by float_denom (in cfg.h)
-float parse_float_fixed(uint8_t* s);
+// parse a fixed point number in the format '123.456'
+fixedpt parse_fixedpt(uint8_t* str);
 
 // int to string
 uint8_t* str_int(int n);
 
-// float to string
-uint8_t* str_float(float f);
+// fixedpt to string
+uint8_t* str_fixedpt(fixedpt f);
 
-// float to string, represented as an integer, multiplied by float_denom (in cfg.h)
-uint8_t* str_float_fixed(float f);
+int scale_int(fixedpt v, int multiplier);
 
-void clamp(float* v, float min, float max);
-void clamp_min(float* v, float min);
-void clamp_max(float* v, float max);
+void clamp(fixedpt* v, fixedpt min, fixedpt max);
+void clamp_min(fixedpt* v, fixedpt min);
+void clamp_max(fixedpt* v, fixedpt max);

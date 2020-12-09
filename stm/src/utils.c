@@ -26,50 +26,28 @@ void split_string(uint8_t* into[], uint8_t* s, uint8_t token, size_t n) {
     }
 }
 
-float parse_float_fixed(uint8_t* s) {
-    if (!s) {
-        return 0.0;
+fixedpt parse_fixedpt_pair(uint8_t* whole, uint8_t* frac) {
+    if (!whole || !frac) {
+        return fixedpt_rconst(0.0);
     }
 
-    return (float)atoi((char*)s) / (float)float_denom;
-}
-
-uint8_t* str_float_fixed(float f) {
-    return str_int(f * float_denom);
-}
-
-float parse_float(uint8_t* num, uint8_t* denom) {
-    if (!num || !denom) {
-        return 0.0;
+    fixedpt result = fixedpt_fromint(atoi((char*)whole));
+    fixedpt acc = fixedpt_rconst(0.1);
+    for (size_t i = 0; frac[i] != '\0'; i++) {
+        result += fixedpt_mul(acc, fixedpt_fromint(frac[i] - '0'));
+        acc = fixedpt_mul(acc, fixedpt_rconst(0.1));
     }
 
-    return (float)atoi((char*)num) / (float)atoi((char*)denom);
+    return result;
+}
+
+fixedpt parse_fixedpt(uint8_t* str) {
+    uint8_t* parts[3];
+    split_string(parts, str, '.', 2);
+    return parse_fixedpt_pair(parts[0], parts[1]);
 }
 
 #define max_len 10
-
-uint8_t* str_float(float f) {
-    // TODO: doesn't work for negatives
-    static uint8_t buf[max_len + 1];
-
-    buf[max_len] = '\0';
-
-    int l = (int)f;
-    int r = (int)(f * 1000.0);
-
-    int i;
-    for (i = 0; i < 3; i++) {
-        buf[max_len - i - 1] = '0' + (r % 10);
-        r /= 10;
-    }
-    buf[max_len - 3 - 1] = '.';
-    for (i = max_len - 4 - 1; i >= 0 && l != 0; i--) {
-        buf[i] = '0' + (l % 10);
-        l /= 10;
-    }
-
-    return &buf[i + 1];
-}
 
 uint8_t* str_int(int n) {
     static uint8_t buf[max_len + 1];
@@ -93,6 +71,10 @@ uint8_t* str_int(int n) {
     return &buf[max_len - i];
 }
 
+uint8_t* str_fixedpt(fixedpt f) {
+    return (uint8_t*)fixedpt_cstr(f, 4);
+}
+
 bool string_eq(uint8_t* a, uint8_t* b) {
     int i;
 
@@ -105,19 +87,34 @@ bool string_eq(uint8_t* a, uint8_t* b) {
     return (a[i] == '\0' && b[i] == '\0');
 }
 
-void clamp(float* v, float min, float max) {
+void clamp(fixedpt* v, fixedpt min, fixedpt max) {
     clamp_min(v, min);
     clamp_max(v, max);
 }
 
-void clamp_min(float* v, float min) {
+void clamp_min(fixedpt* v, fixedpt min) {
     if (*v < min){
         *v = min;
     }
 }
 
-void clamp_max(float* v, float max) {
+void clamp_max(fixedpt* v, fixedpt max) {
     if (*v > max){
         *v = max;
     }
+}
+
+int scale_int(fixedpt v, int a) {
+    int top = a * fixedpt_toint(v + fixedpt_rconst(1.0));
+    int bot = a * fixedpt_toint(v);
+
+    for (size_t i = 0; i < FIXEDPT_FBITS; i++) {
+        if (v >> (FIXEDPT_FBITS - i - 1) & 1) {
+            bot = (top + bot) / 2;
+        } else {
+            top = (top + bot) / 2;
+        }
+    }
+
+    return bot;
 }
