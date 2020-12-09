@@ -104,17 +104,6 @@ void clamp_max(fixedpt* v, fixedpt max) {
     }
 }
 
-int scale_int(fixedpt v, int a) {
-    int top = a * fixedpt_toint(v + fixedpt_rconst(1.0));
-    int bot = a * fixedpt_toint(v);
-
-    for (size_t i = 0; i < FIXEDPT_FBITS; i++) {
-        if (v >> (FIXEDPT_FBITS - i - 1) & 1) {
-            bot = (top + bot) / 2;
-        } else {
-            top = (top + bot) / 2;
-        }
-    }
-
-    return bot;
+uint32_t scale_int(uint32_t a, fixedpt v) {
+    return (uint32_t)(((uint64_t)v * (uint64_t)a) / (1 << FIXEDPT_FBITS));
 }

@@ -31,7 +31,7 @@ uint8_t* str_int(int n);
 // fixedpt to string
 uint8_t* str_fixedpt(fixedpt f);
 
-int scale_int(fixedpt v, int multiplier);
+uint32_t scale_int(uint32_t a, fixedpt v);
 
 void clamp(fixedpt* v, fixedpt min, fixedpt max);
 void clamp_min(fixedpt* v, fixedpt min);

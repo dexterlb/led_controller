@@ -217,8 +217,8 @@ void update_channel(size_t chan_index, chan_t* chan) {
     chan->linear_a = fixedpt_pow(chan->actual_a, chan->gamma);
     chan->linear_b = fixedpt_pow(chan->actual_b, chan->gamma);
 
-    chan->duty_a = scale_int(chan->linear_a, PWM_PERIOD);
-    chan->duty_b = scale_int(chan->linear_b, PWM_PERIOD);
+    chan->duty_a = scale_int(PWM_PERIOD, chan->linear_a);
+    chan->duty_b = scale_int(PWM_PERIOD, chan->linear_b);
     pwm_set_chan(chan_index, chan->duty_a, chan->duty_b);
 }
 
