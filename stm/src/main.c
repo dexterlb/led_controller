@@ -192,16 +192,30 @@ void bump_val(float* val, float speed, float target) {
     }
 }
 
-void update_channel(chan_t* chan) {
+void pwm_set_chan(size_t index, uint32_t duty_a, uint32_t duty_b) {
+    switch (index) {
+        case 0:
+            pwm_set(11, duty_a);
+            pwm_set(12, duty_b);
+            break;
+    }
+}
+
+void update_channel(size_t chan_index, chan_t* chan) {
     float target_a = chan->val * chan->ratio;
     float target_b = chan->val * (1.0 - chan->ratio);
     bump_val(&chan->actual_a, chan->fade_speed, target_a);
     bump_val(&chan->actual_b, chan->fade_speed, target_b);
+    pwm_set_chan(
+        chan_index,
+        powf(chan->actual_a, chan->gamma) * PWM_PERIOD,
+        powf(chan->actual_b, chan->gamma) * PWM_PERIOD
+    );
 }
 
 void update(state_t* state) {
     for (size_t i = 0; i < length(state->channels); i++) {
-        update_channel(&state->channels[i]);
+        update_channel(i, &state->channels[i]);
     }
 }
 
