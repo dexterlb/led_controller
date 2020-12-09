@@ -10,7 +10,7 @@ void split_string(uint8_t* into[], uint8_t* s, uint8_t token, size_t n) {
 
     size_t arg_index = 0;
     for (size_t i = 0; s[i] != '\0'; i++) {
-        if (s[i] == ' ') {
+        if (s[i] == token) {
             s[i] = '\0';
             arg_index++;
             continue;
