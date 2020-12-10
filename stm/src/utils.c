@@ -71,6 +71,19 @@ uint8_t* str_int(int n) {
     return &buf[max_len - i];
 }
 
+uint8_t* str_uint(uint32_t n) {
+    static uint8_t buf[max_len + 1];
+    buf[max_len] = '\0';
+
+    int i;
+    for (i = 0; i < max_len - 1 && (n != 0 || i == 0); i++) {
+        buf[max_len - i - 1] = '0' + (n % 10);
+        n /= 10;
+    }
+
+    return &buf[max_len - i];
+}
+
 uint8_t* str_fixedpt(fixedpt f) {
     return (uint8_t*)fixedpt_cstr(f, 4);
 }

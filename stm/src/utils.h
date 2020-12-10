@@ -28,6 +28,9 @@ fixedpt parse_fixedpt(uint8_t* str);
 // int to string
 uint8_t* str_int(int n);
 
+// uint to string
+uint8_t* str_uint(uint32_t n);
+
 // fixedpt to string
 uint8_t* str_fixedpt(fixedpt f);
 

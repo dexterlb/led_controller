@@ -12,11 +12,10 @@
 
 void Error_Handler(void);
 
-GPIO_InitTypeDef   gpio;
-
 typedef struct {
     // settable by user:
-    fixedpt gamma;
+    fixedpt gamma_a;
+    fixedpt gamma_b;
     fixedpt val;
     fixedpt ratio;
     fixedpt fade_speed;
@@ -38,7 +37,8 @@ typedef struct {
 
 void default_state(state_t* state) {
     for (size_t i = 0; i < length(state->channels); i++) {
-        state->channels[i].gamma = fixedpt_rconst(2.2);
+        state->channels[i].gamma_a = fixedpt_rconst(2.2);
+        state->channels[i].gamma_b = fixedpt_rconst(2.2);
         state->channels[i].val = fixedpt_rconst(0.5);
         state->channels[i].ratio = fixedpt_rconst(0.5);
         state->channels[i].fade_speed = fixedpt_rconst(2.0);
@@ -56,8 +56,11 @@ chan_t* resolve_chan(state_t* state, uint8_t* chan_name) {
 }
 
 fixedpt* resolve_float_field(chan_t* chan, uint8_t* field_name) {
-    if (string_eq(field_name, str("gamma"))) {
-        return &chan->gamma;
+    if (string_eq(field_name, str("gamma_a"))) {
+        return &chan->gamma_a;
+    }
+    if (string_eq(field_name, str("gamma_b"))) {
+        return &chan->gamma_b;
     }
     if (string_eq(field_name, str("val"))) {
         return &chan->val;
@@ -73,7 +76,8 @@ fixedpt* resolve_float_field(chan_t* chan, uint8_t* field_name) {
 
 void validate_float_field(fixedpt* field, chan_t* chan) {
     switch ((size_t)field - (size_t)chan) {
-        case offsetof(chan_t, gamma):
+        case offsetof(chan_t, gamma_a):
+        case offsetof(chan_t, gamma_b):
             clamp(field, fixedpt_rconst(1.0), fixedpt_rconst(16.0));
             break;
         case offsetof(chan_t, val):
@@ -81,7 +85,7 @@ void validate_float_field(fixedpt* field, chan_t* chan) {
             clamp(field, fixedpt_rconst(0.0), fixedpt_rconst(1.0));
             break;
         case offsetof(chan_t, fade_speed):
-            clamp(field, fixedpt_rconst(0.0), fixedpt_rconst(65536.0));
+            clamp(field, fixedpt_rconst(0.0), fixedpt_rconst(255.0));
             break;
     }
 }
@@ -175,14 +179,6 @@ void init(void)
 
     init_clock();
 
-    __HAL_RCC_GPIOA_CLK_ENABLE();
-    gpio.Mode  = GPIO_MODE_OUTPUT_PP;
-    gpio.Pull  = GPIO_PULLUP;
-    gpio.Speed = GPIO_SPEED_FREQ_HIGH;
-
-    gpio.Pin = GPIO_PIN_4;
-    HAL_GPIO_Init(GPIOA, &gpio);
-
     pwm_init();
 
     uart_init();
@@ -214,8 +210,8 @@ void update_channel(size_t chan_index, chan_t* chan) {
     bump_val(&chan->actual_a, chan->fade_speed, target_a);
     bump_val(&chan->actual_b, chan->fade_speed, target_b);
 
-    chan->linear_a = fixedpt_pow(chan->actual_a, chan->gamma);
-    chan->linear_b = fixedpt_pow(chan->actual_b, chan->gamma);
+    chan->linear_a = fixedpt_pow(chan->actual_a, chan->gamma_a);
+    chan->linear_b = fixedpt_pow(chan->actual_b, chan->gamma_b);
 
     chan->duty_a = scale_int(PWM_PERIOD, chan->linear_a);
     chan->duty_b = scale_int(PWM_PERIOD, chan->linear_b);
@@ -232,10 +228,12 @@ void debug_info(state_t* state) {
     uart_queue(str("\r\n"));
     for (size_t i = 0; i < length(state->channels); i++) {
         uart_queue(str("channel "));
-        uart_queue(str_int(i + 1));
+        uart_queue(str_uint(i + 1));
         uart_queue(str("\r\n"));
         uart_queue(str("  gamma: "));
-        uart_queue(str_fixedpt(state->channels[i].gamma));
+        uart_queue(str_fixedpt(state->channels[i].gamma_a));
+        uart_queue(str(", "));
+        uart_queue(str_fixedpt(state->channels[i].gamma_b));
         uart_queue(str("\r\n"));
         uart_queue(str("  val: "));
         uart_queue(str_fixedpt(state->channels[i].val));
@@ -247,28 +245,23 @@ void debug_info(state_t* state) {
         uart_queue(str_fixedpt(state->channels[i].fade_speed));
         uart_queue(str("\r\n"));
         uart_queue(str("\r\n"));
-        uart_queue(str("  actual A: "));
+        uart_queue(str("  actual: "));
         uart_queue(str_fixedpt(state->channels[i].actual_a));
-        uart_queue(str("\r\n"));
-        uart_queue(str("  actual B: "));
+        uart_queue(str(", "));
         uart_queue(str_fixedpt(state->channels[i].actual_b));
         uart_queue(str("\r\n"));
-        uart_queue(str("\r\n"));
-        uart_queue(str("  linear A: "));
+        uart_queue(str("  linear: "));
         uart_queue(str_fixedpt(state->channels[i].linear_a));
-        uart_queue(str("\r\n"));
-        uart_queue(str("  linear B: "));
+        uart_queue(str(", "));
         uart_queue(str_fixedpt(state->channels[i].linear_b));
         uart_queue(str("\r\n"));
-        uart_queue(str("\r\n"));
-        uart_queue(str("  duty A: "));
-        uart_queue(str_int(state->channels[i].duty_a));
-        uart_queue(str("\r\n"));
-        uart_queue(str("  duty B: "));
-        uart_queue(str_int(state->channels[i].duty_b));
+        uart_queue(str("  duty: "));
+        uart_queue(str_uint(state->channels[i].duty_a));
+        uart_queue(str(", "));
+        uart_queue(str_uint(state->channels[i].duty_b));
         uart_queue(str("\r\n"));
         uart_queue(str("  duty max: "));
-        uart_queue(str_int(PWM_PERIOD));
+        uart_queue(str_uint(PWM_PERIOD));
         uart_queue(str("\r\n"));
     }
 }
@@ -283,12 +276,14 @@ void systick() {
     }
     update_counter++;
 
+#if debug_enabled
     static uint16_t debug_counter;
     if (debug_counter % 1000 == 0) {
         debug_info(&state);
         debug_counter = 0;
     }
     debug_counter++;
+#endif
 }
 
 int main(void) {
@@ -296,26 +291,11 @@ int main(void) {
     init();
 
     uart_queue(str("hello\r\n"));
-    // for (uint32_t v = 0; true; v = (v + 1000) % PWM_PERIOD) {
-    //     pwm_set(31, v);
-    //     pwm_set(32, v);
-    //     pwm_set(34, v);
-    //     pwm_set(12, v);
-    //     pwm_set(13, v);
-    //     pwm_set(141, v);
-    //     HAL_Delay(500);
-    //     HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, 0);
-    //     HAL_Delay(500);
-    //     HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, 1);
-    // }
 
     uart_begin_receive();
     while (1)
     {
-        // HAL_Delay(800);
-        // HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, 0);
-        // HAL_Delay(200);
-        // HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, 1);
+        HAL_Delay(1);
         uint8_t* msg = uart_receive_poll();
         if (msg) {
             handle_msg(&state, msg);
