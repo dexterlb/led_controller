@@ -129,9 +129,9 @@ bool handle_get(state_t* state, uint8_t** args) {
     return false;
 }
 
-void handle_msg(state_t* state, uint8_t* msg) {
+void handle_cmd(state_t* state, uint8_t* cmd) {
     uint8_t* args[5];
-    split_string(args, msg, ' ', length(args) - 1);
+    split_string(args, cmd, ' ', length(args) - 1);
 
     if (!args[0]) {
         Error_Handler();
@@ -156,6 +156,15 @@ void handle_msg(state_t* state, uint8_t* msg) {
         }
     }
     uart_queue(str("\r\n"));
+}
+
+void handle_msg(state_t* state, uint8_t* msg) {
+    uint8_t* cmds[5];
+    split_string(cmds, msg, ';', length(cmds) - 1);
+
+    for (size_t i = 0; cmds[i] != NULL; i++) {
+        handle_cmd(state, cmds[i]);
+    }
 }
 
 void init(void)

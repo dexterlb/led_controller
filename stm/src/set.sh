@@ -17,4 +17,4 @@ fi
 
 read v1 v2 < <(perl -E '($r, $v) = @ARGV; say $v * $r, " ", $v * (1 - $r)' "${2}" "${3}")
 
-echo -e "set ch1 val ${v1}\nset ch2 val ${v2}" | tee "${1}"
+echo -e "set ch1 val ${v1};set ch2 val ${v2}" | tee "${1}"
