@@ -1,6 +1,7 @@
 #include "error.h"
 #include "main.h"
 #include "pwm.h"
+#include "utils.h"
 
 #include <stdbool.h>
 
@@ -68,6 +69,8 @@ typedef struct {
     TIM_HandleTypeDef* timer_handle;
     uint8_t chan_handle;
     bool is_started;
+    bool align_right;
+    bool polarity_low;
 } pwm_chan_t;
 
 pwm_chan_t all_channels[] = {
@@ -78,7 +81,8 @@ pwm_chan_t all_channels[] = {
     {
         .timer_handle = &Tim1Handle,
         .chan_handle = TIM_CHANNEL_3,
-    }
+        .align_right = true,
+    },
 };
 
 static void pwm_init_timer(TIM_HandleTypeDef* handle) {
@@ -113,8 +117,23 @@ void pwm_init() {
 }
 
 static void pwm_start(pwm_chan_t* chan, uint32_t value) {
+    if (chan->align_right) {
+        value = PWM_PERIOD - value;
+    }
+
     if (!chan->is_started) {
         pwmConfig.Pulse = value;
+
+        bool polarity_low = chan->polarity_low;
+        if (chan->align_right) {
+            polarity_low = !polarity_low;
+        }
+        if (polarity_low) {
+            pwmConfig.OCPolarity = TIM_OCPOLARITY_LOW;
+        } else {
+            pwmConfig.OCPolarity = TIM_OCPOLARITY_HIGH;
+        }
+
         if (HAL_TIM_PWM_ConfigChannel(chan->timer_handle, &pwmConfig, chan->chan_handle) != HAL_OK) {
             error();
         }
