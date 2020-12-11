@@ -198,8 +198,8 @@ void bump_val(fixedpt* val, fixedpt speed, fixedpt target) {
 void pwm_set_chan(size_t index, uint32_t duty_a, uint32_t duty_b) {
     switch (index) {
         case 0:
-            pwm_set(12, duty_a);
-            pwm_set(13, duty_b);
+            pwm_set(0, duty_a);
+            pwm_set(1, duty_b);
             break;
     }
 }

@@ -2,6 +2,7 @@
 #include "main.h"
 #include "pwm.h"
 
+#include <stdbool.h>
 
 void pwm_msp_init_tim3(TIM_HandleTypeDef* htim) {
     GPIO_InitTypeDef   GPIO_InitStruct;
@@ -63,6 +64,23 @@ TIM_HandleTypeDef  Tim3Handle;
 TIM_HandleTypeDef  Tim14Handle;
 TIM_OC_InitTypeDef pwmConfig;
 
+typedef struct {
+    TIM_HandleTypeDef* timer_handle;
+    uint8_t chan_handle;
+    bool is_started;
+} pwm_chan_t;
+
+pwm_chan_t all_channels[] = {
+    {
+        .timer_handle = &Tim1Handle,
+        .chan_handle = TIM_CHANNEL_2,
+    },
+    {
+        .timer_handle = &Tim1Handle,
+        .chan_handle = TIM_CHANNEL_3,
+    }
+};
+
 static void pwm_init_timer(TIM_HandleTypeDef* handle) {
     handle->Init.Prescaler         = PWM_PRESCALER;
     handle->Init.Period            = PWM_PERIOD;
@@ -94,39 +112,28 @@ void pwm_init() {
     pwm_init_timer(&Tim14Handle);
 }
 
-static void pwm_start(TIM_HandleTypeDef* handle, uint8_t channel_handle, uint32_t value) {
-    pwmConfig.Pulse = value;
-    if (HAL_TIM_PWM_ConfigChannel(handle, &pwmConfig, channel_handle) != HAL_OK) {
-        error();
-    }
+static void pwm_start(pwm_chan_t* chan, uint32_t value) {
+    if (!chan->is_started) {
+        pwmConfig.Pulse = value;
+        if (HAL_TIM_PWM_ConfigChannel(chan->timer_handle, &pwmConfig, chan->chan_handle) != HAL_OK) {
+            error();
+        }
 
-    if (HAL_TIM_PWM_Start(handle, channel_handle) != HAL_OK) {
-        error();
+        if (HAL_TIM_PWM_Start(chan->timer_handle, chan->chan_handle) != HAL_OK) {
+            error();
+        }
+
+        chan->is_started = true;
+    } else {
+        __HAL_TIM_SET_COMPARE(chan->timer_handle, chan->chan_handle, value);
     }
 }
 
 void pwm_set(uint8_t chan, uint32_t value) {
-    switch(chan) {
-        case 31:
-            pwm_start(&Tim3Handle, TIM_CHANNEL_1, value);
-            return;
-        case 32:
-            pwm_start(&Tim3Handle, TIM_CHANNEL_2, value);
-            return;
-        case 34:
-            pwm_start(&Tim3Handle, TIM_CHANNEL_4, value);
-            return;
-        case 12:
-            pwm_start(&Tim1Handle, TIM_CHANNEL_2, value);
-            return;
-        case 13:
-            pwm_start(&Tim1Handle, TIM_CHANNEL_3, value);
-            return;
-        case 141:
-            pwm_start(&Tim14Handle, TIM_CHANNEL_1, value);
-            return;
+    if (chan >= length(all_channels)) {
+        error();
     }
-    error();
+    pwm_start(&all_channels[chan], value);
 }
 
 void HAL_TIM_PWM_MspInit(TIM_HandleTypeDef *htim)
