@@ -199,6 +199,7 @@ void bump_val(fixedpt* val, fixedpt speed, fixedpt target) {
 
 void update_channel(size_t chan_index, chan_t* chan) {
     bump_val(&chan->actual_val, chan->fade_speed, chan->val);
+    bump_val(&chan->actual_blend, chan->fade_speed, chan->blend);
 
     chan->linear = fixedpt_mul(fixedpt_pow(chan->actual_val, chan->gamma), chan->actual_blend);
     chan->duty = scale_int(PWM_PERIOD, chan->linear);
