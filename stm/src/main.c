@@ -16,10 +16,12 @@ typedef struct {
     // settable by user:
     fixedpt gamma;
     fixedpt val;
+    fixedpt blend;
     fixedpt fade_speed;
 
     // computed:
-    fixedpt actual;
+    fixedpt actual_val;
+    fixedpt actual_blend;
     fixedpt linear;
     int duty;
 } chan_t;
@@ -33,7 +35,9 @@ void default_state(state_t* state) {
         state->channels[i].val = fixedpt_rconst(0.5);
         state->channels[i].fade_speed = fixedpt_rconst(2.0);
         state->channels[i].gamma = fixedpt_rconst(2.2);
-        state->channels[i].actual = fixedpt_rconst(0.0);
+        state->channels[i].blend = fixedpt_rconst(1.0);
+        state->channels[i].actual_val = fixedpt_rconst(0.0);
+        state->channels[i].actual_blend = fixedpt_rconst(0.5);
     }
 }
 
@@ -55,6 +59,9 @@ fixedpt* resolve_float_field(chan_t* chan, uint8_t* field_name) {
     if (string_eq(field_name, str("val"))) {
         return &chan->val;
     }
+    if (string_eq(field_name, str("blend"))) {
+        return &chan->blend;
+    }
     if (string_eq(field_name, str("fade_speed"))) {
         return &chan->fade_speed;
     }
@@ -67,6 +74,7 @@ void validate_float_field(fixedpt* field, chan_t* chan) {
             clamp(field, fixedpt_rconst(1.0), fixedpt_rconst(16.0));
             break;
         case offsetof(chan_t, val):
+        case offsetof(chan_t, blend):
             clamp(field, fixedpt_rconst(0.0), fixedpt_rconst(1.0));
             break;
         case offsetof(chan_t, fade_speed):
@@ -190,9 +198,9 @@ void bump_val(fixedpt* val, fixedpt speed, fixedpt target) {
 }
 
 void update_channel(size_t chan_index, chan_t* chan) {
-    bump_val(&chan->actual, chan->fade_speed, chan->val);
+    bump_val(&chan->actual_val, chan->fade_speed, chan->val);
 
-    chan->linear = fixedpt_pow(chan->actual, chan->gamma);
+    chan->linear = fixedpt_mul(fixedpt_pow(chan->actual_val, chan->gamma), chan->actual_blend);
     chan->duty = scale_int(PWM_PERIOD, chan->linear);
 
     pwm_set(chan_index, chan->duty);
@@ -216,12 +224,15 @@ void debug_info(state_t* state) {
         uart_queue(str("  val: "));
         uart_queue(str_fixedpt(state->channels[i].val));
         uart_queue(str("\r\n"));
+        uart_queue(str("  blend: "));
+        uart_queue(str_fixedpt(state->channels[i].blend));
+        uart_queue(str("\r\n"));
         uart_queue(str("  fade speed: "));
         uart_queue(str_fixedpt(state->channels[i].fade_speed));
         uart_queue(str("\r\n"));
         uart_queue(str("\r\n"));
-        uart_queue(str("  actual: "));
-        uart_queue(str_fixedpt(state->channels[i].actual));
+        uart_queue(str("  actual_val: "));
+        uart_queue(str_fixedpt(state->channels[i].actual_val));
         uart_queue(str("\r\n"));
         uart_queue(str("  linear: "));
         uart_queue(str_fixedpt(state->channels[i].linear));

@@ -15,6 +15,8 @@ if [[ ! -c "${1}" ]]; then
     die "\$1 must be a char device"
 fi
 
-read v1 v2 < <(perl -E '($r, $v) = @ARGV; say $v * $r, " ", $v * (1 - $r)' "${2}" "${3}")
+val="${3}"
+ratio="${2}"
+read b1 b2 < <(perl -E '($r, $v) = @ARGV; say $r, " ", (1 - $r)' "${2}" "${3}")
 
-echo -e "set ch1 val ${v1};set ch2 val ${v2}" | tee "${1}"
+echo -e "set ch1 val ${val};set ch2 val ${val};set ch1 blend ${b1};set ch2 blend ${b2}" | tee "${1}"
