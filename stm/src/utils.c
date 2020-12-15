@@ -41,9 +41,12 @@ fixedpt parse_fixedpt_pair(uint8_t* whole, uint8_t* frac) {
     return result;
 }
 
-fixedpt parse_fixedpt(uint8_t* str) {
+fixedpt parse_fixedpt(uint8_t* input) {
     uint8_t* parts[3];
-    split_string(parts, str, '.', 2);
+    split_string(parts, input, '.', 2);
+    if (parts[1] == NULL) {
+        return parse_fixedpt_pair(parts[0], str(""));
+    }
     return parse_fixedpt_pair(parts[0], parts[1]);
 }
 
