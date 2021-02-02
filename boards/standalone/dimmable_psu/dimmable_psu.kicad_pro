@@ -392,7 +392,7 @@
       "version": 0
     },
     "net_format_name": "",
-    "page_layout_descr_file": "",
+    "page_layout_descr_file": "../../templates/sch_a4.kicad_wks",
     "plot_directory": "",
     "spice_adjust_passive_values": false,
     "spice_external_command": "spice \"%I\"",
@@ -401,7 +401,7 @@
   },
   "sheets": [
     [
-      "88ceb086-4ed2-4fa7-9dbb-ea0e446926b0",
+      "d773f516-0b43-4636-ac08-f22c1fc84e21",
       ""
     ]
   ],
