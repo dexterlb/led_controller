@@ -1,0 +1,49 @@
+=========================
+per channel (52v variant)
+
+64 leds (4 * 16)
+max voltage drop: 3.3v
+
+nominal current: 150mA
+flux at 150mA: 65lm
+flux at 100mA: 45lm
+
+total voltage: 16 * 3.3v = 52.8v
+current and flux per channel per board for 150mA per led:       600mA, 4160lm
+current and flux per channel for 150mA per led and 4 boards:    2.4A,  16640lm
+current and flux per channel per board for 100mA per led:       400mA, 2880lm
+current and flux per channel for 100mA per led and 5 boards:    2A,    14400lm
+
+=========================
+per channel (26v variant)
+
+64 leds (8 * 8)
+max voltage drop: 3.3v
+
+nominal current: 150mA
+flux at 150mA: 65lm
+flux at 100mA: 45lm
+
+total voltage: 8 * 3.3v = 26.4v
+current and flux per channel per board for 150mA per led:       1200mA, 4160lm
+current and flux per channel for 150mA per led and 4 boards:    4.8A,   16640lm
+current and flux per channel per board for 100mA per led:       800mA,  2880lm
+current and flux per channel for 100mA per led and 5 boards:    4A,     14400lm
+
+=========================
+per channel (40v variant)
+
+60 leds (5 * 12)
+max voltage drop: 3.3v
+
+nominal current: 150mA
+flux at 150mA: 65lm
+flux at 100mA: 45lm
+
+total voltage = 12 * 3.3v = 39.6v
+current and flux per channel per board for 150mA per led:       750mA,  3900lm
+current and flux per channel for 150mA per led and 4 boards:    3A,     15600lm
+current and flux per channel per board for 100mA per led:       500mA,  2700lm
+current and flux per channel for 100mA per led and 5 boards:    2.5A,   13500lm
+current and flux per channel for 100mA per led and 6 boards:    3A,     16200lm
+
