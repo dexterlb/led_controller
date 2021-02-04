@@ -392,7 +392,7 @@
       "version": 0
     },
     "net_format_name": "",
-    "page_layout_descr_file": "../../templates/sch_a4.kicad_wks",
+    "page_layout_descr_file": "../../templates/sch_a3.kicad_wks",
     "plot_directory": "",
     "spice_adjust_passive_values": false,
     "spice_external_command": "spice \"%I\"",
