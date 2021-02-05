@@ -47,3 +47,43 @@ current and flux per channel per board for 100mA per led:       500mA,  2700lm
 current and flux per channel for 100mA per led and 5 boards:    2.5A,   13500lm
 current and flux per channel for 100mA per led and 6 boards:    3A,     16200lm
 
+
+
+PSU design
+==========
+Vin:  48v (47v min, 55v max)
+Vout: 40v (41v max)
+Iout: 3A  (5A max)
+
+rd (virtual led resistance) = Vout / Iout = 13ohm
+
+D = Vout / eta * Vin = 40 / 0.9 * 48 = 0.93
+Dmax = Vout_max / eta * Vin_min = 0.96
+
+Rvout2 = 10k (22k pot)
+Rvout1 = (Rvout2 * Vout) / 2.5v - Rvout2 = 150k
+
+fsw = 500kHz
+Con = 1n
+Ron = ((Rvout1 + Rvout2) / Rvout2) / (Con * fsw) = 32k (thus 33k)
+
+Vcsense = 200mV
+Viadj = Vcsense * 10 = 2V
+Rcsense = Viadj / (10 * Iout) = 0.6666ohm (thus 3 resistors of 0.2ohm, 1W)
+
+Riadj1 = 10k
+Riadj2 = (Viadj * Riadj1) / (Vref - Viadj) = 19.4k (22k pot)
+
+ripple_led_min = 300mA
+ripple_ind_min = 350mA
+
+cout_min = ripple_ind_min / (8 * rd * ripple_led_min * fsw) = 224nF
+
+Lmin = ((Vin - Vout) * D) / (ripple_ind_min * fsw) = 51uH (thus, 68uH)
+
+Vturnon = 40V
+Vhys = 15V
+
+Rudim1 = 100k
+Rudim2 = (1.276v * Rudim1) / (Vturnon - 1.276v) = 3.3k
+Rudim3 = ((Vhys / 21uA) * Rudim2) / (Rudim1 + Rudim2) = 19.3 (thus, 19.1k)
