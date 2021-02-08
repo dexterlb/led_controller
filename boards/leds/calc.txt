@@ -69,17 +69,19 @@ Ron = ((Rvout1 + Rvout2) / Rvout2) / (Con * fsw) = 32k (thus 33k)
 
 Vcsense = 200mV
 Viadj = Vcsense * 10 = 2V
-Rcsense = Viadj / (10 * Iout) = 0.6666ohm (thus 3 resistors of 0.2ohm, 1W)
+Rcsense = Viadj / (10 * Iout) = 0.06666ohm (thus 3 resistors of 0.2ohm, 1W)
+
+Vref = 3.03v
 
 Riadj1 = 10k
-Riadj2 = (Viadj * Riadj1) / (Vref - Viadj) = 19.4k (22k pot)
+Riadj2 = (Viadj * Riadj1) / (Vref - Viadj) = 19.4k (47k pot)
 
-ripple_led_min = 300mA
-ripple_ind_min = 350mA
+ripple_led_max = 300mA
+ripple_ind_max = 350mA
 
-cout_min = ripple_ind_min / (8 * rd * ripple_led_min * fsw) = 224nF
+cout_min = ripple_ind_max / (8 * rd * ripple_led_max * fsw) = 224nF
 
-Lmin = ((Vin - Vout) * D) / (ripple_ind_min * fsw) = 51uH (thus, 68uH)
+Lmin = ((Vin - Vout) * D) / (ripple_ind_max * fsw) = 51uH (thus, 68uH)
 
 Vturnon = 40V
 Vhys = 15V
@@ -87,3 +89,12 @@ Vhys = 15V
 Rudim1 = 100k
 Rudim2 = (1.276v * Rudim1) / (Vturnon - 1.276v) = 3.3k
 Rudim3 = ((Vhys / 21uA) * Rudim2) / (Rudim1 + Rudim2) = 19.3 (thus, 19.1k)
+
+Rf = 10ohm
+Roff < Vout / (0.5 * ripple_led_max) - (Rf + Rcs) = 166ohm
+Roff < 100 * Vout * Rf = 400k
+
+Rout' = ((Roff + Rf) * Rd) / ((Roff + Rf) + Rf) = 12ohm
+Vcsense' = (Vout * Rcsense) / (Rout' + Rcsense) = 221mV
+Viadj' = Vcsense' * 10 = 2.21V
+Riadj2' = (Viadj' * Riadj1) / (Vref - Viadj') = 27k (47k pot)
