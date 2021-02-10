@@ -415,7 +415,7 @@
     },
     "net_format_name": "",
     "page_layout_descr_file": "../../templates/sch_a3.kicad_wks",
-    "plot_directory": "",
+    "plot_directory": "/tmp/",
     "spice_adjust_passive_values": false,
     "spice_external_command": "spice \"%I\"",
     "subpart_first_id": 65,
@@ -423,7 +423,7 @@
   },
   "sheets": [
     [
-      "aff2f28b-a0ed-4987-9aae-a3066826a7ca",
+      "9c36a861-ec55-4a0a-b2f9-fb3bae754430",
       ""
     ]
   ],
