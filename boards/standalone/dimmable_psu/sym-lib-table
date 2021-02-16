@@ -1,3 +1,4 @@
 (sym_lib_table
   (lib (name "ti_reg")(type "KiCad")(uri "${KIPRJMOD}/ti_reg.kicad_sym")(options "")(descr ""))
+  (lib (name "dip_switches")(type "KiCad")(uri "${KIPRJMOD}/dip_switches.kicad_sym")(options "")(descr ""))
 )
