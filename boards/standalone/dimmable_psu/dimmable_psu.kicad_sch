@@ -1,4 +1,6 @@
-(kicad_sch (version 20210126) (generator eeschema)
+(kicad_sch (version 20210406) (generator eeschema)
+
+  (uuid 6f29aa88-c26b-414c-93d9-c0d1fc605db1)
 
   (paper "A3")
 
@@ -5033,19 +5035,19 @@
     (pin "2" (uuid a7d866fd-46d0-4100-ac80-f089db710170))
   )
 
-  (symbol (lib_id "Connector_Generic:Conn_01x02") (at 379.73 80.01 0) (mirror x) (unit 1)
+  (symbol (lib_id "Connector_Generic:Conn_01x02") (at 379.73 77.47 0) (unit 1)
     (in_bom yes) (on_board yes)
     (uuid f00ce824-724d-4879-9f07-b70936792d1d)
-    (property "Reference" "J4" (id 0) (at 382.27 80.01 0)
+    (property "Reference" "J4" (id 0) (at 382.27 77.47 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "POWER_OUT" (id 1) (at 382.27 77.47 0)
+    (property "Value" "POWER_OUT" (id 1) (at 382.27 80.01 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "wago:2061-602" (id 2) (at 379.73 80.01 0)
+    (property "Footprint" "wago:2061-602" (id 2) (at 379.73 77.47 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Datasheet" "~" (id 3) (at 379.73 80.01 0)
+    (property "Datasheet" "~" (id 3) (at 379.73 77.47 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (pin "1" (uuid 2b112c65-a956-4c10-aa18-fa9846b0d02f))
