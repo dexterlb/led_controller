@@ -776,6 +776,10 @@
     (stroke (width 0) (type default))
     (uuid 062e5b3b-246a-4995-a3e2-f7514abba147)
   )
+  (wire (pts (xy 87.63 160.02) (xy 87.63 161.29))
+    (stroke (width 0) (type default))
+    (uuid 092a9d3f-a728-4190-a508-dd1869371357)
+  )
   (wire (pts (xy 143.51 38.1) (xy 143.51 41.91))
     (stroke (width 0) (type default))
     (uuid 0c07e484-1468-43c5-8e34-c068ceb36621)
@@ -816,6 +820,10 @@
     (stroke (width 0) (type default))
     (uuid 288b42e8-0ef9-485b-b708-fd14298b0085)
   )
+  (wire (pts (xy 106.68 160.02) (xy 106.68 161.29))
+    (stroke (width 0) (type default))
+    (uuid 2abfadef-ab0f-45e1-bd29-9079ed221645)
+  )
   (wire (pts (xy 125.73 38.1) (xy 130.81 38.1))
     (stroke (width 0) (type default))
     (uuid 2da9805a-d42d-475e-8193-f7bc80d34b48)
@@ -835,6 +843,10 @@
   (wire (pts (xy 154.94 106.68) (xy 154.94 110.49))
     (stroke (width 0) (type default))
     (uuid 406ae50f-65c9-4893-be29-d8a6e64230a5)
+  )
+  (wire (pts (xy 106.68 148.59) (xy 106.68 149.86))
+    (stroke (width 0) (type default))
+    (uuid 41d6dec6-a663-4279-9319-025f6d921b96)
   )
   (wire (pts (xy 201.93 121.92) (xy 203.2 121.92))
     (stroke (width 0) (type default))
@@ -911,6 +923,10 @@
   (wire (pts (xy 90.17 95.25) (xy 119.38 95.25))
     (stroke (width 0) (type default))
     (uuid 7f164fbd-0dc4-472a-87bd-c0d071a21b23)
+  )
+  (wire (pts (xy 87.63 148.59) (xy 87.63 149.86))
+    (stroke (width 0) (type default))
+    (uuid 7f8cc9b5-c88a-442a-922e-ba8073542984)
   )
   (wire (pts (xy 81.28 38.1) (xy 83.82 38.1))
     (stroke (width 0) (type default))
@@ -1053,10 +1069,35 @@
     )
   )
 
+  (symbol (lib_id "Mechanical:MountingHole_Pad") (at 87.63 157.48 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid 07103a76-a5ac-4bc5-b899-b2bf68fd7800)
+    (property "Reference" "H6" (at 90.17 156.21 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Value" "MountingHole" (at 90.17 158.75 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Footprint" "MountingHole:MountingHole_3.2mm_M3_DIN965_Pad" (at 87.63 157.48 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (at 87.63 157.48 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 971fbc0e-7a90-4c91-b692-cb39ae91dd89))
+    (instances
+      (project "fast_pwm_controller"
+        (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86"
+          (reference "H6") (unit 1)
+        )
+      )
+    )
+  )
+
   (symbol (lib_id "power:GND") (at 143.51 69.85 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 119db1c8-9244-42f2-9700-3d917e5dce91)
-    (property "Reference" "#PWR09" (at 143.51 76.2 0)
+    (property "Reference" "#PWR013" (at 143.51 76.2 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 143.51 74.93 0)
@@ -1072,7 +1113,7 @@
     (instances
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86"
-          (reference "#PWR09") (unit 1)
+          (reference "#PWR013") (unit 1)
         )
       )
     )
@@ -1110,7 +1151,7 @@
   (symbol (lib_id "power:VPP") (at 201.93 93.98 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 128f3f72-7486-461e-8c82-3affcddefa62)
-    (property "Reference" "#PWR019" (at 205.74 93.98 0)
+    (property "Reference" "#PWR023" (at 205.74 93.98 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "VPP" (at 198.12 93.98 90)
@@ -1126,7 +1167,7 @@
     (instances
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86"
-          (reference "#PWR019") (unit 1)
+          (reference "#PWR023") (unit 1)
         )
       )
     )
@@ -1189,7 +1230,7 @@
   (symbol (lib_id "power:GND") (at 147.32 137.16 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 1b666447-51ed-4ccc-8963-f27341850d60)
-    (property "Reference" "#PWR013" (at 153.67 137.16 0)
+    (property "Reference" "#PWR017" (at 153.67 137.16 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 152.4 137.16 0)
@@ -1205,7 +1246,7 @@
     (instances
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86"
-          (reference "#PWR013") (unit 1)
+          (reference "#PWR017") (unit 1)
         )
       )
     )
@@ -1214,7 +1255,7 @@
   (symbol (lib_id "power:+12V") (at 165.1 36.83 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 20f14de4-a19e-4fe4-8a8d-025ec7b00a40)
-    (property "Reference" "#PWR015" (at 165.1 40.64 0)
+    (property "Reference" "#PWR019" (at 165.1 40.64 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+12V" (at 165.1 33.02 0)
@@ -1230,7 +1271,7 @@
     (instances
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86"
-          (reference "#PWR015") (unit 1)
+          (reference "#PWR019") (unit 1)
         )
       )
     )
@@ -1290,6 +1331,56 @@
     )
   )
 
+  (symbol (lib_id "power:GND") (at 106.68 149.86 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid 3b7ff7fb-d808-4459-8fb9-ef31038a8514)
+    (property "Reference" "#PWR010" (at 106.68 156.21 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "GND" (at 106.68 154.94 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Footprint" "" (at 106.68 149.86 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 106.68 149.86 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 9ccf620f-e351-4513-9018-6c43d2a46c53))
+    (instances
+      (project "fast_pwm_controller"
+        (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86"
+          (reference "#PWR010") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "Mechanical:MountingHole_Pad") (at 87.63 146.05 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid 3c1275af-87a9-4902-bbd8-073b7c326c9b)
+    (property "Reference" "H5" (at 90.17 144.78 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Value" "MountingHole" (at 90.17 147.32 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Footprint" "MountingHole:MountingHole_3.2mm_M3_DIN965_Pad" (at 87.63 146.05 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (at 87.63 146.05 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid fa9ca03a-49dd-4496-9dd6-f516c8d574dd))
+    (instances
+      (project "fast_pwm_controller"
+        (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86"
+          (reference "H5") (unit 1)
+        )
+      )
+    )
+  )
+
   (symbol (lib_id "Connector:Screw_Terminal_01x02") (at 208.28 135.89 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 458d3e0d-578c-4d7e-b4ab-bb5fa0bededa)
@@ -1322,7 +1413,7 @@
   (symbol (lib_id "power:GND") (at 196.85 50.8 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 50e5fd24-4961-4850-88ad-7e14f6b05dca)
-    (property "Reference" "#PWR017" (at 190.5 50.8 0)
+    (property "Reference" "#PWR021" (at 190.5 50.8 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 191.77 50.8 0)
@@ -1338,7 +1429,7 @@
     (instances
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86"
-          (reference "#PWR017") (unit 1)
+          (reference "#PWR021") (unit 1)
         )
       )
     )
@@ -1347,7 +1438,7 @@
   (symbol (lib_id "power:GND") (at 147.32 95.25 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 68904a2d-3876-478c-8a5d-80f1fb1adcc7)
-    (property "Reference" "#PWR010" (at 153.67 95.25 0)
+    (property "Reference" "#PWR014" (at 153.67 95.25 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 152.4 95.25 0)
@@ -1363,7 +1454,7 @@
     (instances
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86"
-          (reference "#PWR010") (unit 1)
+          (reference "#PWR014") (unit 1)
         )
       )
     )
@@ -1492,7 +1583,7 @@
   (symbol (lib_id "power:GND") (at 130.81 69.85 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 8ed41d22-b05b-4daa-a9b0-275c3946fa63)
-    (property "Reference" "#PWR08" (at 130.81 76.2 0)
+    (property "Reference" "#PWR012" (at 130.81 76.2 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 130.81 74.93 0)
@@ -1508,7 +1599,32 @@
     (instances
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86"
-          (reference "#PWR08") (unit 1)
+          (reference "#PWR012") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "Mechanical:MountingHole_Pad") (at 106.68 146.05 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid 91246f28-ef10-42ac-828c-48143222020f)
+    (property "Reference" "H7" (at 109.22 144.78 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Value" "MountingHole" (at 109.22 147.32 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Footprint" "MountingHole:MountingHole_3.2mm_M3_DIN965_Pad" (at 106.68 146.05 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (at 106.68 146.05 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 884da42f-6f57-45ac-ab4d-c1f75970b7ac))
+    (instances
+      (project "fast_pwm_controller"
+        (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86"
+          (reference "H7") (unit 1)
         )
       )
     )
@@ -1567,7 +1683,7 @@
   (symbol (lib_id "power:GND") (at 147.32 109.22 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid a185852f-a0fc-48ea-a502-dbb73f78c7c4)
-    (property "Reference" "#PWR011" (at 153.67 109.22 0)
+    (property "Reference" "#PWR015" (at 153.67 109.22 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 152.4 109.22 0)
@@ -1583,7 +1699,7 @@
     (instances
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86"
-          (reference "#PWR011") (unit 1)
+          (reference "#PWR015") (unit 1)
         )
       )
     )
@@ -1637,6 +1753,56 @@
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86"
           (reference "FID3") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "power:GND") (at 106.68 161.29 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid ae5448b0-8bc8-458c-b486-41030ba75042)
+    (property "Reference" "#PWR011" (at 106.68 167.64 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "GND" (at 106.68 166.37 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Footprint" "" (at 106.68 161.29 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 106.68 161.29 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 46f00898-7e11-4eeb-81ad-9aff9d6f7c5a))
+    (instances
+      (project "fast_pwm_controller"
+        (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86"
+          (reference "#PWR011") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "power:GND") (at 87.63 161.29 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid af8ba6a1-1d49-424b-949a-470f92970573)
+    (property "Reference" "#PWR09" (at 87.63 167.64 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "GND" (at 87.63 166.37 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Footprint" "" (at 87.63 161.29 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 87.63 161.29 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 5619a1a1-a3d1-4a7d-bd95-561fc6e99ef4))
+    (instances
+      (project "fast_pwm_controller"
+        (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86"
+          (reference "#PWR09") (unit 1)
         )
       )
     )
@@ -1829,7 +1995,7 @@
   (symbol (lib_id "power:GND") (at 165.1 69.85 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid c9d01bb5-d65a-44ac-af9b-31a2713e005a)
-    (property "Reference" "#PWR016" (at 165.1 76.2 0)
+    (property "Reference" "#PWR020" (at 165.1 76.2 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 165.1 74.93 0)
@@ -1845,7 +2011,7 @@
     (instances
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86"
-          (reference "#PWR016") (unit 1)
+          (reference "#PWR020") (unit 1)
         )
       )
     )
@@ -1876,10 +2042,35 @@
     )
   )
 
+  (symbol (lib_id "Mechanical:MountingHole_Pad") (at 106.68 157.48 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid cbe463e1-1b85-4744-bed2-943bd15d36fa)
+    (property "Reference" "H8" (at 109.22 156.21 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Value" "MountingHole" (at 109.22 158.75 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Footprint" "MountingHole:MountingHole_3.2mm_M3_DIN965_Pad" (at 106.68 157.48 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (at 106.68 157.48 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid ed9e3ec7-1ed2-42b6-8850-f5090f46de47))
+    (instances
+      (project "fast_pwm_controller"
+        (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86"
+          (reference "H8") (unit 1)
+        )
+      )
+    )
+  )
+
   (symbol (lib_id "power:GND") (at 196.85 62.23 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid cc71d876-d6fc-4db1-963a-3da400b0497c)
-    (property "Reference" "#PWR018" (at 190.5 62.23 0)
+    (property "Reference" "#PWR022" (at 190.5 62.23 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 191.77 62.23 0)
@@ -1895,7 +2086,7 @@
     (instances
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86"
-          (reference "#PWR018") (unit 1)
+          (reference "#PWR022") (unit 1)
         )
       )
     )
@@ -1970,7 +2161,7 @@
   (symbol (lib_id "power:VPP") (at 201.93 135.89 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid d191d3c2-110d-4ff5-96cd-80d97896b3f2)
-    (property "Reference" "#PWR022" (at 205.74 135.89 0)
+    (property "Reference" "#PWR026" (at 205.74 135.89 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "VPP" (at 198.12 135.89 90)
@@ -1986,7 +2177,7 @@
     (instances
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86"
-          (reference "#PWR022") (unit 1)
+          (reference "#PWR026") (unit 1)
         )
       )
     )
@@ -1995,7 +2186,7 @@
   (symbol (lib_id "power:VPP") (at 201.93 107.95 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid d253e15c-f199-4e4e-88c5-bf15d12d157a)
-    (property "Reference" "#PWR020" (at 205.74 107.95 0)
+    (property "Reference" "#PWR024" (at 205.74 107.95 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "VPP" (at 198.12 107.95 90)
@@ -2011,7 +2202,7 @@
     (instances
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86"
-          (reference "#PWR020") (unit 1)
+          (reference "#PWR024") (unit 1)
         )
       )
     )
@@ -2139,7 +2330,7 @@
   (symbol (lib_id "power:GND") (at 147.32 123.19 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid e8880205-6ff0-44bb-b443-6459b8e8ebdc)
-    (property "Reference" "#PWR012" (at 153.67 123.19 0)
+    (property "Reference" "#PWR016" (at 153.67 123.19 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 152.4 123.19 0)
@@ -2155,7 +2346,7 @@
     (instances
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86"
-          (reference "#PWR012") (unit 1)
+          (reference "#PWR016") (unit 1)
         )
       )
     )
@@ -2164,7 +2355,7 @@
   (symbol (lib_id "power:GND") (at 157.48 69.85 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid e8887608-314f-45de-a979-aa1f1067a222)
-    (property "Reference" "#PWR014" (at 157.48 76.2 0)
+    (property "Reference" "#PWR018" (at 157.48 76.2 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 157.48 74.93 0)
@@ -2180,7 +2371,7 @@
     (instances
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86"
-          (reference "#PWR014") (unit 1)
+          (reference "#PWR018") (unit 1)
         )
       )
     )
@@ -2240,6 +2431,31 @@
     )
   )
 
+  (symbol (lib_id "power:GND") (at 87.63 149.86 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid ece73594-d29e-47be-8a4b-295cd9163b3d)
+    (property "Reference" "#PWR08" (at 87.63 156.21 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "GND" (at 87.63 154.94 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Footprint" "" (at 87.63 149.86 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 87.63 149.86 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid ac6a9f97-2d09-4d12-a294-15781a891d2b))
+    (instances
+      (project "fast_pwm_controller"
+        (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86"
+          (reference "#PWR08") (unit 1)
+        )
+      )
+    )
+  )
+
   (symbol (lib_id "power:GND") (at 67.31 149.86 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid f3cbaa71-51f9-4f1e-9ff4-c7807fa00821)
@@ -2268,7 +2484,7 @@
   (symbol (lib_id "power:VPP") (at 201.93 121.92 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid f66e50f6-f2b2-473f-99c3-85a73c5489b2)
-    (property "Reference" "#PWR021" (at 205.74 121.92 0)
+    (property "Reference" "#PWR025" (at 205.74 121.92 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "VPP" (at 198.12 121.92 90)
@@ -2284,7 +2500,7 @@
     (instances
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86"
-          (reference "#PWR021") (unit 1)
+          (reference "#PWR025") (unit 1)
         )
       )
     )

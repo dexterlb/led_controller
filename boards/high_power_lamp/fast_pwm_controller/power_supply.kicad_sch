@@ -908,7 +908,7 @@
       )
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/14949cb1-4b69-4c50-91f5-b66762a055b9"
-          (reference "#PWR037") (unit 1)
+          (reference "#PWR041") (unit 1)
         )
       )
     )
@@ -976,7 +976,7 @@
       )
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/14949cb1-4b69-4c50-91f5-b66762a055b9"
-          (reference "#FLG03") (unit 1)
+          (reference "#FLG04") (unit 1)
         )
       )
     )
@@ -1009,7 +1009,7 @@
       )
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/14949cb1-4b69-4c50-91f5-b66762a055b9"
-          (reference "#PWR036") (unit 1)
+          (reference "#PWR040") (unit 1)
         )
       )
     )
@@ -1076,7 +1076,7 @@
       )
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/14949cb1-4b69-4c50-91f5-b66762a055b9"
-          (reference "#PWR033") (unit 1)
+          (reference "#PWR037") (unit 1)
         )
       )
     )
@@ -1085,7 +1085,7 @@
   (symbol (lib_id "power:PWR_FLAG") (at 101.6 71.12 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 46b1bf48-9cac-4709-aa20-68e5b5efa4d9)
-    (property "Reference" "#FLG05" (at 103.505 71.12 0)
+    (property "Reference" "#FLG03" (at 103.505 71.12 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "PWR_FLAG" (at 106.68 71.12 0)
@@ -1101,7 +1101,7 @@
     (instances
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/14949cb1-4b69-4c50-91f5-b66762a055b9"
-          (reference "#FLG05") (unit 1)
+          (reference "#FLG03") (unit 1)
         )
       )
     )
@@ -1134,7 +1134,7 @@
       )
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/14949cb1-4b69-4c50-91f5-b66762a055b9"
-          (reference "#PWR035") (unit 1)
+          (reference "#PWR039") (unit 1)
         )
       )
     )
@@ -1143,7 +1143,7 @@
   (symbol (lib_id "power:PWR_FLAG") (at 199.39 80.01 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 578bf2e7-e979-4da7-88b7-e5c463128bf8)
-    (property "Reference" "#FLG04" (at 199.39 78.105 0)
+    (property "Reference" "#FLG05" (at 199.39 78.105 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "PWR_FLAG" (at 199.39 74.93 0)
@@ -1159,7 +1159,7 @@
     (instances
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/14949cb1-4b69-4c50-91f5-b66762a055b9"
-          (reference "#FLG04") (unit 1)
+          (reference "#FLG05") (unit 1)
         )
       )
     )
@@ -1449,7 +1449,7 @@
       )
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/14949cb1-4b69-4c50-91f5-b66762a055b9"
-          (reference "#PWR038") (unit 1)
+          (reference "#PWR042") (unit 1)
         )
       )
     )
@@ -1519,7 +1519,7 @@
       )
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/14949cb1-4b69-4c50-91f5-b66762a055b9"
-          (reference "#PWR042") (unit 1)
+          (reference "#PWR046") (unit 1)
         )
       )
     )
@@ -1626,7 +1626,7 @@
       )
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/14949cb1-4b69-4c50-91f5-b66762a055b9"
-          (reference "#PWR039") (unit 1)
+          (reference "#PWR043") (unit 1)
         )
       )
     )
@@ -1696,7 +1696,7 @@
       )
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/14949cb1-4b69-4c50-91f5-b66762a055b9"
-          (reference "#PWR041") (unit 1)
+          (reference "#PWR045") (unit 1)
         )
       )
     )
@@ -1769,7 +1769,7 @@
       )
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/14949cb1-4b69-4c50-91f5-b66762a055b9"
-          (reference "#PWR034") (unit 1)
+          (reference "#PWR038") (unit 1)
         )
       )
     )
@@ -1839,7 +1839,7 @@
       )
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/14949cb1-4b69-4c50-91f5-b66762a055b9"
-          (reference "#PWR040") (unit 1)
+          (reference "#PWR044") (unit 1)
         )
       )
     )
