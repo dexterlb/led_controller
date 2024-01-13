@@ -808,7 +808,7 @@
   (symbol (lib_id "power:GND") (at 82.55 95.25 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 07d2d596-46ee-42ac-b8a1-8b642d551213)
-    (property "Reference" "#PWR05" (at 82.55 101.6 0)
+    (property "Reference" "#PWR035" (at 82.55 101.6 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 82.55 100.33 0)
@@ -823,12 +823,6 @@
     (pin "1" (uuid 2e8ea0b3-3a16-47ca-a7cd-49e4caba7a27))
     (instances
       (project "fast_pwm_controller"
-        (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86"
-          (reference "#PWR05") (unit 1)
-        )
-        (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/e05c2491-0151-410f-b890-9105113d0b96"
-          (reference "#PWR05") (unit 1)
-        )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/1dc02105-34f4-4dcd-909a-a43f3cf6326e"
           (reference "#PWR035") (unit 1)
         )
@@ -845,10 +839,10 @@
     )
   )
 
-  (symbol (lib_id "Comparator:LM339") (at 157.48 83.82 0) (unit 1)
+  (symbol (lib_id "Comparator:LM339") (at 157.48 83.82 0) (unit 4)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 209a6cc5-54ad-4f87-afb0-43101c9f0cc2)
-    (property "Reference" "U?" (at 157.48 73.66 0)
+    (property "Reference" "U2" (at 157.48 73.66 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "TLC3704" (at 157.48 76.2 0)
@@ -876,20 +870,17 @@
     (pin "3" (uuid b8e447e1-79a9-4984-b707-9b7e51802ee3))
     (instances
       (project "fast_pwm_controller"
-        (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86"
-          (reference "U?") (unit 1)
-        )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/1dc02105-34f4-4dcd-909a-a43f3cf6326e"
-          (reference "U2") (unit 1)
+          (reference "U2") (unit 4)
         )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/7bb7f3cd-bd16-48a2-9709-ee0db83f3451"
-          (reference "U2") (unit 2)
-        )
-        (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/abcbc788-820f-4167-8f5b-0037e0acabb5"
           (reference "U2") (unit 3)
         )
+        (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/abcbc788-820f-4167-8f5b-0037e0acabb5"
+          (reference "U2") (unit 2)
+        )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/7c02a172-be14-404a-b556-b25540aed647"
-          (reference "U2") (unit 4)
+          (reference "U2") (unit 1)
         )
       )
     )
@@ -898,7 +889,7 @@
   (symbol (lib_id "Device:R") (at 111.76 81.28 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 3b5c4e29-18cb-4982-854c-12548bc72442)
-    (property "Reference" "R?" (at 111.76 83.82 90)
+    (property "Reference" "R12" (at 111.76 83.82 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "47k" (at 111.76 86.36 90)
@@ -914,12 +905,6 @@
     (pin "2" (uuid c4d92a58-09eb-4df3-bc15-a609875861b1))
     (instances
       (project "fast_pwm_controller"
-        (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86"
-          (reference "R?") (unit 1)
-        )
-        (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/e05c2491-0151-410f-b890-9105113d0b96"
-          (reference "R?") (unit 1)
-        )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/1dc02105-34f4-4dcd-909a-a43f3cf6326e"
           (reference "R12") (unit 1)
         )
@@ -939,7 +924,7 @@
   (symbol (lib_id "power:GND") (at 119.38 95.25 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 6d56326e-eb29-4cf1-b6ab-cf619768af45)
-    (property "Reference" "#PWR05" (at 119.38 101.6 0)
+    (property "Reference" "#PWR036" (at 119.38 101.6 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 119.38 100.33 0)
@@ -954,12 +939,6 @@
     (pin "1" (uuid 2f240bb2-c6c0-4b6d-8f9b-442a1fe7c7b3))
     (instances
       (project "fast_pwm_controller"
-        (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86"
-          (reference "#PWR05") (unit 1)
-        )
-        (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/e05c2491-0151-410f-b890-9105113d0b96"
-          (reference "#PWR05") (unit 1)
-        )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/1dc02105-34f4-4dcd-909a-a43f3cf6326e"
           (reference "#PWR036") (unit 1)
         )
@@ -979,7 +958,7 @@
   (symbol (lib_id "Device:R") (at 172.72 83.82 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 7dbb90da-d626-42b0-9966-8c3449282b62)
-    (property "Reference" "R?" (at 172.72 86.36 90)
+    (property "Reference" "R26" (at 172.72 86.36 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "2.2Ω" (at 172.72 88.9 90)
@@ -995,23 +974,17 @@
     (pin "2" (uuid 5c55009c-d131-4e9d-ba0a-11e67b9bf3c6))
     (instances
       (project "fast_pwm_controller"
-        (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86"
-          (reference "R?") (unit 1)
-        )
-        (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/e05c2491-0151-410f-b890-9105113d0b96"
-          (reference "R?") (unit 1)
-        )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/1dc02105-34f4-4dcd-909a-a43f3cf6326e"
-          (reference "R13") (unit 1)
+          (reference "R26") (unit 1)
         )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/7bb7f3cd-bd16-48a2-9709-ee0db83f3451"
-          (reference "R20") (unit 1)
-        )
-        (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/abcbc788-820f-4167-8f5b-0037e0acabb5"
           (reference "R23") (unit 1)
         )
+        (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/abcbc788-820f-4167-8f5b-0037e0acabb5"
+          (reference "R13") (unit 1)
+        )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/7c02a172-be14-404a-b556-b25540aed647"
-          (reference "R26") (unit 1)
+          (reference "R20") (unit 1)
         )
       )
     )
@@ -1055,7 +1028,7 @@
   (symbol (lib_id "power:GND") (at 189.23 95.25 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid ae3a3602-3443-4b1c-a561-463a47b565ec)
-    (property "Reference" "#PWR05" (at 189.23 101.6 0)
+    (property "Reference" "#PWR037" (at 189.23 101.6 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 189.23 100.33 0)
@@ -1070,12 +1043,6 @@
     (pin "1" (uuid 70f2a828-c8f5-40d0-bfad-9b79391fef39))
     (instances
       (project "fast_pwm_controller"
-        (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86"
-          (reference "#PWR05") (unit 1)
-        )
-        (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/e05c2491-0151-410f-b890-9105113d0b96"
-          (reference "#PWR05") (unit 1)
-        )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/1dc02105-34f4-4dcd-909a-a43f3cf6326e"
           (reference "#PWR037") (unit 1)
         )
@@ -1095,7 +1062,7 @@
   (symbol (lib_id "Device:C") (at 119.38 88.9 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid b11fd9e4-8919-49a6-9f91-c6eaf354b87e)
-    (property "Reference" "C?" (at 123.19 86.36 0)
+    (property "Reference" "C8" (at 123.19 86.36 0)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "500nF" (at 123.19 88.9 0)
@@ -1114,12 +1081,6 @@
     (pin "2" (uuid 646e2ba5-7cfb-462e-b544-2f60f15463de))
     (instances
       (project "fast_pwm_controller"
-        (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86"
-          (reference "C?") (unit 1)
-        )
-        (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/e05c2491-0151-410f-b890-9105113d0b96"
-          (reference "C?") (unit 1)
-        )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/1dc02105-34f4-4dcd-909a-a43f3cf6326e"
           (reference "C8") (unit 1)
         )
@@ -1139,7 +1100,7 @@
   (symbol (lib_id "Device:R") (at 82.55 88.9 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid c669deaa-c01a-437b-b210-915887a3b621)
-    (property "Reference" "R?" (at 85.09 87.63 0)
+    (property "Reference" "R11" (at 85.09 87.63 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "10M" (at 85.09 90.17 0)
@@ -1155,12 +1116,6 @@
     (pin "2" (uuid 659c65a1-1558-47ee-bf87-802ac835f645))
     (instances
       (project "fast_pwm_controller"
-        (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86"
-          (reference "R?") (unit 1)
-        )
-        (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/e05c2491-0151-410f-b890-9105113d0b96"
-          (reference "R?") (unit 1)
-        )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/1dc02105-34f4-4dcd-909a-a43f3cf6326e"
           (reference "R11") (unit 1)
         )
@@ -1227,7 +1182,7 @@
   (symbol (lib_id "Device:Q_NMOS_GDS") (at 186.69 83.82 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid fbc78151-5f69-4ecf-9f9f-eca273fcf6f8)
-    (property "Reference" "Q1" (at 193.04 83.82 0)
+    (property "Reference" "Q4" (at 193.04 83.82 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "BUK7516-55A,127" (at 193.04 85.09 0)
@@ -1248,16 +1203,16 @@
     (instances
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/1dc02105-34f4-4dcd-909a-a43f3cf6326e"
-          (reference "Q1") (unit 1)
+          (reference "Q4") (unit 1)
         )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/7bb7f3cd-bd16-48a2-9709-ee0db83f3451"
-          (reference "Q2") (unit 1)
-        )
-        (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/abcbc788-820f-4167-8f5b-0037e0acabb5"
           (reference "Q3") (unit 1)
         )
+        (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/abcbc788-820f-4167-8f5b-0037e0acabb5"
+          (reference "Q1") (unit 1)
+        )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/7c02a172-be14-404a-b556-b25540aed647"
-          (reference "Q4") (unit 1)
+          (reference "Q2") (unit 1)
         )
       )
     )
