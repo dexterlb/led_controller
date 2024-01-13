@@ -830,16 +830,16 @@
           (reference "#PWR05") (unit 1)
         )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/1dc02105-34f4-4dcd-909a-a43f3cf6326e"
-          (reference "#PWR034") (unit 1)
+          (reference "#PWR035") (unit 1)
         )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/7bb7f3cd-bd16-48a2-9709-ee0db83f3451"
-          (reference "#PWR047") (unit 1)
+          (reference "#PWR048") (unit 1)
         )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/abcbc788-820f-4167-8f5b-0037e0acabb5"
-          (reference "#PWR050") (unit 1)
+          (reference "#PWR051") (unit 1)
         )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/7c02a172-be14-404a-b556-b25540aed647"
-          (reference "#PWR053") (unit 1)
+          (reference "#PWR054") (unit 1)
         )
       )
     )
@@ -961,16 +961,16 @@
           (reference "#PWR05") (unit 1)
         )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/1dc02105-34f4-4dcd-909a-a43f3cf6326e"
-          (reference "#PWR035") (unit 1)
+          (reference "#PWR036") (unit 1)
         )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/7bb7f3cd-bd16-48a2-9709-ee0db83f3451"
-          (reference "#PWR048") (unit 1)
+          (reference "#PWR049") (unit 1)
         )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/abcbc788-820f-4167-8f5b-0037e0acabb5"
-          (reference "#PWR051") (unit 1)
+          (reference "#PWR052") (unit 1)
         )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/7c02a172-be14-404a-b556-b25540aed647"
-          (reference "#PWR054") (unit 1)
+          (reference "#PWR055") (unit 1)
         )
       )
     )
@@ -1002,10 +1002,10 @@
           (reference "R?") (unit 1)
         )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/1dc02105-34f4-4dcd-909a-a43f3cf6326e"
-          (reference "R20") (unit 1)
+          (reference "R13") (unit 1)
         )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/7bb7f3cd-bd16-48a2-9709-ee0db83f3451"
-          (reference "R13") (unit 1)
+          (reference "R20") (unit 1)
         )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/abcbc788-820f-4167-8f5b-0037e0acabb5"
           (reference "R23") (unit 1)
@@ -1077,16 +1077,16 @@
           (reference "#PWR05") (unit 1)
         )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/1dc02105-34f4-4dcd-909a-a43f3cf6326e"
-          (reference "#PWR036") (unit 1)
+          (reference "#PWR037") (unit 1)
         )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/7bb7f3cd-bd16-48a2-9709-ee0db83f3451"
-          (reference "#PWR049") (unit 1)
+          (reference "#PWR050") (unit 1)
         )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/abcbc788-820f-4167-8f5b-0037e0acabb5"
-          (reference "#PWR052") (unit 1)
+          (reference "#PWR053") (unit 1)
         )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/7c02a172-be14-404a-b556-b25540aed647"
-          (reference "#PWR055") (unit 1)
+          (reference "#PWR056") (unit 1)
         )
       )
     )
@@ -1121,16 +1121,16 @@
           (reference "C?") (unit 1)
         )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/1dc02105-34f4-4dcd-909a-a43f3cf6326e"
-          (reference "C7") (unit 1)
+          (reference "C8") (unit 1)
         )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/7bb7f3cd-bd16-48a2-9709-ee0db83f3451"
-          (reference "C15") (unit 1)
-        )
-        (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/abcbc788-820f-4167-8f5b-0037e0acabb5"
           (reference "C16") (unit 1)
         )
-        (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/7c02a172-be14-404a-b556-b25540aed647"
+        (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/abcbc788-820f-4167-8f5b-0037e0acabb5"
           (reference "C17") (unit 1)
+        )
+        (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/7c02a172-be14-404a-b556-b25540aed647"
+          (reference "C18") (unit 1)
         )
       )
     )
@@ -1227,7 +1227,7 @@
   (symbol (lib_id "Device:Q_NMOS_GDS") (at 186.69 83.82 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid fbc78151-5f69-4ecf-9f9f-eca273fcf6f8)
-    (property "Reference" "Q2" (at 193.04 83.82 0)
+    (property "Reference" "Q1" (at 193.04 83.82 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "BUK7516-55A,127" (at 193.04 85.09 0)
@@ -1248,10 +1248,10 @@
     (instances
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/1dc02105-34f4-4dcd-909a-a43f3cf6326e"
-          (reference "Q2") (unit 1)
+          (reference "Q1") (unit 1)
         )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/7bb7f3cd-bd16-48a2-9709-ee0db83f3451"
-          (reference "Q1") (unit 1)
+          (reference "Q2") (unit 1)
         )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/abcbc788-820f-4167-8f5b-0037e0acabb5"
           (reference "Q3") (unit 1)

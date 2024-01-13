@@ -908,7 +908,7 @@
       )
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/14949cb1-4b69-4c50-91f5-b66762a055b9"
-          (reference "#PWR041") (unit 1)
+          (reference "#PWR042") (unit 1)
         )
       )
     )
@@ -1009,7 +1009,7 @@
       )
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/14949cb1-4b69-4c50-91f5-b66762a055b9"
-          (reference "#PWR040") (unit 1)
+          (reference "#PWR041") (unit 1)
         )
       )
     )
@@ -1076,7 +1076,7 @@
       )
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/14949cb1-4b69-4c50-91f5-b66762a055b9"
-          (reference "#PWR037") (unit 1)
+          (reference "#PWR038") (unit 1)
         )
       )
     )
@@ -1134,7 +1134,7 @@
       )
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/14949cb1-4b69-4c50-91f5-b66762a055b9"
-          (reference "#PWR039") (unit 1)
+          (reference "#PWR040") (unit 1)
         )
       )
     )
@@ -1196,7 +1196,7 @@
       )
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/14949cb1-4b69-4c50-91f5-b66762a055b9"
-          (reference "C13") (unit 1)
+          (reference "C14") (unit 1)
         )
       )
     )
@@ -1344,7 +1344,7 @@
       )
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/14949cb1-4b69-4c50-91f5-b66762a055b9"
-          (reference "C11") (unit 1)
+          (reference "C12") (unit 1)
         )
       )
     )
@@ -1449,7 +1449,7 @@
       )
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/14949cb1-4b69-4c50-91f5-b66762a055b9"
-          (reference "#PWR042") (unit 1)
+          (reference "#PWR043") (unit 1)
         )
       )
     )
@@ -1519,7 +1519,7 @@
       )
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/14949cb1-4b69-4c50-91f5-b66762a055b9"
-          (reference "#PWR046") (unit 1)
+          (reference "#PWR047") (unit 1)
         )
       )
     )
@@ -1593,7 +1593,7 @@
       )
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/14949cb1-4b69-4c50-91f5-b66762a055b9"
-          (reference "C12") (unit 1)
+          (reference "C13") (unit 1)
         )
       )
     )
@@ -1626,7 +1626,7 @@
       )
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/14949cb1-4b69-4c50-91f5-b66762a055b9"
-          (reference "#PWR043") (unit 1)
+          (reference "#PWR044") (unit 1)
         )
       )
     )
@@ -1663,7 +1663,7 @@
       )
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/14949cb1-4b69-4c50-91f5-b66762a055b9"
-          (reference "C14") (unit 1)
+          (reference "C15") (unit 1)
         )
       )
     )
@@ -1696,7 +1696,7 @@
       )
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/14949cb1-4b69-4c50-91f5-b66762a055b9"
-          (reference "#PWR045") (unit 1)
+          (reference "#PWR046") (unit 1)
         )
       )
     )
@@ -1769,7 +1769,7 @@
       )
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/14949cb1-4b69-4c50-91f5-b66762a055b9"
-          (reference "#PWR038") (unit 1)
+          (reference "#PWR039") (unit 1)
         )
       )
     )
@@ -1806,7 +1806,7 @@
       )
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/14949cb1-4b69-4c50-91f5-b66762a055b9"
-          (reference "C10") (unit 1)
+          (reference "C11") (unit 1)
         )
       )
     )
@@ -1839,7 +1839,7 @@
       )
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/14949cb1-4b69-4c50-91f5-b66762a055b9"
-          (reference "#PWR044") (unit 1)
+          (reference "#PWR045") (unit 1)
         )
       )
     )
@@ -1879,7 +1879,7 @@
       )
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/14949cb1-4b69-4c50-91f5-b66762a055b9"
-          (reference "C8") (unit 1)
+          (reference "C9") (unit 1)
         )
       )
     )
@@ -1916,7 +1916,7 @@
       )
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/14949cb1-4b69-4c50-91f5-b66762a055b9"
-          (reference "C9") (unit 1)
+          (reference "C10") (unit 1)
         )
       )
     )
