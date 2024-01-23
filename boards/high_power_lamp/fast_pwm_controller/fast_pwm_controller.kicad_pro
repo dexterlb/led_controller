@@ -647,7 +647,7 @@
     ],
     [
       "1dc02105-34f4-4dcd-909a-a43f3cf6326e",
-      "PWM stage 1"
+      "PWM stage 4"
     ],
     [
       "14949cb1-4b69-4c50-91f5-b66762a055b9",
@@ -655,15 +655,15 @@
     ],
     [
       "7bb7f3cd-bd16-48a2-9709-ee0db83f3451",
-      "PWM stage 2"
-    ],
-    [
-      "abcbc788-820f-4167-8f5b-0037e0acabb5",
       "PWM stage 3"
     ],
     [
+      "abcbc788-820f-4167-8f5b-0037e0acabb5",
+      "PWM stage 1"
+    ],
+    [
       "7c02a172-be14-404a-b556-b25540aed647",
-      "PWM stage 4"
+      "PWM stage 2"
     ]
   ],
   "text_variables": {}

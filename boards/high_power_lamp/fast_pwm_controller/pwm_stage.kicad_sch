@@ -938,7 +938,7 @@
   (symbol (lib_id "Device:R") (at 111.76 81.28 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 3b5c4e29-18cb-4982-854c-12548bc72442)
-    (property "Reference" "R12" (at 111.76 83.82 90)
+    (property "Reference" "R22" (at 111.76 83.82 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "47k" (at 111.76 86.36 90)
@@ -955,13 +955,13 @@
     (instances
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/1dc02105-34f4-4dcd-909a-a43f3cf6326e"
-          (reference "R12") (unit 1)
+          (reference "R22") (unit 1)
         )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/7bb7f3cd-bd16-48a2-9709-ee0db83f3451"
-          (reference "R19") (unit 1)
+          (reference "R12") (unit 1)
         )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/abcbc788-820f-4167-8f5b-0037e0acabb5"
-          (reference "R22") (unit 1)
+          (reference "R19") (unit 1)
         )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/7c02a172-be14-404a-b556-b25540aed647"
           (reference "R25") (unit 1)
@@ -1007,7 +1007,7 @@
   (symbol (lib_id "Device:R") (at 173.99 83.82 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 7dbb90da-d626-42b0-9966-8c3449282b62)
-    (property "Reference" "R13" (at 173.99 86.36 90)
+    (property "Reference" "R20" (at 173.99 86.36 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "2.2Ω" (at 173.99 88.9 90)
@@ -1024,16 +1024,16 @@
     (instances
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/1dc02105-34f4-4dcd-909a-a43f3cf6326e"
-          (reference "R13") (unit 1)
-        )
-        (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/7bb7f3cd-bd16-48a2-9709-ee0db83f3451"
           (reference "R20") (unit 1)
         )
+        (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/7bb7f3cd-bd16-48a2-9709-ee0db83f3451"
+          (reference "R26") (unit 1)
+        )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/abcbc788-820f-4167-8f5b-0037e0acabb5"
-          (reference "R23") (unit 1)
+          (reference "R13") (unit 1)
         )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/7c02a172-be14-404a-b556-b25540aed647"
-          (reference "R26") (unit 1)
+          (reference "R23") (unit 1)
         )
       )
     )
@@ -1042,7 +1042,7 @@
   (symbol (lib_id "Jumper:SolderJumper_2_Open") (at 93.98 66.04 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid a0f4630f-d924-4ab1-8b58-be4980f9563a)
-    (property "Reference" "JP1" (at 93.98 63.5 0)
+    (property "Reference" "JP4" (at 93.98 63.5 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "SolderJumper_2_Open" (at 93.98 62.23 0)
@@ -1059,13 +1059,13 @@
     (instances
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/1dc02105-34f4-4dcd-909a-a43f3cf6326e"
-          (reference "JP1") (unit 1)
+          (reference "JP4") (unit 1)
         )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/7bb7f3cd-bd16-48a2-9709-ee0db83f3451"
-          (reference "JP3") (unit 1)
+          (reference "JP1") (unit 1)
         )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/abcbc788-820f-4167-8f5b-0037e0acabb5"
-          (reference "JP4") (unit 1)
+          (reference "JP3") (unit 1)
         )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/7c02a172-be14-404a-b556-b25540aed647"
           (reference "JP5") (unit 1)
@@ -1111,7 +1111,7 @@
   (symbol (lib_id "Device:C") (at 119.38 88.9 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid b11fd9e4-8919-49a6-9f91-c6eaf354b87e)
-    (property "Reference" "C8" (at 123.19 86.36 0)
+    (property "Reference" "C17" (at 123.19 86.36 0)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "500nF" (at 123.19 88.9 0)
@@ -1131,13 +1131,13 @@
     (instances
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/1dc02105-34f4-4dcd-909a-a43f3cf6326e"
-          (reference "C8") (unit 1)
+          (reference "C17") (unit 1)
         )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/7bb7f3cd-bd16-48a2-9709-ee0db83f3451"
-          (reference "C16") (unit 1)
+          (reference "C8") (unit 1)
         )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/abcbc788-820f-4167-8f5b-0037e0acabb5"
-          (reference "C17") (unit 1)
+          (reference "C16") (unit 1)
         )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/7c02a172-be14-404a-b556-b25540aed647"
           (reference "C18") (unit 1)
@@ -1149,7 +1149,7 @@
   (symbol (lib_id "Device:R") (at 82.55 88.9 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid c669deaa-c01a-437b-b210-915887a3b621)
-    (property "Reference" "R11" (at 85.09 87.63 0)
+    (property "Reference" "R21" (at 85.09 87.63 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "10M" (at 85.09 90.17 0)
@@ -1166,13 +1166,13 @@
     (instances
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/1dc02105-34f4-4dcd-909a-a43f3cf6326e"
-          (reference "R11") (unit 1)
+          (reference "R21") (unit 1)
         )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/7bb7f3cd-bd16-48a2-9709-ee0db83f3451"
-          (reference "R18") (unit 1)
+          (reference "R11") (unit 1)
         )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/abcbc788-820f-4167-8f5b-0037e0acabb5"
-          (reference "R21") (unit 1)
+          (reference "R18") (unit 1)
         )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/7c02a172-be14-404a-b556-b25540aed647"
           (reference "R24") (unit 1)
@@ -1184,7 +1184,7 @@
   (symbol (lib_id "Connector:TestPoint") (at 143.51 81.28 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid d16c2107-8f1b-4ce6-ba6d-d590e9fd3316)
-    (property "Reference" "TP3" (at 142.24 76.2 0)
+    (property "Reference" "TP7" (at 142.24 76.2 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "TestPoint" (at 146.05 79.248 0)
@@ -1200,13 +1200,13 @@
     (instances
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/1dc02105-34f4-4dcd-909a-a43f3cf6326e"
-          (reference "TP3") (unit 1)
+          (reference "TP7") (unit 1)
         )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/7bb7f3cd-bd16-48a2-9709-ee0db83f3451"
-          (reference "TP5") (unit 1)
+          (reference "TP3") (unit 1)
         )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/abcbc788-820f-4167-8f5b-0037e0acabb5"
-          (reference "TP7") (unit 1)
+          (reference "TP5") (unit 1)
         )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/7c02a172-be14-404a-b556-b25540aed647"
           (reference "TP9") (unit 1)
@@ -1249,7 +1249,7 @@
     )
   )
 
-  (symbol (lib_id "4xxx:4050") (at 95.25 81.28 0) (unit 3)
+  (symbol (lib_id "4xxx:4050") (at 95.25 81.28 0) (unit 4)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid ee9dd2d2-42d8-4fb7-bc02-cf8b6d780172)
     (property "Reference" "U1" (at 95.25 72.39 0)
@@ -1281,13 +1281,13 @@
     (instances
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/1dc02105-34f4-4dcd-909a-a43f3cf6326e"
-          (reference "U1") (unit 3)
+          (reference "U1") (unit 4)
         )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/7bb7f3cd-bd16-48a2-9709-ee0db83f3451"
-          (reference "U1") (unit 1)
+          (reference "U1") (unit 3)
         )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/abcbc788-820f-4167-8f5b-0037e0acabb5"
-          (reference "U1") (unit 4)
+          (reference "U1") (unit 1)
         )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/7c02a172-be14-404a-b556-b25540aed647"
           (reference "U1") (unit 2)
@@ -1299,7 +1299,7 @@
   (symbol (lib_id "Device:Q_NMOS_GDS") (at 186.69 83.82 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid fbc78151-5f69-4ecf-9f9f-eca273fcf6f8)
-    (property "Reference" "Q1" (at 193.04 83.82 0)
+    (property "Reference" "Q2" (at 193.04 83.82 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "BUK7516-55A,127" (at 193.04 85.09 0)
@@ -1320,16 +1320,16 @@
     (instances
       (project "fast_pwm_controller"
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/1dc02105-34f4-4dcd-909a-a43f3cf6326e"
-          (reference "Q1") (unit 1)
-        )
-        (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/7bb7f3cd-bd16-48a2-9709-ee0db83f3451"
           (reference "Q2") (unit 1)
         )
+        (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/7bb7f3cd-bd16-48a2-9709-ee0db83f3451"
+          (reference "Q4") (unit 1)
+        )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/abcbc788-820f-4167-8f5b-0037e0acabb5"
-          (reference "Q3") (unit 1)
+          (reference "Q1") (unit 1)
         )
         (path "/ebb02bb0-15d4-41b5-b7b0-053d51d38d86/7c02a172-be14-404a-b556-b25540aed647"
-          (reference "Q4") (unit 1)
+          (reference "Q3") (unit 1)
         )
       )
     )
