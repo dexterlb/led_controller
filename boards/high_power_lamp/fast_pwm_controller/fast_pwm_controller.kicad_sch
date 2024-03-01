@@ -1774,7 +1774,7 @@
     (property "Datasheet" "~" (at 76.2 38.1 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Purpose" "VPP IN" (at 73.66 36.83 0)
+    (property "Purpose" "VPP-IN" (at 73.66 36.83 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (pin "1" (uuid 5874943b-4a68-4e84-8001-c38ccf1672a4))
